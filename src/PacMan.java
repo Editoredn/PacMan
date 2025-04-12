@@ -23,7 +23,16 @@ public class PacMan extends JPanel implements ActionListener , KeyListener{   //
     boolean pacmanIsOnReverse = false;
 
     
+    // variables for the toggle button gate
+    boolean gate1Open = false;
+boolean gate2Open = false;
+boolean pacmanOnButton1 = false;
+boolean pacmanOnButton2 = false;
+
     
+
+// variables for spider nets
+boolean isInSpiderNet = false;
 
     // variables for teleporting
     private boolean isTeleporting = false;
@@ -31,7 +40,8 @@ public class PacMan extends JPanel implements ActionListener , KeyListener{   //
     private static final long TELEPORT_COOLDOWN = 500; // Cooldown period in milliseconds (adjust as needed)
 
 
-
+    // WALL COLLISON
+    boolean hitWall = false;
 
   
     
@@ -198,6 +208,8 @@ public class PacMan extends JPanel implements ActionListener , KeyListener{   //
     private Image reverseImage;
     private Image warpEntranceImage;
     private Image warpExitImage;
+    private Image buttonsImage;
+    private Image spiderWeb;
     
     
         
@@ -623,23 +635,23 @@ private String[] tileMap14 = {
 
 private String[] tileMap15 = {
     "XXXXXXXXXmXXXXXXXXX" ,
-    "X       X        IX" ,
-    "X XXXXX X XXXXXXXIX" ,
-    "X X   X  r  X    IX" ,
-    "X X X XXXXX X XXXXX" ,
+    "X       X         X" ,
+    "X XXXXX X XXXXXXI X" ,
+    "X X   X  r  X   I X" ,
+    "X X X XXXXX X XXIXX" ,
     "X X X       X     X" ,
-    "X X XXXXX XXXXX X X" ,
+    "X X XXX X XXXXX X X" ,
     "X X    IX     X X X" ,
     "X XX XXIXXXXX X X X" ,
     "eI   X Ip    I    E" ,
-    "XIXXXX XXXIXXIXXX X" ,
+    "XIXXXX IXXIXXIXXX X" ,
     "XI   X      XIX   X" ,
     "XIXX XXXXXX XIX XXX" ,
     "XIX         XIX   X" ,
     "XIX XXXXXX XXIXXX X" ,
     "XI  X  b  IIII  X X" ,
     "XIXXXXX XXXXX XXX X" ,
-    "XI      P         X" ,
+    "X       P         X" ,
     "XXXXXXX XXX XXXXXXX" ,
     "X                 X" ,
     "XXXXXXXMXXXXXXXXXXX"     ,
@@ -1001,6 +1013,118 @@ private String[] tileMap26 = {
 
 };
 
+
+    // LEVEL 27: MEDIUM [BUTTON GATES]
+// B -> BUTTON1 WHICH TOGGLES G WHICH IS GATE 1
+// Q -> BUTTON 2 WHICH TOGGLES H WHICH IS GATE 2
+
+
+private String[] tileMap27 = {
+
+
+    "XXXXXXXXXXXXXXXXXXX" ,
+    "X       B         X" , 
+    "X XXXXX XXXXX XXX X" , 
+    "X X   X X X X X   X" , 
+    "X X X X X X X X X X" , 
+    "X X r X o   b X   X" , 
+    "X XXvXX XXXXX XXvXX" , 
+    "X     X     X     X" , 
+    "XXXXX X XXX X XXXXX" , 
+    "X G   X X X X   V X" , 
+    "X XXXXX X X XXXXX X" , 
+    "e        P        E" , 
+    "X XXXXXXX XXXXXXX X" , 
+    "X X     X X     X X" , 
+    "X X XXX X X XXX X X" , 
+    "X X X   G V X X X X" , 
+    "X X XXXXXpXXXXX X X" , 
+    "X X             X X" , 
+    "X XXXXXXXXXXXXX X X" , 
+    "X        B        X" , 
+    "XXXXXXXXXXXXXXXXXXX" ,
+
+
+
+
+};
+
+
+private String[] tileMap28 = {
+
+    "XXXXXXXXXXXXXXXXmXX",
+    "X    rXB   oX     X",
+    "XXX XXXGXXX XXXvX X",
+    "e   X       X   X X",
+    "X XXX XXXXX XXX X X",
+    "X X       X   X X X",
+    "X X X X XXX X X X X",
+    "X XbX V X   X X X X",
+    "X X X X X XXX XvX X",
+    "X   X X X X       X",
+    "XXX X X X X XXXXX X",
+    "X   X X   G X V X X",
+    "X XXXGXXXXX XXX X X",
+    "X X        vXp  X X",
+    "X X XXXXXXX XXX X X",
+    "X X X B   X X G X X",
+    "X X X XXX X X XXX X",
+    "X X X   X X X     E",
+    "X X XXXvXvX XXXXX X",
+    "X       P         X",
+    "XXXXXMXXXXXXXXXXXXX" ,
+};
+
+private String[] tileMap29 = {
+    "XXXXXXXXXXXXXXXXMXX" ,
+    "X        r        X" ,
+    "X XXXXX XXX XXXXX X" ,
+    "X X   X NNN NN  X X" ,
+    "X X X XXXXXXXNX X X" ,
+    "X X X        NX X X" ,
+    "X X XNXXX XXXXX X X" ,
+    "X X  NNNX X  N  X X" ,
+    "XNXXX X X X XXX XNX" ,
+    "eNN   XNp X     NNE" ,
+    "XNXXX XNX X XXX XNX" ,
+    "X X   XNXNX     X X" ,
+    "X X XXX XNXXX XXX X" ,
+    "X X     XN    X   X" ,
+    "X XXXXX X XXXXX X X" ,
+    "X X  NNNbNNN    X X" ,
+    "XNX XXXXXXXXXNXXX X" ,
+    "XNX    P     N    X" ,
+    "X XXXXX XXXXXNXXX X" ,
+    "X         NNNN    X" ,
+    "XXmXXXXXXXXXXXXXXXX" ,
+};
+
+
+private String[] tileMap30 = {
+
+    "XXXXXXXXXXXXXXXXmXX" ,
+    "X         X    r  X" ,
+    "X XXXXXXX X XXXXX X" ,
+    "X XNNN  X X X   X X" ,
+    "X XNX X XNX X X XNX" ,
+    "X X X X XNX XNNNNNX" ,
+    "X X X X XNX X XNXNX" ,
+    "X   X X       XN  X" ,
+    "XXXXX XXXXX XXXNXXX" ,
+    "X  N  X  p  X     X" ,
+    "X XXX X XXX X XXX X" ,
+    "eNN X   P     XNNNE" ,
+    "XNXXX XXXXX XXX X X" ,
+    "XNX  NN     X X X X" ,
+    "XNX XNXXX XXX X X X" ,
+    "XNX XN   b  N X X X" ,
+    "XNX XXXXXXX X X X X" ,
+    "X X         X N X X" ,
+    "X XXXXXXXXXNX XXX X" ,
+    "X        NNNX     X" ,
+    "XXXXXMXXXXXXXXXXXXX" ,
+};
+
      // creating hashset for the constructor block used above
     HashSet<Block> walls;   // it is called as hashset of block and is named as walls
     HashSet<Block> spaces1;  // symbol : E // for moving pacman from one end to other
@@ -1017,6 +1141,12 @@ private String[] tileMap26 = {
     HashSet<Block> reverseControls; // for level 23
     HashSet<Block> warpEntrance;  // for level 25 
     HashSet<Block> warpExit;   // for level 25
+    HashSet<Block> Button1;  // for level 27
+    HashSet<Block> Gate1;
+    HashSet<Block> Button2;  // for level 28
+    HashSet<Block> Gate2; 
+    HashSet<Block> spiderNets;  // tiles that slow down pacman
+
 
     
 
@@ -1119,7 +1249,9 @@ private String[] tileMap26 = {
         // phantomImage = new ImageIcon(getClass().getResource("./cherry.png")).getImage();
         reverseImage = new ImageIcon(getClass().getResource("./reverse.png")).getImage();
         warpEntranceImage = new ImageIcon(getClass().getResource("./wrapEntrance.png")).getImage();
-        warpExitImage = new ImageIcon(getClass().getResource("./ice.png")).getImage();
+        warpExitImage = new ImageIcon(getClass().getResource("./wrapExit.png")).getImage();
+        buttonsImage = new ImageIcon(getClass().getResource("./button.png")).getImage();
+        spiderWeb = new ImageIcon(getClass().getResource("./spiderWeb.png")).getImage();
         
         
         
@@ -1168,7 +1300,7 @@ private String[] tileMap26 = {
 
 
          // checking number of walls , foods , ghosts
-         loadMap26();  // calling the function loadmap bcz we want to check the number of walls , foods , ghosts and its algo is written inside the function loadMap();
+         loadMap15();  // calling the function loadmap bcz we want to check the number of walls , foods , ghosts and its algo is written inside the function loadMap();
         //  System.out.println(walls.size());  // walls was the hashset where all the walls when encountered were stored 
         //  System.out.println(foods.size());  // same here
         //  System.out.println(ghosts.size()); // same here
@@ -1238,6 +1370,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
         {
@@ -1397,6 +1533,33 @@ private String[] tileMap26 = {
                 }
 
 
+                else if ( tileMapChar == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMapChar == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMapChar == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMapChar == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -1423,6 +1586,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
@@ -1583,6 +1750,33 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+
+                else if ( tileMap2Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap2Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap2Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap2Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -1610,6 +1804,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
         {
@@ -1769,6 +1967,33 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+                else if ( tileMap3Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap3Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap3Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap3Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -1796,6 +2021,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
@@ -1955,6 +2184,33 @@ private String[] tileMap26 = {
                     warpExit.add(wexit);
                     walls.add(wexit);
                 }
+
+                else if ( tileMap4Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap4Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap4Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap4Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -1982,6 +2238,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
@@ -2141,6 +2401,34 @@ private String[] tileMap26 = {
                     warpExit.add(wexit);
                     walls.add(wexit);
                 }
+
+
+                else if ( tileMap5Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap5Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap5Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap5Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -2168,6 +2456,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
@@ -2326,6 +2618,33 @@ private String[] tileMap26 = {
                     warpExit.add(wexit);
                     walls.add(wexit);
                 }
+
+                else if ( tileMap6Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap6Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap6Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap6Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -2354,6 +2673,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
@@ -2514,6 +2837,34 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+
+                else if ( tileMap7Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap7Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap7Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap7Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -2541,6 +2892,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
@@ -2700,6 +3055,33 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+                else if ( tileMap8Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap8Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap8Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap8Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -2728,6 +3110,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
@@ -2888,6 +3274,33 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+                else if ( tileMap9Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap9Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap9Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap9Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -2917,7 +3330,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
-
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
         {
@@ -3078,6 +3494,33 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+                else if ( tileMap10Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap10Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap10Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap10Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -3107,6 +3550,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
         {
@@ -3266,6 +3713,33 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+                else if ( tileMap11Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap11Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap11Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap11Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -3294,6 +3768,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
         {
@@ -3452,6 +3930,33 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+
+                else if ( tileMap12Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap12Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap12Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap12Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -3477,6 +3982,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
         {
@@ -3637,6 +4146,33 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+
+                else if ( tileMap13Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap13Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap13Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap13Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -3664,6 +4200,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
         {
@@ -3821,6 +4361,33 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+                else if ( tileMap14Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap14Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap14Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap14Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -3848,6 +4415,11 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
+        spiderNets = new HashSet<Block>(); //N
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
         {
@@ -4008,6 +4580,39 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+                else if ( tileMap15Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap15Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap15Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap15Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
+                else if ( tileMap15Char == 'N')
+                {
+                    Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
+                    spiderNets.add(web);
+                }
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -4035,6 +4640,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
         {
@@ -4190,6 +4799,34 @@ private String[] tileMap26 = {
                     warpExit.add(wexit);
                     walls.add(wexit);
                 }
+
+                else if ( tileMap16Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap16Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap16Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap16Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -4217,6 +4854,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
@@ -4379,6 +5020,33 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+                else if ( tileMap17Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap17Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap17Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap17Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -4406,6 +5074,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
@@ -4562,6 +5234,33 @@ private String[] tileMap26 = {
                     warpExit.add(wexit);
                     walls.add(wexit);
                 }
+
+                else if ( tileMap18Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap18Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap18Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap18Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -4590,6 +5289,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
         
         
 
@@ -4748,6 +5451,34 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+                else if ( tileMap19Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap19Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap19Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap19Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -4776,6 +5507,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
         
 
@@ -4935,6 +5670,33 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+                else if ( tileMap20Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap20Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap20Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap20Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
 
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
@@ -4964,6 +5726,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
         {
@@ -5116,6 +5882,35 @@ private String[] tileMap26 = {
                     warpExit.add(wexit);
                     walls.add(wexit);
                 }
+
+                else if ( tileMap21Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap21Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap21Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap21Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -5144,6 +5939,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
         {
@@ -5299,6 +6098,34 @@ private String[] tileMap26 = {
                     warpExit.add(wexit);
                     walls.add(wexit);
                 }
+
+
+                else if ( tileMap22Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap22Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap22Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap22Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -5326,6 +6153,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
         {
@@ -5481,6 +6312,34 @@ private String[] tileMap26 = {
                     warpExit.add(wexit);
                     walls.add(wexit);
                 }
+
+                else if ( tileMap23Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap23Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap23Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap23Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -5509,6 +6368,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
         {
@@ -5665,6 +6528,34 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+
+                else if ( tileMap24Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap24Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap24Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap24Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -5692,6 +6583,10 @@ private String[] tileMap26 = {
         spaces2 = new HashSet<Block>();
         exitSpaces1 = new HashSet<Block>();
         exitSpaces2 = new HashSet<Block>();
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
         
 
         for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
@@ -5848,6 +6743,35 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+
+                else if ( tileMap25Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap25Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap25Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap25Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -5875,6 +6799,10 @@ private String[] tileMap26 = {
         exitSpaces1 = new HashSet<Block>(); //e
         spaces2 = new HashSet<Block>();   // M
         exitSpaces2 = new HashSet<Block>(); //m
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
 
 
 
@@ -6033,6 +6961,33 @@ private String[] tileMap26 = {
                     walls.add(wexit);
                 }
 
+                else if ( tileMap26Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap26Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap26Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap26Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
@@ -6041,7 +6996,893 @@ private String[] tileMap26 = {
 
 
 
+
+    public void loadMap27(){
+            
+        // i need to initilise all the hashset first 
+
+        walls = new HashSet<Block>();
+        ghosts = new HashSet<Block>();
+        foods = new HashSet<Block>();
+        iceBlocks = new HashSet<Block>();
+        teleportPads = new HashSet<Block>();
+        speedZones = new HashSet<Block>();
+        phantomZones = new HashSet<Block>();
+        reverseControls = new HashSet<Block>();
+        warpEntrance = new HashSet<Block>();
+        warpExit = new HashSet<Block>();
+        spaces1 = new HashSet<Block>();  // E
+        exitSpaces1 = new HashSet<Block>(); //e
+        spaces2 = new HashSet<Block>();   // M
+        exitSpaces2 = new HashSet<Block>(); //m
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
+
+ 
+
+
+
+        for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
+        {
+            for (  int c = 0 ; c<colCount ; c++)   // c stands for column
+            {
+                String row = tileMap27[r];   // getting the current row bcz tileMap is our map and r index is the row index so we are getting the loop indexing 
+                char tileMap27Char = row.charAt(c);  // getting the current character
+                // what we had done in the above two lines is that we getting the row and then we are getting the character present at that row with the col index
+                // we had declared two variables 1) row 2) tileMapChar
+                // the string row represents the single row in the tile map from index r=0 to r<rowCount
+                // now we are using inbuilt string operations charAt() to acces the character present at that position
+                // row.charAt(c) acceses the character from the row at index c where c represents the columns 
+
+
+                // we got a char at a specific tile now we need to figure out where this tile is. therefore to draw we need x , y positions and width and height of tile 
+
+                // getting x position ( it will be the 'how many columns we are from the left')
+                int x = c*tileSize;
+                // getting y position (  it will be the 'how many rows from the top')
+                int y = r*tileSize;
+
+
+                if ( tileMap27Char == 'X'){  // block wall
+
+                    Block wall = new Block(wallImage , x , y , tileSize , tileSize);  // since we had created a class Block and a constructor Block also so here we are creating an object for the constructor Block. this is the object for constructor bcz here i had declared paramters also so it tells the program that we creating an object for constructor
+                    walls.add(wall);  // Adds the newly created wall to a HashSet that stores all the walls in the game.
+                    // this ensures that all walls are stored in one list which is walls here
+                    // it makes easier to draw all the walls in the game 
+                    // used for collision detection so that pacman cant go throught walls
+                }
+
+                else if ( tileMap27Char == ' ')  // food
+                {
+                    System.out.println("adding foods");
+                    Block food = new Block(null, x+14, y+14, 4,  4);  // here there wont be a image so i draw a rectangle programatically. for image i set it to null . since the rectangle will be made small so we decrease the size to 4 pixels and we offset the position to x+14 , y+14
+                    foods.add(food);   // it is of the form  HashSet.add(objt);
+
+                    // x+14? y+14?
+                    // since our tile size is 32x32 but we had made here 4x4 so our image here will be a small particle therefore 32-4 is 28 therefore to go to this 4x4 rectangle we had to traverse 14 to the rigth from left and 14 from top to down 
+
+                }
+
+
+                else if ( tileMap27Char == 'E')   // allowing pacman to move map from end to other
+                {
+                   Block space1  = new Block(null , x, y, tileSize, tileSize);
+                   spaces1.add(space1);
+                }
+                
+                else if ( tileMap27Char == 'e')
+                {
+                    Block exit1 = new Block(null, x, y, tileSize, tileSize);
+                    exitSpaces1.add(exit1);
+                }
+
+
+                else if ( tileMap27Char == 'M')   // allowing pacman to move map from end to other
+                {
+                   Block space2  = new Block(null , x, y, tileSize, tileSize);
+                   spaces2.add(space2);
+                }
+                
+                else if ( tileMap27Char == 'm')
+                {
+                    Block exit2 = new Block(null, x, y, tileSize, tileSize);
+                    exitSpaces2.add(exit2);
+                }
+
+
+                else if( tileMap27Char == 'o')   // orange ghost
+                {
+
+                    Block OrangeGhost = new Block(orangeGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(OrangeGhost);
+                }
+
+
+                else if( tileMap27Char == 'b')   // blue ghost
+                {
+
+                    Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(BlueGhost);
+                }
+
+
+                else if( tileMap27Char == 'r')   // red ghost
+                {
+
+                    Block RedGhost = new Block(redGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(RedGhost);
+                }
+
+
+                else if( tileMap27Char == 'p')   // pink ghost
+                {
+
+                    Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(PinkGhost);
+                }
+
+
+                else if ( tileMap27Char == 'P')  // pacman
+                {
+                    pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);   // here we had created a pacman character and have stored it in pacman variable
+                    // in the starting of the game we want our pacman to be facing towards right so we right pacmanRightImage
+                    // also bcz pacman was single entity so we didnt created a hashset for it
+                    // we had done this to treat pac man as a game object making collision detection easier
+                }
+
+                else if ( tileMap27Char == 'I')
+                {
+                    Block ice  = new Block(iceImage, x, y, tileSize, tileSize);
+                    iceBlocks.add(ice);
+                }
+
+
+                else if ( tileMap27Char == 'T')
+                {
+                    Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
+                    teleportPads.add(teleport);
+                }
+
+
+                else if ( tileMap27Char == 'S')
+                {
+                    Block speed = new Block(speedImage, x, y, tileSize, tileSize);
+                    speedZones.add(speed);
+                }
+
+                else if ( tileMap27Char == 'Z')
+                {
+                    Block phantom = new Block(null, x, y, tileSize, tileSize);  // null  bcz we are not taking the image
+                    phantomZones.add(phantom);
+                }
+
+
+                else if ( tileMap27Char == 'R')
+                {
+                    Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
+                    reverseControls.add(rev);
+                }
+
+
+                else if ( tileMap27Char == 'W')
+                {
+                    Block Wenter = new Block(warpEntranceImage, x, y, tileSize, tileSize);
+                    warpEntrance.add(Wenter);
+                }
+
+                else if ( tileMap27Char == 'w')
+                {
+                    Block wexit = new Block(warpExitImage, x, y, tileSize, tileSize);
+                    warpExit.add(wexit);
+                    walls.add(wexit);
+                }
+
+
+                else if ( tileMap27Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap27Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap27Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap27Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
+
+                // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
+
+            }
+        }
+    };
+
+
+
+    public void loadMap28(){
+            
+        // i need to initilise all the hashset first 
+
+        walls = new HashSet<Block>();
+        ghosts = new HashSet<Block>();
+        foods = new HashSet<Block>();
+        iceBlocks = new HashSet<Block>();
+        teleportPads = new HashSet<Block>();
+        speedZones = new HashSet<Block>();
+        phantomZones = new HashSet<Block>();
+        reverseControls = new HashSet<Block>();
+        warpEntrance = new HashSet<Block>();
+        warpExit = new HashSet<Block>();
+        spaces1 = new HashSet<Block>();  // E
+        exitSpaces1 = new HashSet<Block>(); //e
+        spaces2 = new HashSet<Block>();   // M
+        exitSpaces2 = new HashSet<Block>(); //m
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
+ 
+
+
+
+        for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
+        {
+            for (  int c = 0 ; c<colCount ; c++)   // c stands for column
+            {
+                String row = tileMap28[r];   // getting the current row bcz tileMap is our map and r index is the row index so we are getting the loop indexing 
+                char tileMap28Char = row.charAt(c);  // getting the current character
+                // what we had done in the above two lines is that we getting the row and then we are getting the character present at that row with the col index
+                // we had declared two variables 1) row 2) tileMapChar
+                // the string row represents the single row in the tile map from index r=0 to r<rowCount
+                // now we are using inbuilt string operations charAt() to acces the character present at that position
+                // row.charAt(c) acceses the character from the row at index c where c represents the columns 
+
+
+                // we got a char at a specific tile now we need to figure out where this tile is. therefore to draw we need x , y positions and width and height of tile 
+
+                // getting x position ( it will be the 'how many columns we are from the left')
+                int x = c*tileSize;
+                // getting y position (  it will be the 'how many rows from the top')
+                int y = r*tileSize;
+
+
+                if ( tileMap28Char == 'X'){  // block wall
+
+                    Block wall = new Block(wallImage , x , y , tileSize , tileSize);  // since we had created a class Block and a constructor Block also so here we are creating an object for the constructor Block. this is the object for constructor bcz here i had declared paramters also so it tells the program that we creating an object for constructor
+                    walls.add(wall);  // Adds the newly created wall to a HashSet that stores all the walls in the game.
+                    // this ensures that all walls are stored in one list which is walls here
+                    // it makes easier to draw all the walls in the game 
+                    // used for collision detection so that pacman cant go throught walls
+                }
+
+                else if ( tileMap28Char == ' ')  // food
+                {
+                    System.out.println("adding foods");
+                    Block food = new Block(null, x+14, y+14, 4,  4);  // here there wont be a image so i draw a rectangle programatically. for image i set it to null . since the rectangle will be made small so we decrease the size to 4 pixels and we offset the position to x+14 , y+14
+                    foods.add(food);   // it is of the form  HashSet.add(objt);
+
+                    // x+14? y+14?
+                    // since our tile size is 32x32 but we had made here 4x4 so our image here will be a small particle therefore 32-4 is 28 therefore to go to this 4x4 rectangle we had to traverse 14 to the rigth from left and 14 from top to down 
+
+                }
+
+
+                else if ( tileMap28Char == 'E')   // allowing pacman to move map from end to other
+                {
+                   Block space1  = new Block(null , x, y, tileSize, tileSize);
+                   spaces1.add(space1);
+                }
+                
+                else if ( tileMap28Char == 'e')
+                {
+                    Block exit1 = new Block(null, x, y, tileSize, tileSize);
+                    exitSpaces1.add(exit1);
+                }
+
+
+                else if ( tileMap28Char == 'M')   // allowing pacman to move map from end to other
+                {
+                   Block space2  = new Block(null , x, y, tileSize, tileSize);
+                   spaces2.add(space2);
+                }
+                
+                else if ( tileMap28Char == 'm')
+                {
+                    Block exit2 = new Block(null, x, y, tileSize, tileSize);
+                    exitSpaces2.add(exit2);
+                }
+
+
+                else if( tileMap28Char == 'o')   // orange ghost
+                {
+
+                    Block OrangeGhost = new Block(orangeGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(OrangeGhost);
+                }
+
+
+                else if( tileMap28Char == 'b')   // blue ghost
+                {
+
+                    Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(BlueGhost);
+                }
+
+
+                else if( tileMap28Char == 'r')   // red ghost
+                {
+
+                    Block RedGhost = new Block(redGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(RedGhost);
+                }
+
+
+                else if( tileMap28Char == 'p')   // pink ghost
+                {
+
+                    Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(PinkGhost);
+                }
+
+
+                else if ( tileMap28Char == 'P')  // pacman
+                {
+                    pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);   // here we had created a pacman character and have stored it in pacman variable
+                    // in the starting of the game we want our pacman to be facing towards right so we right pacmanRightImage
+                    // also bcz pacman was single entity so we didnt created a hashset for it
+                    // we had done this to treat pac man as a game object making collision detection easier
+                }
+
+                else if ( tileMap28Char == 'I')
+                {
+                    Block ice  = new Block(iceImage, x, y, tileSize, tileSize);
+                    iceBlocks.add(ice);
+                }
+
+
+                else if ( tileMap28Char == 'T')
+                {
+                    Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
+                    teleportPads.add(teleport);
+                }
+
+                else if ( tileMap28Char == 'S')
+                {
+                    Block speed = new Block(speedImage, x, y, tileSize, tileSize);
+                    speedZones.add(speed);
+                }
+
+                else if ( tileMap28Char == 'Z')
+                {
+                    Block phantom = new Block(null, x, y, tileSize, tileSize);  // null  bcz we are not taking the image
+                    phantomZones.add(phantom);
+                }
+
+
+                else if ( tileMap28Char == 'R')
+                {
+                    Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
+                    reverseControls.add(rev);
+                }
+
+
+                else if ( tileMap28Char == 'W')
+                {
+                    Block Wenter = new Block(warpEntranceImage, x, y, tileSize, tileSize);
+                    warpEntrance.add(Wenter);
+                }
+
+                else if ( tileMap28Char == 'w')
+                {
+                    Block wexit = new Block(warpExitImage, x, y, tileSize, tileSize);
+                    warpExit.add(wexit);
+                    walls.add(wexit);
+                }
+
+
+                else if ( tileMap28Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap28Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap28Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap28Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
+
+                // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
+
+            }
+        }
+    };
+
+
+
+    public void loadMap29(){
+            
+        // i need to initilise all the hashset first 
+
+        walls = new HashSet<Block>();
+        ghosts = new HashSet<Block>();
+        foods = new HashSet<Block>();
+        iceBlocks = new HashSet<Block>();
+        teleportPads = new HashSet<Block>();
+        speedZones = new HashSet<Block>();
+        phantomZones = new HashSet<Block>();
+        reverseControls = new HashSet<Block>();
+        warpEntrance = new HashSet<Block>();
+        warpExit = new HashSet<Block>();
+        spaces1 = new HashSet<Block>();  // E
+        exitSpaces1 = new HashSet<Block>(); //e
+        spaces2 = new HashSet<Block>();   // M
+        exitSpaces2 = new HashSet<Block>(); //m
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
+        spiderNets = new HashSet<Block>();  // N
+ 
+
+
+
+        for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
+        {
+            for (  int c = 0 ; c<colCount ; c++)   // c stands for column
+            {
+                String row = tileMap29[r];   // getting the current row bcz tileMap is our map and r index is the row index so we are getting the loop indexing 
+                char tileMap29Char = row.charAt(c);  // getting the current character
+                // what we had done in the above two lines is that we getting the row and then we are getting the character present at that row with the col index
+                // we had declared two variables 1) row 2) tileMapChar
+                // the string row represents the single row in the tile map from index r=0 to r<rowCount
+                // now we are using inbuilt string operations charAt() to acces the character present at that position
+                // row.charAt(c) acceses the character from the row at index c where c represents the columns 
+
+
+                // we got a char at a specific tile now we need to figure out where this tile is. therefore to draw we need x , y positions and width and height of tile 
+
+                // getting x position ( it will be the 'how many columns we are from the left')
+                int x = c*tileSize;
+                // getting y position (  it will be the 'how many rows from the top')
+                int y = r*tileSize;
+
+
+                if ( tileMap29Char == 'X'){  // block wall
+
+                    Block wall = new Block(wallImage , x , y , tileSize , tileSize);  // since we had created a class Block and a constructor Block also so here we are creating an object for the constructor Block. this is the object for constructor bcz here i had declared paramters also so it tells the program that we creating an object for constructor
+                    walls.add(wall);  // Adds the newly created wall to a HashSet that stores all the walls in the game.
+                    // this ensures that all walls are stored in one list which is walls here
+                    // it makes easier to draw all the walls in the game 
+                    // used for collision detection so that pacman cant go throught walls
+                }
+
+                else if ( tileMap29Char == ' ')  // food
+                {
+                    System.out.println("adding foods");
+                    Block food = new Block(null, x+14, y+14, 4,  4);  // here there wont be a image so i draw a rectangle programatically. for image i set it to null . since the rectangle will be made small so we decrease the size to 4 pixels and we offset the position to x+14 , y+14
+                    foods.add(food);   // it is of the form  HashSet.add(objt);
+
+                    // x+14? y+14?
+                    // since our tile size is 32x32 but we had made here 4x4 so our image here will be a small particle therefore 32-4 is 28 therefore to go to this 4x4 rectangle we had to traverse 14 to the rigth from left and 14 from top to down 
+
+                }
+
+
+                else if ( tileMap29Char == 'E')   // allowing pacman to move map from end to other
+                {
+                   Block space1  = new Block(null , x, y, tileSize, tileSize);
+                   spaces1.add(space1);
+                }
+                
+                else if ( tileMap29Char == 'e')
+                {
+                    Block exit1 = new Block(null, x, y, tileSize, tileSize);
+                    exitSpaces1.add(exit1);
+                }
+
+
+                else if ( tileMap29Char == 'M')   // allowing pacman to move map from end to other
+                {
+                   Block space2  = new Block(null , x, y, tileSize, tileSize);
+                   spaces2.add(space2);
+                }
+                
+                else if ( tileMap29Char == 'm')
+                {
+                    Block exit2 = new Block(null, x, y, tileSize, tileSize);
+                    exitSpaces2.add(exit2);
+                }
+
+
+                else if( tileMap29Char == 'o')   // orange ghost
+                {
+
+                    Block OrangeGhost = new Block(orangeGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(OrangeGhost);
+                }
+
+
+                else if( tileMap29Char == 'b')   // blue ghost
+                {
+
+                    Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(BlueGhost);
+                }
+
+
+                else if( tileMap29Char == 'r')   // red ghost
+                {
+
+                    Block RedGhost = new Block(redGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(RedGhost);
+                }
+
+
+                else if( tileMap29Char == 'p')   // pink ghost
+                {
+
+                    Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(PinkGhost);
+                }
+
+
+                else if ( tileMap29Char == 'P')  // pacman
+                {
+                    pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);   // here we had created a pacman character and have stored it in pacman variable
+                    // in the starting of the game we want our pacman to be facing towards right so we right pacmanRightImage
+                    // also bcz pacman was single entity so we didnt created a hashset for it
+                    // we had done this to treat pac man as a game object making collision detection easier
+                }
+
+                else if ( tileMap29Char == 'I')
+                {
+                    Block ice  = new Block(iceImage, x, y, tileSize, tileSize);
+                    iceBlocks.add(ice);
+                }
+
+
+                else if ( tileMap29Char == 'T')
+                {
+                    Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
+                    teleportPads.add(teleport);
+                }
+
+                else if ( tileMap29Char == 'S')
+                {
+                    Block speed = new Block(speedImage, x, y, tileSize, tileSize);
+                    speedZones.add(speed);
+                }
+
+                else if ( tileMap29Char == 'Z')
+                {
+                    Block phantom = new Block(null, x, y, tileSize, tileSize);  // null  bcz we are not taking the image
+                    phantomZones.add(phantom);
+                }
+
+
+                else if ( tileMap29Char == 'R')
+                {
+                    Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
+                    reverseControls.add(rev);
+                }
+
+
+                else if ( tileMap29Char == 'W')
+                {
+                    Block Wenter = new Block(warpEntranceImage, x, y, tileSize, tileSize);
+                    warpEntrance.add(Wenter);
+                }
+
+                else if ( tileMap29Char == 'w')
+                {
+                    Block wexit = new Block(warpExitImage, x, y, tileSize, tileSize);
+                    warpExit.add(wexit);
+                    walls.add(wexit);
+                }
+
+
+                else if ( tileMap29Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap29Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap29Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap29Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
+                else if ( tileMap29Char == 'N')
+                {
+                    Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
+                    spiderNets.add(web);
+                }
+
+
+                // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
+
+            }
+        }
+    };
+
+
+    public void loadMap30(){
+            
+        // i need to initilise all the hashset first 
+
+        walls = new HashSet<Block>();
+        ghosts = new HashSet<Block>();
+        foods = new HashSet<Block>();
+        iceBlocks = new HashSet<Block>();
+        teleportPads = new HashSet<Block>();
+        speedZones = new HashSet<Block>();
+        phantomZones = new HashSet<Block>();
+        reverseControls = new HashSet<Block>();
+        warpEntrance = new HashSet<Block>();
+        warpExit = new HashSet<Block>();
+        spaces1 = new HashSet<Block>();  // E
+        exitSpaces1 = new HashSet<Block>(); //e
+        spaces2 = new HashSet<Block>();   // M
+        exitSpaces2 = new HashSet<Block>(); //m
+        Button1  = new HashSet<Block>();  // B
+        Gate1 = new HashSet<Block>();  // G
+        Button2 = new HashSet<Block>(); // V
+        Gate2 = new HashSet<Block>();  //v
+        spiderNets = new HashSet<Block>();  // N
+ 
+
+
+
+        for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
+        {
+            for (  int c = 0 ; c<colCount ; c++)   // c stands for column
+            {
+                String row = tileMap30[r];   // getting the current row bcz tileMap is our map and r index is the row index so we are getting the loop indexing 
+                char tileMap30Char = row.charAt(c);  // getting the current character
+                // what we had done in the above two lines is that we getting the row and then we are getting the character present at that row with the col index
+                // we had declared two variables 1) row 2) tileMapChar
+                // the string row represents the single row in the tile map from index r=0 to r<rowCount
+                // now we are using inbuilt string operations charAt() to acces the character present at that position
+                // row.charAt(c) acceses the character from the row at index c where c represents the columns 
+
+
+                // we got a char at a specific tile now we need to figure out where this tile is. therefore to draw we need x , y positions and width and height of tile 
+
+                // getting x position ( it will be the 'how many columns we are from the left')
+                int x = c*tileSize;
+                // getting y position (  it will be the 'how many rows from the top')
+                int y = r*tileSize;
+
+
+                if ( tileMap30Char == 'X'){  // block wall
+
+                    Block wall = new Block(wallImage , x , y , tileSize , tileSize);  // since we had created a class Block and a constructor Block also so here we are creating an object for the constructor Block. this is the object for constructor bcz here i had declared paramters also so it tells the program that we creating an object for constructor
+                    walls.add(wall);  // Adds the newly created wall to a HashSet that stores all the walls in the game.
+                    // this ensures that all walls are stored in one list which is walls here
+                    // it makes easier to draw all the walls in the game 
+                    // used for collision detection so that pacman cant go throught walls
+                }
+
+                else if ( tileMap30Char == ' ')  // food
+                {
+                    System.out.println("adding foods");
+                    Block food = new Block(null, x+14, y+14, 4,  4);  // here there wont be a image so i draw a rectangle programatically. for image i set it to null . since the rectangle will be made small so we decrease the size to 4 pixels and we offset the position to x+14 , y+14
+                    foods.add(food);   // it is of the form  HashSet.add(objt);
+
+                    // x+14? y+14?
+                    // since our tile size is 32x32 but we had made here 4x4 so our image here will be a small particle therefore 32-4 is 28 therefore to go to this 4x4 rectangle we had to traverse 14 to the rigth from left and 14 from top to down 
+
+                }
+
+
+                else if ( tileMap30Char == 'E')   // allowing pacman to move map from end to other
+                {
+                   Block space1  = new Block(null , x, y, tileSize, tileSize);
+                   spaces1.add(space1);
+                }
+                
+                else if ( tileMap30Char == 'e')
+                {
+                    Block exit1 = new Block(null, x, y, tileSize, tileSize);
+                    exitSpaces1.add(exit1);
+                }
+
+
+                else if ( tileMap30Char == 'M')   // allowing pacman to move map from end to other
+                {
+                   Block space2  = new Block(null , x, y, tileSize, tileSize);
+                   spaces2.add(space2);
+                }
+                
+                else if ( tileMap30Char == 'm')
+                {
+                    Block exit2 = new Block(null, x, y, tileSize, tileSize);
+                    exitSpaces2.add(exit2);
+                }
+
+
+                else if( tileMap30Char == 'o')   // orange ghost
+                {
+
+                    Block OrangeGhost = new Block(orangeGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(OrangeGhost);
+                }
+
+
+                else if( tileMap30Char == 'b')   // blue ghost
+                {
+
+                    Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(BlueGhost);
+                }
+
+
+                else if( tileMap30Char == 'r')   // red ghost
+                {
+
+                    Block RedGhost = new Block(redGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(RedGhost);
+                }
+
+
+                else if( tileMap30Char == 'p')   // pink ghost
+                {
+
+                    Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
+                    ghosts.add(PinkGhost);
+                }
+
+
+                else if ( tileMap30Char == 'P')  // pacman
+                {
+                    pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);   // here we had created a pacman character and have stored it in pacman variable
+                    // in the starting of the game we want our pacman to be facing towards right so we right pacmanRightImage
+                    // also bcz pacman was single entity so we didnt created a hashset for it
+                    // we had done this to treat pac man as a game object making collision detection easier
+                }
+
+                else if ( tileMap30Char == 'I')
+                {
+                    Block ice  = new Block(iceImage, x, y, tileSize, tileSize);
+                    iceBlocks.add(ice);
+                }
+
+
+                else if ( tileMap30Char == 'T')
+                {
+                    Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
+                    teleportPads.add(teleport);
+                }
+
+                else if ( tileMap30Char == 'S')
+                {
+                    Block speed = new Block(speedImage, x, y, tileSize, tileSize);
+                    speedZones.add(speed);
+                }
+
+                else if ( tileMap30Char == 'Z')
+                {
+                    Block phantom = new Block(null, x, y, tileSize, tileSize);  // null  bcz we are not taking the image
+                    phantomZones.add(phantom);
+                }
+
+
+                else if ( tileMap30Char == 'R')
+                {
+                    Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
+                    reverseControls.add(rev);
+                }
+
+
+                else if ( tileMap30Char == 'W')
+                {
+                    Block Wenter = new Block(warpEntranceImage, x, y, tileSize, tileSize);
+                    warpEntrance.add(Wenter);
+                }
+
+                else if ( tileMap30Char == 'w')
+                {
+                    Block wexit = new Block(warpExitImage, x, y, tileSize, tileSize);
+                    warpExit.add(wexit);
+                    walls.add(wexit);
+                }
+
+
+                else if ( tileMap30Char == 'B')
+                {
+                    Block button1 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button1.add(button1);
+                }
+
+                else if ( tileMap30Char == 'G')
+                {
+                    Block gate1 = new Block(null, x, y, tileSize, tileSize);
+                    Gate1.add(gate1);
+                    walls.add(gate1);
+                }
+
+
+                else if ( tileMap30Char == 'V')
+                {
+                    Block button2 = new Block(buttonsImage, x, y, tileSize, tileSize);
+                    Button2.add(button2);
+                }
+
+                else if ( tileMap30Char == 'v')
+                {
+                    Block gate2 = new Block(null, x, y, tileSize, tileSize);
+                    Gate2.add(gate2);
+                    walls.add(gate2);
+                }
+
+                else if ( tileMap30Char == 'N')
+                {
+                    Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
+                    spiderNets.add(web);
+                }
+
+
+                // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
+
+            }
+        }
+    };
+
+
+
+    
     // creating a function paintComponent in this we will draw all of our objects onto the game
+
 
     public void paintComponent(Graphics g)   // it will take in graphics g
     {
@@ -6054,6 +7895,11 @@ private String[] tileMap26 = {
     public void draw(Graphics g)  // taking graphics g 
     {
 
+
+        for ( Block web : spiderNets)
+        {
+            g.drawImage(web.image, web.x, web.y, web.width , web.height , null);
+        }
         
 
  
@@ -6065,6 +7911,32 @@ private String[] tileMap26 = {
          }
 
 
+
+         // displaying button1 and gate 1
+         // Draw Buttons (B)
+        
+        for (Block button : Button1) {
+            g.drawImage(button.image, button.x, button.y, button.width , button.height , null);
+        }
+
+        for (Block button : Button2) {
+            g.drawImage(button.image, button.x, button.y, button.width , button.height , null);
+        }
+
+        // Draw Gates (G)
+        g.setColor(gate1Open ? Color.BLACK : Color.DARK_GRAY); // change color if open/closed
+        for (Block gate : Gate1) {
+            g.fillRect(gate.x, gate.y, tileSize, tileSize);
+        }
+
+        g.setColor(gate2Open ? Color.BLACK : Color.DARK_GRAY); // change color if open/closed
+        for (Block gate : Gate2) {
+            g.fillRect(gate.x, gate.y, tileSize, tileSize);
+        }
+
+        
+
+         
          // displaying teleportation pads
          // similarly teleport pads needs to be drawn before pacman
          for ( Block tele: teleportPads)
@@ -6200,7 +8072,6 @@ for (Block phantom : phantomZones) {
 
 
 
-    
 
 
     public void move(){
@@ -6215,6 +8086,7 @@ for (Block phantom : phantomZones) {
         // since velocity is tilesize/4 so we expect the pacman to move one quarter of the tile size 
 
 
+        
 
 
         // reverse controls 
@@ -6251,36 +8123,69 @@ pacmanIsOnReverse = currentlyOnReverse;
         }
 
 
-        // ICE SLIDING LOGIC
-        boolean onIceNow = isOnIce(pacman); // check current tile. isOnIce is a function which returns boolean value. this functions checks if the tile is ice or not. if yes then returns true therefore here boolean onIceNow = true
 
-        // 1. Update velocity based on current direction
-        pacman.updateVelocity();
+      
+// STEP 1: Check where Pac-Man is (before moving)
+boolean alreadyInWeb = isInsideSpiderNet(pacman); // checks if pacman is currently on a spider web
 
-        // 2. Try moving
-        pacman.x += pacman.velocityX;
-        pacman.y += pacman.velocityY;
-        // these two are increasing the speed of pacman when on ice tiles
+if (alreadyInWeb) {
+    // Slow down Pac-Man's movement inside the web
+    if (pacman.direction == 'L') {
+        pacman.velocityX = -tileSize / 8;  // Slow down horizontally
+        pacman.velocityY = 0;  // No vertical movement
+    } else if (pacman.direction == 'R') {
+        pacman.velocityX = +tileSize / 8;
+        pacman.velocityY = 0;
+    } else if (pacman.direction == 'U') {
+        pacman.velocityY = -tileSize / 8;  // Slow down vertically
+        pacman.velocityX = 0;
+    } else if (pacman.direction == 'D') {
+        pacman.velocityX = 0;
+        pacman.velocityY = +tileSize / 8;
+    }
+} 
+else if (isOnIce(pacman)) {
+    // ICE SLIDING LOGIC
+    boolean onIceNow = isOnIce(pacman); // check current tile. isOnIce is a function which returns boolean value. this functions checks if the tile is ice or not. if yes then returns true therefore here boolean onIceNow = true
 
-        // 3. Check for wall hit
-        for (Block wall : walls) {
-            if (collision(pacman, wall)) {
-                pacman.x -= pacman.velocityX;
-                pacman.y -= pacman.velocityY;
+    // 1. Update velocity based on current direction
+    pacman.updateVelocity();
+
+    // 2. Try moving
+    pacman.x += pacman.velocityX;
+    pacman.y += pacman.velocityY;
+    // these two are increasing the speed of pacman when on ice tiles
+
+    // 3. Check for wall hit
+    for (Block wall : walls) {
+        if (collision(pacman, wall)) {
+            pacman.x -= pacman.velocityX;
+            pacman.y -= pacman.velocityY;
 
             // Stop motion
-                pacman.velocityX = 0;
-                pacman.velocityY = 0;
-                break; // if we used here return then move function is ended therefore now when pacman hits a wall then everyone does not move ghosts also until a key is pressed by user to make it move in open area. therefore this is wrong to put here return
-            }
-        }
-
-        // 4. If still on ice, keep sliding automatically in same direction next frame
-        // But if off ice, zero out velocity so it doesn’t keep going
-        if (!isOnIce(pacman)) {
             pacman.velocityX = 0;
             pacman.velocityY = 0;
+            break; // if we used here return then move function is ended therefore now when pacman hits a wall then everyone does not move ghosts also until a key is pressed by user to make it move in open area. therefore this is wrong to put here return
         }
+    }
+
+    // 4. If still on ice, keep sliding automatically in same direction next frame
+    // But if off ice, zero out velocity so it doesn’t keep going
+    if (!isOnIce(pacman)) {
+        pacman.velocityX = 0;
+        pacman.velocityY = 0;
+    }
+
+} else {
+    // Normal speed when not on ice or spider net
+    pacman.updateVelocity();
+}
+
+
+
+        
+        
+
         
         
 
@@ -6332,7 +8237,7 @@ pacmanIsOnReverse = currentlyOnReverse;
         
 
         // TELEPORTING THE PACMAN FROM ONE MAP END TO OTHER
-        // Handle E ↔ e warp
+        // Handle E ↔ e warp for pacman 
 for (Block space1 : spaces1) {
     if (collision(pacman, space1)) {
         for (Block exit1 : exitSpaces1) {
@@ -6353,7 +8258,7 @@ for (Block exit1 : exitSpaces1) {
     }
 }
 
-// Handle M ↔ m warp
+// Handle M ↔ m warp for pacman
 for (Block space2 : spaces2) {
     if (collision(pacman, space2)) {
         for (Block exit2 : exitSpaces2) {
@@ -6372,8 +8277,68 @@ for (Block exit2 : exitSpaces2) {
         }
         break;
     }
+} 
+              
+
+        // TELEPORTING THE ghost FROM ONE MAP END TO OTHER
+        // Handle E ↔ e warp for ghost
+for (Block space1 : spaces1) {
+    for ( Block ghost : ghosts){
+
+        if (collision(ghost, space1)) {
+            for (Block exit1 : exitSpaces1) {
+                teleport(space1, exit1, ghost);
+                break;
+            }
+            break;
+        }
+    }
+    
 }
 
+for (Block exit1 : exitSpaces1) {
+    for ( Block ghost :ghosts)
+    {
+        if (collision(ghost, exit1)) {
+            for (Block space1 : spaces1) {
+                teleport(exit1, space1, ghost);
+                break;
+            }
+            break;
+        }
+    }
+    
+}
+
+// Handle M ↔ m warp for ghost
+for (Block space2 : spaces2) {
+    for ( Block ghost : ghosts)
+    {
+
+        if (collision(ghost, space2)) {
+            for (Block exit2 : exitSpaces2) {
+                teleport(space2, exit2, ghost);
+                break;
+            }
+            break;
+        }
+    }
+    
+}
+
+for (Block exit2 : exitSpaces2) {
+    for ( Block ghost : ghosts)
+    {
+        if (collision(ghost, exit2)) {
+            for (Block space2 : spaces2) {
+                teleport(exit2, space2, ghost);
+                break;
+            }
+            break;
+        }
+    }
+    
+}
 
         
 
@@ -6453,28 +8418,98 @@ for (Block exit2 : exitSpaces2) {
     
 
        
+       // --- Toggle for Button 1 & Gate 1 ---
+boolean currentlyOnButton1 = false;
+
+for (Block button : Button1) {
+    if (collision(pacman, button)) {
+        currentlyOnButton1 = true;
+
+        if (!pacmanOnButton1) { // Just stepped onto it
+            gate1Open = !gate1Open;
+
+            if (gate1Open) {
+                for (Block gate : Gate1) {
+                    walls.remove(gate); // gate becomes walkable
+                }
+                System.out.println("Gate 1 opened!");
+            } else {
+                for (Block gate : Gate1) {
+                    walls.add(gate); // gate becomes solid again
+                }
+                System.out.println("Gate 1 closed!");
+            }
+        }
+
+        break;
+    }
+}
+pacmanOnButton1 = currentlyOnButton1;
+
+// --- Toggle for Button 2 & Gate 2 ---
+boolean currentlyOnButton2 = false;
+
+for (Block button : Button2) {
+    if (collision(pacman, button)) {
+        currentlyOnButton2 = true;
+
+        if (!pacmanOnButton2) {
+            gate2Open = !gate2Open;
+
+            if (gate2Open) {
+                for (Block gate : Gate2) {
+                    walls.remove(gate);
+                }
+                System.out.println("Gate 2 opened!");
+            } else {
+                for (Block gate : Gate2) {
+                    walls.add(gate);
+                }
+                System.out.println("Gate 2 closed!");
+            }
+        }
+
+        break;
+    }
+}
+pacmanOnButton2 = currentlyOnButton2;
+
 
 
         // checking wall collision
         // now i want to iterate through all the walls in the hashset
         // so
-        for ( Block wall : walls){
-            if (collision(pacman , wall))   // if collison happens between pacman and this current wall
-            {
-                pacman.x -= pacman.velocityX;  
-                pacman.y -= pacman.velocityY;
-                break; // once we found a collision we dont need to continue with hashset bcz we already foubd the wall that we are colliding to 
-                // i will take a step back 
-                // what is happening here is 
-                // -> If a collision is detected, we undo the last movement, so Pac-Man stays in place.
-                // -> Since we break out of the loop after detecting a collision, we avoid unnecessary checks for other walls.
-                // -> Instead of stopping abruptly, we just reverse Pac-Man's last movement, making the transition feel natural.
-                // -> Pac-Man stays in place instead of going through the wall
-                // -> it does not means that the pacman will start moving backwards 
+        // for ( Block wall : walls){
+        //     if (collision(pacman , wall))   // if collison happens between pacman and this current wall
+        //     {
+        //         pacman.x -= pacman.velocityX;  
+        //         pacman.y -= pacman.velocityY;
+        //         break; // once we found a collision we dont need to continue with hashset bcz we already foubd the wall that we are colliding to 
+        //         // i will take a step back 
+        //         // what is happening here is 
+        //         // -> If a collision is detected, we undo the last movement, so Pac-Man stays in place.
+        //         // -> Since we break out of the loop after detecting a collision, we avoid unnecessary checks for other walls.
+        //         // -> Instead of stopping abruptly, we just reverse Pac-Man's last movement, making the transition feel natural.
+        //         // -> Pac-Man stays in place instead of going through the wall
+        //         // -> it does not means that the pacman will start moving backwards 
 
+        //     }
+        // }
+
+
+        for (Block wall : walls) {
+            if (collision(pacman, wall)) {
+                pacman.x -= pacman.velocityX;
+                pacman.y -= pacman.velocityY;
+        
+                // 🛑 Completely stop movement
+                pacman.velocityX = 0;
+                pacman.velocityY = 0;
+        
+                hitWall = true;
+                break;
             }
         }
-
         
 
         // now our pacman stops after colliding with the wall but it got stuck sometimes when we there is no way
@@ -6686,8 +8721,14 @@ switch (pacman.direction) {
         
     }
 
+    private boolean isInsideSpiderNet(Block pacman) {
+        for (Block net : spiderNets) {
+            if (collision(pacman, net)) return true;
+        }
+        return false;
+    }
 
-
+    
 
 
 
@@ -6885,7 +8926,9 @@ Runnable[] levelLoaders = new Runnable[]{   // it is an array of runnables where
     this :: loadMap23,
     this :: loadMap24,
     this :: loadMap25,
-    this :: loadMap26
+    this :: loadMap26,
+    this :: loadMap27,
+    this :: loadMap28
 
     // if we want to add more maps then just write this::loadMapX and done but the last line should not have a comma
 
@@ -7020,116 +9063,77 @@ public void updateGameLogic()
 
 
     @Override
-    public void keyReleased(KeyEvent e) {   // it only gets triggered when we press a key and let it go and release the key 
-        // System.out.println("KeyEvent: "+ e.getKeyCode());  
-        // now to make our key presses work . we need to add two things in our constructor adding key listner 
+public void keyReleased(KeyEvent e) {   // it only gets triggered when we press a key and let it go and release the key 
+    // System.out.println("KeyEvent: "+ e.getKeyCode());  
+    // now to make our key presses work . we need to add two things in our constructor adding key listener 
 
-        // now i comment out that prinitng statement
+    // now i comment out that printing statement
 
-
-        if ( gameOver)
-        {
-            loadMap1(); // reloading the map . this is done bcz i want to add all the foods back into the hashset 
-            resetPositions(); // resetting the positions 
-            // now we want each object a new direction to move in  so
-            lives = 3;  // making lives again 3
-            score  = 0;  // making score again 0
-            gameOver = false;  // setting gameover to be false
-            gameLoop.start();  // starting the game loop 
-
-        }
-
-        // now there maybe a case where the pacman has eaten all the food so i can load new levels but here i will load the same map
-
-
-
-        if (controlsReversed) {
-            if (e.getKeyCode() == KeyEvent.VK_UP) {
-                pacman.updateDirection('D');
-            } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                pacman.updateDirection('U');
-            } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                pacman.updateDirection('R');
-            } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                pacman.updateDirection('L');
-            }
-        } else {
-            if (e.getKeyCode() == KeyEvent.VK_UP) {
-                pacman.updateDirection('U');
-            } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                pacman.updateDirection('D');
-            } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                pacman.updateDirection('L');
-            } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                pacman.updateDirection('R');
-            }
-        }
-        
-    
-        
-
-        // if (e.getKeyCode() == KeyEvent.VK_UP)   // when i pressed the up arrow then i call this function
-        // {
-        //     pacman.updateDirection('U');   // passing U
-        // }
-
-        // else if (e.getKeyCode() == KeyEvent.VK_DOWN)   // when i pressed the down arrow then i call this function
-        // {
-        //     pacman.updateDirection('D');   // passing D
-        // }
-
-        // else if (e.getKeyCode() == KeyEvent.VK_LEFT)   // when i pressed the left arrow then i call this function
-        // {
-        //     pacman.updateDirection('L');   // passing L
-        // }
-
-        // else if (e.getKeyCode() == KeyEvent.VK_RIGHT)   // when i pressed the right arrow then i call this function
-        // {
-        //     pacman.updateDirection('R');   // passing R
-        // }
-
-        // // this will update the direction and velocity but we actually need to move the pacman so we need to keep updating the paintComponent also 
-        // // so create a function move just above the override function of action listener
-
-    
-        
-
-        // // now we are trying to update the image with the direction updation
-
-        // if ( pacman.direction == 'U')
-        // {
-        //     pacman.image = pacmanUpImage;
-        // }
-
-
-        // else if ( pacman.direction == 'D')
-        // {
-        //     pacman.image = pacmanDownImage;
-        // }
-
-
-        // else if ( pacman.direction == 'L')
-        // {
-        //     pacman.image = pacmanLeftImage;
-        // }
-
-
-        // else if ( pacman.direction == 'R')
-        // {
-        //     pacman.image = pacmanRightImage;
-        // }
-
-        // now we had created different cases to do this instead of writing this one line inside the above if else cases where we are checking for the key up down left and right
-        // and updating the direction
-        // but if you press the key up then it does not mean that the packman will move upwards bcz there maybe a wall so if i could have placed this image upadation line inisde them just below updateDirection('U') then it would have resulted in falsy manner 
-
-
-
-        // now we are going to make the ghost move 
-        // they will move randomly 
-
-        // for that lets move on to the class PacMan
+    if (gameOver) {
+        loadMap1(); // reloading the map . this is done bcz i want to add all the foods back into the hashset 
+        resetPositions(); // resetting the positions 
+        // now we want each object a new direction to move in  so
+        lives = 3;  // making lives again 3
+        score  = 0;  // making score again 0
+        gameOver = false;  // setting gameover to be false
+        gameLoop.start();  // starting the game loop 
+        return;  // exiting this function so it doesn't check key presses when restarting
     }
+
+    // now there maybe a case where the pacman has eaten all the food so i can load new levels but here i will load the same map
+
+    // ----------- WALL CHECKING STARTS HERE ------------
+    // storing the next position of pacman
+    // Assuming you already have pacman.direction and tileSize set
+int futureX = pacman.x;
+int futureY = pacman.y;
+
+if (controlsReversed) {
+    if (e.getKeyCode() == KeyEvent.VK_UP) {
+        futureY += tileSize / 4;
+        if (!willHitWall(futureX, futureY)) pacman.updateDirection('D');
+    } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+        futureY -= tileSize / 4;
+        if (!willHitWall(futureX, futureY)) pacman.updateDirection('U');
+    } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        futureX += tileSize / 4;
+        if (!willHitWall(futureX, futureY)) pacman.updateDirection('R');
+    } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        futureX -= tileSize / 4;
+        if (!willHitWall(futureX, futureY)) pacman.updateDirection('L');
+    }
+} else {
+    if (e.getKeyCode() == KeyEvent.VK_UP) {
+        futureY -= tileSize / 4;
+        if (!willHitWall(futureX, futureY)) pacman.updateDirection('U');
+    } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+        futureY += tileSize / 4;
+        if (!willHitWall(futureX, futureY)) pacman.updateDirection('D');
+    } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        futureX -= tileSize / 4;
+        if (!willHitWall(futureX, futureY)) pacman.updateDirection('L');
+    } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        futureX += tileSize / 4;
+        if (!willHitWall(futureX, futureY)) pacman.updateDirection('R');
+    }
+}
+
+    
+
+
+
+}
+
+
+
+private boolean willHitWall(int futureX, int futureY) {
+    for (Block wall : walls) {
+        if (collision(futureX, futureY, wall)) {
+            return true;
+        }
+    }
+    return false;
+}
 
 
 }
