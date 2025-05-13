@@ -26,8 +26,8 @@ public class App {
  
         */
 
-        int rowCount = 21;
-        int colCount = 19;
+        int rowCount = 23;
+        int colCount = 21;
         int tileSize = 32;
 
         int widthBoard = colCount*tileSize;
