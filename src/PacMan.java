@@ -14947,7 +14947,8 @@ if (controlsReversed) {
 
 
 
-private boolean willHitWall(int futureX, int futureY) {
+private boolean willHitWall(int futureX, int futureY)
+{
     for (Block wall : walls) {
         if (collision(futureX, futureY, wall)) {
             return true;
@@ -14955,6 +14956,7 @@ private boolean willHitWall(int futureX, int futureY) {
     }
     return false;
 }
-
-
+ 
 }
+
+// yes 
