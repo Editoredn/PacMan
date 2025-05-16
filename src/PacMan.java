@@ -1403,7 +1403,7 @@ PACMAN = P
  */
 
 
- // problem :  the phantom zoens are not working for ghost , wall image change
+ // problem :  the phantom zoens are not working for ghost , wall image change[ fixed]
 private String[] tileMap26 = {
 
 "<<<<<<<<<<<<<<<<<<<<<" ,
@@ -2110,7 +2110,7 @@ private String[] tileMap37 = {
 
 
          // checking number of walls , foods , ghosts
-         loadMap17();  // calling the function loadmap bcz we want to check the number of walls , foods , ghosts and its algo is written inside the function loadMap();
+         loadMap26();  // calling the function loadmap bcz we want to check the number of walls , foods , ghosts and its algo is written inside the function loadMap();
         //  System.out.println(walls.size());  // walls was the hashset where all the walls when encountered were stored 
         //  System.out.println(foods.size());  // same here
         //  System.out.println(ghosts.size()); // same here
@@ -14217,38 +14217,46 @@ BUT! It may also depend on how often you're checking collisions (and where in th
                      // THEREFORE CORRECT WAY IS 
                     //  ghost.phaseTilesRemaining = (tileSize / ghostSpeed) * numTilesToPass;
 
+                    ghost.x += ghost.velocityX;
+                    ghost.y += ghost.velocityY;
+
                     ghost.phaseTilesRemaining = (tileSize / 8) * 2;  // GHOST SPEED IN OUR PROGRAM IS TILESIZE/4 I.E 32/4
                     // NOTE: HERE NUMBER OF TILES TWO BCZ I THINK IT COUNTS THE PHANTOM ZONE TILE ALSO SO ONE WALL AND ONE PHANTOM ZONE THEREFORE 2
 
+
+                    //  ghost.x += ghost.velocityX;
+                    // ghost.y += ghost.velocityY;
+                    
+                    
                     break;
 
                 }
             // }
         
-            // // Move ghost
             // ghost.x += ghost.velocityX;
-            // ghost.y += ghost.velocityY;
+            //         ghost.y += ghost.velocityY;
+            
         
             // Handle walls ONLY if not in phase mode
             // Only check for wall collision if ghost is NOT phasing
-if (ghost.phaseTilesRemaining <= 0) {
-    for (Block wall : walls) {
-        if (collision(ghost, wall)) {
-            ghost.x -= ghost.velocityX;
-            ghost.y -= ghost.velocityY;
 
-            char newDirection = directions[random.nextInt(4)];
-            ghost.updateDirection(newDirection);
-            break;
+            if (ghost.phaseTilesRemaining > 0) {
+        // Ghost is phasing, so skip wall collision
+        
+        ghost.phaseTilesRemaining--;
+    } else {
+        // Ghost is not phasing, so check walls
+        for (Block wall : walls) {
+            if (collision(ghost, wall)) {
+                ghost.x += ghost.velocityX;
+                ghost.y += ghost.velocityY;
+                ghost.updateDirection(directions[random.nextInt(4)]);
+                break;
+            }
         }
     }
-} else {
-    // Ghost is in phantom mode, so allow movement through walls
-    ghost.phaseTilesRemaining--;
-}
 
-        
-}
+} 
 
             // Check if this ghost is stunned
 if (ghostStunEndTimes.containsKey(ghost)) {
