@@ -1352,7 +1352,7 @@ PACMAN = P
 private String[] tileMap25 = {
     
 "<<<<<<<<<<<<<<<<<<<<<" ,
-"<//////////////////<<" ,
+"<///////////////////<" ,
 "</       /         /<" ,
 "</ ///// / ///// / /<" ,
 "</ /   / / /   / / /<" ,
@@ -1403,15 +1403,15 @@ PACMAN = P
  */
 
 
- // problem :  the phantom zoens are not working for ghost , wall image change[ fixed]
+ // problem :  the phantom zoens are not working for ghost[fixed] , wall image change[ fixed]
 private String[] tileMap26 = {
 
 "<<<<<<<<<<<<<<<<<<<<<" ,
 "<___________________<" ,
 "<_      ~_~      y _<" ,
-"<_ _____ _ _______ _<" ,
-"<_ _~  _ _ _~   ~_ _<" ,
-"<_ _ _ _ _ _ ___ _ _<" ,
+"<_ _______________ _<" ,
+"<_ _~  _ _ _~  ~ _ _<" ,
+"<_ _ _ _ _ _ __ __ _<" ,
 "<_ _ _ _ _ _ _ _ _ _<" ,
 "<_ _ _ _   _ _ q _ _<" ,
 "<_ _ _ _ _ _ _ _ _ _<" ,
@@ -1535,7 +1535,7 @@ private String[] tileMap29 = {
 
 
 
-// PROBLEM WALL IS DIFFERENT IT SHOULD NOT BE 
+// PROBLEM WALL IS DIFFERENT IT SHOULD NOT BE [ fixed ]
 private String[] tileMap30 = {
 
 "<<<<<<<<<<<<<<<<<-<<<" ,
@@ -2110,7 +2110,7 @@ private String[] tileMap37 = {
 
 
          // checking number of walls , foods , ghosts
-         loadMap26();  // calling the function loadmap bcz we want to check the number of walls , foods , ghosts and its algo is written inside the function loadMap();
+         loadMap24();  // calling the function loadmap bcz we want to check the number of walls , foods , ghosts and its algo is written inside the function loadMap();
         //  System.out.println(walls.size());  // walls was the hashset where all the walls when encountered were stored 
         //  System.out.println(foods.size());  // same here
         //  System.out.println(ghosts.size()); // same here
@@ -13494,7 +13494,7 @@ private String[] tileMap37 = {
     
 
         // displaying phantom zones. it is done after walls are drawn bcz they will display above the wall . if drawn before walls then it will make then hide behind walls
-        g.setColor(new Color(100, 0, 100, 120)); // semi-transparent purple
+        g.setColor(new Color(100, 130, 160, 120)); // semi-transparent purple
 for (Block phantom : phantomZones) {
     g.fillRect(phantom.x, phantom.y, phantom.width, phantom.height);
 }
@@ -14224,8 +14224,8 @@ BUT! It may also depend on how often you're checking collisions (and where in th
                     // NOTE: HERE NUMBER OF TILES TWO BCZ I THINK IT COUNTS THE PHANTOM ZONE TILE ALSO SO ONE WALL AND ONE PHANTOM ZONE THEREFORE 2
 
 
-                    //  ghost.x += ghost.velocityX;
-                    // ghost.y += ghost.velocityY;
+                     ghost.x += ghost.velocityX;
+                    ghost.y += ghost.velocityY;
                     
                     
                     break;
@@ -14764,7 +14764,7 @@ Runnable[] levelLoaders = new Runnable[]{   // it is an array of runnables where
 };
 
 
-int currentLevel = 13;
+int currentLevel = 24;
 
 public void updateGameLogic()
 {
