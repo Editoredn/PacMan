@@ -2110,7 +2110,7 @@ private String[] tileMap37 = {
 
 
          // checking number of walls , foods , ghosts
-         loadMap6();  // calling the function loadmap bcz we want to check the number of walls , foods , ghosts and its algo is written inside the function loadMap();
+         loadMap17();  // calling the function loadmap bcz we want to check the number of walls , foods , ghosts and its algo is written inside the function loadMap();
         //  System.out.println(walls.size());  // walls was the hashset where all the walls when encountered were stored 
         //  System.out.println(foods.size());  // same here
         //  System.out.println(ghosts.size()); // same here
