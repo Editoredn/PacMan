@@ -1,4 +1,4 @@
-// src is my source folder. i had to insert my images in this folder only 
+package src;// src is my source folder. i had to insert my images in this folder only
 // App.java is the main file where we will run our code 
 
 
@@ -26,8 +26,8 @@ public class App {
  
         */
 
-        int rowCount = 21;
-        int colCount = 19;
+        int rowCount = 23;
+        int colCount = 21;
         int tileSize = 32;
 
         int widthBoard = colCount*tileSize;
