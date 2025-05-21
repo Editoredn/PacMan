@@ -42,7 +42,7 @@ public class App {
         // the above line is commented out bcz we dont 
         frame.setSize(widthBoard  , heightBoard);   // setting the size of the board 
         frame.setLocationRelativeTo(null);  // making our window to be visible at centre of screen 
-        frame.setResizable(false);  // i dont want the user to resize the widht and height of the frame so i set the boolean false
+        frame.setResizable(true);  // i dont want the user to resize the widht and height of the frame so i set the boolean false
 
         // since in the window we had the option to close the window ( a cross sign ) . so now i will create a method to allow the user to close the window when clicked on that cross
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
