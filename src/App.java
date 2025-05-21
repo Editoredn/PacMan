@@ -1,4 +1,4 @@
-// src is my source folder. i had to insert my images in this folder only 
+package src;// src is my source folder. i had to insert my images in this folder only
 // App.java is the main file where we will run our code 
 
 
