@@ -40,26 +40,37 @@ public class SoundManager {
         }
     }
 
-    private void playSoundEffect(String path) {
-        try {
-            Clip clip = soundCache.get(path);
-            if (clip == null || !clip.isOpen()) {
-                AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(path));
-                clip = AudioSystem.getClip();
-                clip.open(audioStream);
-                soundCache.put(path, clip);
-            }
-
-            if (clip.isRunning()) {
-                clip.stop();
-            }
-
-            clip.setFramePosition(0);
-            clip.start();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            System.err.println("Error playing sound effect: " + e.getMessage());
-        }
+//    private void playSoundEffect(String path) {
+//        try {
+//            Clip clip = soundCache.get(path);
+//            if (clip == null || !clip.isOpen()) {
+//                AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(path));
+//                clip = AudioSystem.getClip();
+//                clip.open(audioStream);
+//                soundCache.put(path, clip);
+//            }
+//
+//            if (clip.isRunning()) {
+//                clip.stop();
+//            }
+//
+//            clip.setFramePosition(0);
+//            clip.start();
+//        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+//            System.err.println("Error playing sound effect: " + e.getMessage());
+//        }
+//    }
+private void playSoundEffect(String path) {
+    try {
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(path));
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioStream);
+        clip.start();
+    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+        System.err.println("Error playing sound effect: " + e.getMessage());
     }
+}
+
 
     public void playEatSound() {
         playSoundEffect("src/sounds/effects/eat.wav");

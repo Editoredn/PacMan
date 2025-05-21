@@ -14659,7 +14659,7 @@
 //
 //
 //
-//    // proceding to new level
+//    // proceeding to new level
 //    // -> method 1: using switch case
 //
 ////     int currentLevel = 1;

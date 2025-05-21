@@ -13,15 +13,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-
+import src.SoundManager;
 import javax.swing.*;
 import java.util.Iterator;
 
-import src.SoundManager;
 
 
-public class PacMan extends JPanel implements ActionListener , KeyListener{   // i have written extends JPanel bcz this PacMan class inherits JPanel
-        private SoundManager soundManager = new SoundManager();
+
+
+public class PacMan extends JPanel implements ActionListener , KeyListener {   // i have written extends JPanel bcz this PacMan class inherits JPanel class
+    private SoundManager soundManager = new SoundManager();
+
+
+    // variable to debug the map
+    int debugMapLevel = 1;   // if i found a problem in map and i want to go to that specific map then i only need to change here. nothing to be done in the else code
+
 
 
     // variables for the reverse control
@@ -145,7 +151,7 @@ public class PacMan extends JPanel implements ActionListener , KeyListener{   //
             {
                 if ( collision(this , wall))  // if this object collides with the wall. here this is being refered as pacman. we will use the same function for ghost as well
                 {
-                    // then we gonna take a step back
+                    // then we gonna take a step back ( since we were moving previously so stepping back will make our pacman still at that place)
                     this.x -= this.velocityX;
                     this.y -= this.velocityY;
                     // now we need to update the direction
@@ -212,6 +218,8 @@ public class PacMan extends JPanel implements ActionListener , KeyListener{   //
         // now go back to move function to the ghost collision loop
 
     }
+
+
     // defining few properties
     private int rowCount = 23;
     private int colCount = 21;
@@ -346,1484 +354,6 @@ public class PacMan extends JPanel implements ActionListener , KeyListener{   //
 
 
 
-
-    //X = wall, O = skip(dont do anything), P = pac man, ' ' = food
-    //Ghosts: b = blue, o = orange, p = pink, r = red
-
-
-    // THEME 1 : LEVEL 1 TO 5
-    /*
-     PACMAN = P
-     BUSHES = :
-     WALSS = X
-     SPACEENTRY = .
-     EXIT ENTRY = E
-     red ghost = r
-     orange ghost = a
-
-     black boxes [ non one can enter there ] = <
-     */
-
-
-    // problem : ghost looks very small , bushes image change. it should be a square shaped tile
-    private String[] tileMap1 ={     // tileMap is an array of strings
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<XXXXXXXXXXXXXXXXXXX<" ,
-            "<X       :X        X<" ,
-            "<X XXXXXX:X XXXXXX X<" ,
-            "<X X     :       X X<" ,
-            "<X X XXXXXXXXXXX X X<" ,
-            "<X                 X<" ,
-            "<XXXXX XXXXX XXXXX X<" ,
-            "<X                 X<" ,
-            "<X XXXXXXX XXXXXXX X<" ,
-            "<X        r        X<" ,
-            "<X XXXXXXX XXXXXXX X<" ,
-            "E:::  P          :::." ,
-            "<X XXXXX XXXXX XXXXX<" ,
-            "<X              :  X<" ,
-            "<X X XXXXXXXXXXX:X X<" ,
-            "<X X            :X X<" ,
-            "<X XXXXXX X XXXXXX X<" ,
-            "<X        X        X<" ,
-            "<X XXXXXXXXXXXXXXX X<" ,
-            "<X      :::::      X<" ,
-            "<XXXXXXXXXXXXXXXXXXX<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-
-
-    };
-    // this is the tile map which i am using we can create anything which we want
-    // here we have array of strings and each string is a row
-
-    // now i had to go through the tile map and create objects like walls , foods , and ghosts , etc
-    // for this i create another function below the PacMan function and i name it as loadMap
-
-
-
-    // level 2: easy
-
-    // problem : orange ghost is also tiny
-    private String[] tileMap2 = {
-
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<XXXXXXXXXXXXXXXXXXX<" ,
-            "<X        X        X<" ,
-            "<X XXXXXX:X:XXXXXX X<" ,
-            "<X X  X  :X:  X  X X<" ,
-            "<X X XX X:X:X XX X X<" ,
-            "<X X             X X<" ,
-            "<X X XX XXXXX XX X X<" ,
-            "<X        r        X<" ,
-            "<XXX X XXX XXX X XXX<" ,
-            "E::       a       ::." ,
-            "<XXX X XXX XXX X XXX<" ,
-            "<X   X         X   X<" ,
-            "<X X XX XXXXX XX X X<" ,
-            "<X X             X X<" ,
-            "<X X XXXX:X:XXXX X X<" ,
-            "<X X     :P:     X X<" ,
-            "<X XXXXXX:X:XXXXXX X<" ,
-            "<X        X        X<" ,
-            "<X XXXXXXXXXXXXXXX X<" ,
-            "<X                 X<" ,
-            "<XXXXXXXXXXXXXXXXXXX<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-    };
-
-
-
-// level 3: easy
-
-    private String[] tileMap3 = {
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<XXXXXXXXXXXXXXXXXXX<" ,
-            "<X         a       X<" ,
-            "<X XXX XXXXXXX XXX X<" ,
-            "<X X::           X X<" ,
-            "<X X:XXXXX XXXXX X X<" ,
-            "<X X X         X X X<" ,
-            "<X X X XXXXXXX X X X<" ,
-            "<X   X    r    X::::E" ,
-            "<XXX XXXXXXXXXXX:XXX<" ,
-            "<X        :     :  X<" ,
-            "<XXX XXXXXXXXXXX:XXX<" ,
-            "<X   X         X   X<" ,
-            "<X X X XXXXXXX X X X<" ,
-            "<X X X         X X X<" ,
-            "<X X XXXXX XXXXX X X<" ,
-            ".::::    P         X<" ,
-            "<X XXX XXXXXXX XXX X<" ,
-            "<X X       X     X:X<" ,
-            "<X XXXXXXX X XXXXX:X<" ,
-            "<X                :X<" ,
-            "<XXXXXXXXXXXXXXXXXXX<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-    };
-
-
-
-// level 4: easy
-
-    private String[] tileMap4 = {
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<XXXXXXXXXXXXXXXXXXX<" ,
-            "<X       :X        X<" ,
-            "<X XXXXXX:X XXXXXX X<" ,
-            "<X    :::: r       X<" ,
-            "<XXX XXXXXXXXXXX XXX<" ,
-            "<X                 X<" ,
-            "<X XX XX XXXXX XX:XX<" ,
-            "<X    X         X: X<" ,
-            "<X XX X XXXXXXX X:XX<" ,
-            ".       a           E" ,
-            "<X:XX:X XXXXXXX X XX<" ,
-            "<X:: :X         X  X<" ,
-            "<X XX XX XXXXX XX XX<" ,
-            "<X                 X<" ,
-            "<XXX XXXXXXXXXXX XXX<" ,
-            "<X        P        X<" ,
-            "<X XXXXXX X XXXXXX X<" ,
-            "<X X::    X      X X<" ,
-            "<X X:XXXXXXXXXXXXX X<" ,
-            "<X  :              X<" ,
-            "<XXXXXXXXXXXXXXXXXXX<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-    };
-
-
-
-// level 5: easy
-
-    // problem : in this bushes teleports the pacman [ RESOLVED]
-    private String[] tileMap5 = {
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<XXXXXXXXXXXXXXXXXXX<" ,
-            "<X           r     X<" ,
-            "<X XXXXX:XXX XXXXX X<" ,
-            "<X X   a:X X     X X<" ,
-            "<X X XXX:X X X X X X<" ,
-            "<X X X     X X X X X<" ,
-            "<X X X XXX X X X X X<" ,
-            "<X   X X   X X X   X<" ,
-            "<XXX X   X X X X XXX<" ,
-            ".:::   X X   X   :::E" ,
-            "<XXX X X XXX X X XXX<" ,
-            "<X   X X     X X   X<" ,
-            "<X X X XX XX X X X X<" ,
-            "<X X X ::: X X X X X<" ,
-            "<X X XXX X X X X X X<" ,
-            "<X X     X X     X X<" ,
-            "<X XXXXX XXX XXXXX X<" ,
-            "<X    ::: P  :::   X<" ,
-            "<X XXXXX XXX XXXXX X<" ,
-            "<X                 X<" ,
-            "<XXXXXXXXXXXXXXXXXXX<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-    };
-
-
-// level 6: easy
-// theme 2: 6-10
-
-/*
-
-PACMAN = P
-     SPEED ZONES = S
-     WALLS = [
-     SPACEENTRY = .
-     EXIT ENTRY = E
-     red ghost = g
-     orange ghost = s
-     PINK GHOST = t
-     WRAP ENTRANCE = N
-     WRAP EXIT = &
-
- */
-
-
-    // problem : ghost images are wrong . their background needs to be removed , speed zones are not looking speed zone
-    private String[] tileMap6 = {
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<[[[[[[[[[[[[[[[[[[[<" ,
-            "<[               SSE<" ,
-            "<[ [[[[[ [[[[[ [[[ [<" ,
-            "<[ [  s[ [   [ [   [<" ,
-            "<[ [ [ [ [ [ [ [ [ [<" ,
-            "<[ [ [ [ [ [ [ [ [ [<" ,
-            "<[ [ [ [[[ [ [[[ [ [<" ,
-            "<[ [ [   g [     [ [<" ,
-            "<[ [S[[[ [[[ [[[[[ [<" ,
-            "<[ [SSS      [     [<" ,
-            "<[ [[[[[[[[[S[ [[[[[<" ,
-            "<[    t    [S[     [<" ,
-            "<[ [[[[[[[[[S[ [[[ [<" ,
-            "<[ [     [ [     [ [<" ,
-            "<[ [ [[[ [ [[[ [ [ [<" ,
-            "<[ [ [   [   [ [ [ [<" ,
-            "<[ [ [ [[[[[ [ [ [ [<" ,
-            "<[ [ [       [ [ [ [<" ,
-            "<[ [ [[[[[[[[[ [ [ [<" ,
-            ".  P               [<" ,
-            "<[[[[[[[[[[[[[[[[[[[<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-    };
-
-// level 7: easy
-
-
-    // problem is : the pacman can enter from wrapentrance and exit from exit. but the wrap exit is not working as wall it should. and for ghosts the wrap entrance and exit must be like wall but here it is not
-// resolved the problem
-    private String[] tileMap7 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<[[[[[[[[[[N[[[[[[[[<" ,
-            "<[        [        [<" ,
-            "<[S[[[[[[ [ [[[[[[ [<" ,
-            "<[S[      [      [ [<" ,
-            "<[S[ [[[[[[[[[[[ [ [<" ,
-            "<[S[      g s    [ [<" ,
-            "<[S[[[[[[[ [ [[[[[[[<" ,
-            "<[       [ [ [     [<" ,
-            "<[[[[[[[ [ [S[ [[[[[<" ,
-            ".           S       E" ,
-            "<[[[[[[[ [ [S[ [[[[[<" ,
-            "<[       [St [     [<" ,
-            "<[ [[[[[[[S[ [[[[[[[<" ,
-            "<[ [      S      [ [<" ,
-            "<[ [ [[[[[[[[[[[ [ [<" ,
-            "<[ [      P      [ [<" ,
-            "<[ [[[[[[ [ [[[[[[ [<" ,
-            "<[  SSS   [        [<" ,
-            "<[[[[[[[[[[ [[[[[[[[<" ,
-            "<[                 [<" ,
-            "<[[[[[[[[[[&[[[[[[[[<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-    };
-
-
-// level 8: easy
-
-
-    // problem : in thi the same problem is their [ resolved]
-    private String[] tileMap8 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<[&[[[[[[[[[[[[[[[[[<" ,
-            "<[S  g    [        [<" ,
-            "<[S[[[[[[ [ [[[[[[ [<" ,
-            "<[S[s           t[ [<" ,
-            "<[ [ [[[[[ [[[[[ [ [<" ,
-            "<[ [ [ SSS SSS [ [ [<" ,
-            "<[ [ [ [[   [[ [ [ [<" ,
-            "<[   [ [     [ [   [<" ,
-            "<[[[ [ [[[[[[[ [ [[[<" ,
-            ".SSS             SSSE" ,
-            "<[[[ [ [[[[[[[ [ [[[<" ,
-            "<[   [ [     [ [   [<" ,
-            "<[ [ [ [[[S[[[ [ [ [<" ,
-            "<[ [ [         [ [ [<" ,
-            "<[ [ [[[[[ [[[[[ [ [<" ,
-            "<[ [      P      [ [<" ,
-            "<[S[[[[[[ [ [[[[[[ [<" ,
-            "<[S[      [      [ [<" ,
-            "<[S[ [[[[[[[[[[[[[ [<" ,
-            "<[                 [<" ,
-            "<[[[[[[[[[[[[[[[[[N[<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-    };
-
-
-// level 9: easy
-
-    private String[] tileMap9 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<[[[[[[[[[[[[[&[[[[[<" ,
-            "<[         s       [<",
-            "<[ [[[S[[[ [[[S[[[ [<",
-            "<[ [[[S[[   [[S[[[ [<",
-            "<[ [[[S[     [S[[[ [<",
-            "<[        g        [<",
-            "<[ [[[ [[[[[[[ [[[ [<",
-            "<[                 [<",
-            "<[ [[[[[[[ [[[[[[[ [<",
-            ".     SSSSSSSt      E",
-            "<[ [[[[[[[ [[[[[[[ [<",
-            "<[                 [<",
-            "<[ [[[S[[[[[[[ [[[ [<",
-            "<[    S   P        [<",
-            "<[ [[[S[     [ [[[ [<",
-            "<[ [[[ [[ S [[ [[[ [<",
-            "<[ [[[ [[[S[[[ [[[ [<",
-            "<[        S        [<",
-            "<[ [[ [[[[[[[[[[[[S[<",
-            "<[             SSSS[<",
-            "<[[[[N[[[[[[[[[[[[[[<",
-            "<<<<<<<<<<<<<<<<<<<<<",
-
-
-    };
-
-
-// level 10: easy
-
-    // SAME PROBLEM [ rsolved]
-    private String[] tileMap10 = {
-
-            "<<<<<<<<<<<<<<.<<<<<<" ,
-            "<[[[[[[[[[[[[[ [[[[[<" ,
-            "<[  t           s  [<" ,
-            "<[ [[[[[ [ [ [[[[[ [<" ,
-            "<[ [   [ [S[ [   [ [<" ,
-            "<[ [ [ [ [S[ [ [ [ [<" ,
-            "<[ [ [ [ [S[ [ [ [ [<" ,
-            "<[S[ [ [[[S[[[ [ [S[<" ,
-            "<[S[ [     g   [ [S[<" ,
-            "<[S[ [[[[[N[[[[[ [S[<" ,
-            "<[S[             [S[<" ,
-            "<[S[[[[[ [[[ [[[[[S[<" ,
-            "<[       [ P       [<" ,
-            "<[S[[[[[ [[[ [[[[[S[<" ,
-            "<[S[             [S[<" ,
-            "<[S[ [ [[[&[[[ [ [S[<" ,
-            "<[S[ [         [ [S[<" ,
-            "<[S[ [ [[[[[[[ [ [S[<" ,
-            "<[ [ [    S    [ [ [<" ,
-            "<[ [ [ [[[S[[[ [ [ [<" ,
-            "<[       SSS       [<" ,
-            "<[[ [[[[[[[[[[[[[[[[<" ,
-            "<<<E<<<<<<<<<<<<<<<<<",
-
-
-    };
-
-
-
-
-
-// level 11: easy
-
-// theme 3: 11-14
-
-/*
-
-PACMAN = P
-
-     WALLS = ]
-     SPACEENTRY1 = .
-     EXIT ENTRY1 = E
-     SPACEENTRY2 = -
-     EXIT ENTRY2 = e
-     red ghost = h
-     orange ghost = d
-     PINK GHOST = b
-     blue GHOST = y
-     teleport = T
-     electric shock = Q
-
- */
-
-
-
-    // PROBLEM : ANIMATION OF ELECTRIC SHOCK IS TO BE ADDED[ add a full screen animation to the screen which looks amazing ], GHOST SIZE INREASE
-    private String[] tileMap11 = {
-
-            "<<<E<<<<<<<<<<<<E<<<<" ,
-            "<]] ]]]]]]]]]]]] ]]]<" ,
-            "<]          d      ]<" ,
-            "<] ]]] ]]]] ]]]] ]]]<" ,
-            "<] ]  b            ]<" ,
-            "<] ] ]]]]]]]]]] ]] ]<" ,
-            "<] ] ]           ] ]<" ,
-            "<] ] ] ]]]]h ] ] ] ]<" ,
-            "<] ] ] ]     ] ] ] ]<" ,
-            "<] ] ]   ]]] ] ] ] ]<" ,
-            "e    ] ] ] ] ] ] ] Q-" ,
-            "<] ]]] ] ] y ] ] ]]]<" ,
-            "<] ]   ] ]   ] ] ] ]<" ,
-            "<] ] ]]] ]]] ] ] ] ]<" ,
-            "<] ] ]         ] ] ]<" ,
-            "<] ] ] ]]]]]]] ] ] ]<" ,
-            "<] ] ]    P    ] ] ]<" ,
-            "<] ] ]]]]]]]]]]] ] ]<" ,
-            "<] ]   Q           ]<" ,
-            "<] ]]]]]]]] ]]]]]]]]<" ,
-            "<]                 ]<" ,
-            "<]]]]] ]]]]]]]]]] ]]<" ,
-            "<<<<<<.<<<<<<<<<<.<<<",
-
-
-    };
-
-// level 12: easy
-
-
-    // PROBLEM :  GHOST SIZE LESS
-    private String[] tileMap12 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<]]]]]]]]]]]]]]]]]]]<" ,
-            "<]        Q        ]<" ,
-            "<] ] ]]]]]]]]]]] ] ]<" ,
-            "<] ]      h      ] ]<" ,
-            "<] ]]]]] ]]]]] ]]] ]<" ,
-            "<] ]             ] ]<" ,
-            "<] ] ]]]]]]]]]]] ] ]<" ,
-            "<] ]      y      ] ]<" ,
-            "<] ]]]]] ]]]]] ]]]]]<" ,
-            "E   T     ] P  Q    ." ,
-            "<] ]]]]] ]]]]] ]]]]]<" ,
-            "<] ]      d      ] ]<" ,
-            "<] ] ]]]]]]]]]]] ] ]<" ,
-            "<] ]             ] ]<" ,
-            "<] ]]]]] ]]]]] ]]] ]<" ,
-            "<] ]      b      ] ]<" ,
-            "<] ] ]]]]]]]]]]] ] ]<" ,
-            "<]                 ]<" ,
-            "<]]]]]]]]]]]]]]]]]]]<" ,
-            "<]        T        ]<" ,
-            "<]]]]]]]]]]]]]]]]]]]<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-    };
-
-
-
-// medium levels
-
-// level 13 : medium
-
-    // PROBLEM : SAME
-    private String[] tileMap13 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<]]]]]]]]]]]]]]]]]]]<" ,
-            "<]       ]     ]   ]<" ,
-            "<] ]]] ] ]]] ] ] ] ]<" ,
-            "<] ]   ]  h  ] ] ] ]<" ,
-            "<] ] ]]]]] ]]] ] ] ]<" ,
-            "<] ]d      ] T   ] ]<" ,
-            "<] ]]]]] ] ] ]]]]] ]<" ,
-            "<]     ]Q] ] ]     ]<" ,
-            "<]]] ] ] ] ] ] ] ]]]<" ,
-            "E    ] ] ]y] ] ]    ." ,
-            "<]]] ] ] ] ] ] ] ]]]<" ,
-            "<]   ] ] ] ] ] ]   ]<" ,
-            "<] ]]] ] ] ] ]]] ] ]<" ,
-            "<] ]     ]   Q   ] ]<" ,
-            "<] ] ]]] ]]]]]]] ] ]<" ,
-            "<] ] ]b            ]<" ,
-            "<] ] ]]]]] ]]]]] ] ]<" ,
-            "<]   T   ] P ]     ]<" ,
-            "<]]]]]]] ] ] ]]]]]]]<" ,
-            "<]         ]       ]<" ,
-            "<]]]]]]]]]]]]]]]]]]]<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-    };
-
-
-// level 14: medium
-
-    private String[] tileMap14 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<]]]]]]]]]]]]]]]]]]]]<" ,
-            "<]   ]  b    ]     ]<" ,
-            "<] ] ] ]]]]]T] ]]] ]<" ,
-            "<] ] ]  h  ] ] ]   ]<" ,
-            "<] ] ]]] ] ] ] ] ]]]<" ,
-            "<] ]   ] ] ] ] ]   ]<" ,
-            "<] ]]] ] ] ] ]]]]] ]<" ,
-            "<] ]Q  ] ] ]     ] ]<" ,
-            "<] ] ]]] ] ]]]]] ] ]<" ,
-            "e    ] ]y] ]   ]    -" ,
-            "<] ]]] ] ] ] ] ]]] ]<" ,
-            "<]     ] ] ] ]     ]<" ,
-            "<] ]]]]] ] ] ]]] ]]]<" ,
-            "<] ]     ] ] ]     ]<" ,
-            "<] ] ]]]]] ] ]]]]] ]<" ,
-            "<]   ]d    ]Q      ]<" ,
-            "<] ]]]]] ]]]]]]]]] ]<" ,
-            "<]     ] P   ]     ]<" ,
-            "<]]]T] ]]]]] ] ]]] ]<" ,
-            "<]   ]       ]     ]<" ,
-            "<]]]]]]]]]]]]]]]]]]]<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-    };
-
-
-// level 15
-
-
-// THEME 4: BONUS MAP
-// only pacman
-// bonus1wall = {
-
-    // PROBLEM : NOT EATING FOOD
-    private String[] tileMap15 = {
-
-            "<<<<<<<<<<e<<<<<<<<<<" ,
-            "<{{{{{{{{{ {{{{{{{{{<" ,
-            "<{       {         {<" ,
-            "<{ {{{{{ { {{{{{{  {<" ,
-            "<{ {   {     {     {<" ,
-            "<{ { { {{{{{ { {{ {{<" ,
-            "<{ { {       {     {<" ,
-            "<{ { {{{ { {{{{{ { {<" ,
-            "<{ {     {     { { {<" ,
-            "<{ {{ {{ {{{{{ { { {<" ,
-            "-     {             e" ,
-            "<{ {{{{  {{ {{ {{{ {<" ,
-            "<{    {      { {   {<" ,
-            "<{ {{ {{{{{{{{ { {{{<" ,
-            "<{ {         { {   {<" ,
-            "<{ { {{{{{{{ { {{{ {<" ,
-            "<{   {           { {<" ,
-            "<{ {{{{{ {{{{{ {{{ {<" ,
-            "<{       P         {<" ,
-            "<{{{{{{{ {{{ {{{{{{{<" ,
-            "<{                 {<" ,
-            "<{{{{{{{ {{{{{{{{{{{<" ,
-            "<<<<<<<<-<<<<<<<<<<<<" ,
-
-    };
-
-
-
-// LEVEL 16
-
-// theme 5: 16-20
-
-/*
-
-PACMAN = P
-
-     WALLS = }
-     SPACEENTRY1 = .
-     EXIT ENTRY1 = E
-     SPACEENTRY2 = -
-     EXIT ENTRY2 = e
-     red ghost = j
-     orange ghost = f
-     PINK GHOST = n
-     blue GHOST = >
-     ICE TILES = I
-     Button 1 = 1
-     gate 1 = A
-
- */
-
-
-    // problem :  ghost size increase , when pacman is at ice then the game stucks i.e ghost stop moving [ resolved this issue ]  , ICE GATE IMAGE CHNAGE
-    private String[] tileMap16 = {
-
-            "<<<<<<<<<<<<<<<-<<<<<" ,
-            "<}}}}}}}}}}}}}} }}}}<" ,
-            "<}       }      f  }<" ,
-            "<}I}}}}} } }}}}}}} }<" ,
-            "<}I}   }  j  }     }<" ,
-            "<}I} } }}}}} } }}}}}<" ,
-            "<}I} }       }     }<" ,
-            "<}I} } }} }} }}}} }}<" ,
-            "<}I}      }     } }}<" ,
-            "<}I} }}}} }}}} }} }}<" ,
-            ".         n      IIIE" ,
-            "<} } }}}} }}}}} } }}<" ,
-            "<} }      }     }  }<" ,
-            "<} } } }}} } }}}} }}<" ,
-            "<} } }       }     }<" ,
-            "<} } }}}} }}}}} }}I}<" ,
-            "<}   }  >  }       }<" ,
-            "<} }}}} } }}}}} }}I}<" ,
-            "<}       P         }<" ,
-            "<}}} }}}I} }}}}}} }}<" ,
-            "<}      I  III     }<" ,
-            "<}}}}}}}I}}}}}}}}}}}<" ,
-            "<<<<<<<<e<<<<<<<<<<<<" ,
-
-
-
-    };
-
-
-// LEVEL 17 : MEDIUM [TELEPORT]
-
-
-    // problem :  ice stuck here also[ fixed this ], gate are first lokk like black square only and pacman can pass through it but after button toggle it makes the cave image, and now the pacman cannot pass through it [ fixed]
-// fixed
-    private String[] tileMap17 = {
-
-            "<<E<<<<<<<<<<<<<<<<<<" ,
-            "<} }}}}}}}}}}}}}}}}}<" ,
-            "<} III   }         }<" ,
-            "<}I}}}}} } }}}}}}} }<" ,
-            "<}I}A  }  n  }     }<" ,
-            "<} } } }}}}} } }}}}}<" ,
-            "<} } }  P    }  III}<" ,
-            "<} } }}}} }}}} } }I}<" ,
-            "<} }     }     } }I}<" ,
-            "<} }}}} } }}}} } }I}<" ,
-            "e     }   1j    }   -" ,
-            "<}I}}} }}} } }}}}} }<" ,
-            "<}I  }>      }     }<" ,
-            "<}I} }}}}}}}}} }}} }<" ,
-            "<} }           }   }<" ,
-            "<} }}}}}}}}}}}}} } }<" ,
-            "<}   }  f      A   }<" ,
-            "<} } }}}}}}}}}}} } }<" ,
-            "<} }             } }<" ,
-            "<}}}}}} }}} }}}} }I}<" ,
-            "<}          IIII  I}<" ,
-            "<}}}}}}}}}}}}}}}}}I}<" ,
-            "<<<<<<<<<<<<<<<<<<.<<" ,
-
-
-
-
-    };
-
-
-    //
-// LEVEL 18: MEDIUM [ TELEPORT ADVANCED]
-// PROBLEM : SAME ISSUES
-// fixed
-    private String[] tileMap18 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<}}}}}}}}}}}}}}}}}}}<" ,
-            "<}   f   }       I }<" ,
-            "<} }}}}} }A}}}}}}}A}<" ,
-            "<} }   }  j  }   I }<" ,
-            "<} } } }}}}} } }}}}}<" ,
-            "<}I} }       }     }<" ,
-            "<}I} }}}}} }}}I} } }<" ,
-            "<}I}     }     } } }<" ,
-            "<}I}}}}} }I}}}I} } }<" ,
-            ".     }    P     IIIE" ,
-            "<}I}}}1}}}I} }}}}} }<" ,
-            "<}I  }    I  }     }<" ,
-            "<}I} }}}}}I}}} }}} }<" ,
-            "<}I}           }   }<" ,
-            "<} }}}}}}} }}} } } }<" ,
-            "<}   }1 n I    }   }<" ,
-            "<} } }}}}}I} }}} } }<" ,
-            "<} }     }       } }<" ,
-            "<}}}}}}}A}}}A}}}}}}}<" ,
-            "<}          >      }<" ,
-            "<}}}}}}}}}}}}}}}}}}}<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-
-    };
-
-
-// // LEVEL 19: MEDIUM [BUTTON GATES]
-// // B -> BUTTON1 WHICH TOGGLES G WHICH IS GATE 1
-// // Q -> BUTTON 2 WHICH TOGGLES H WHICH IS GATE 2
-// private String [] tileMap19 = {
-
-//     "XXXXXXXXXXXXXXXXXXX",
-//     "X B      b        X",
-//     "X XXXXX XXXXX XXX X",
-//     "X X   X X X X X   X",
-//     "X XGGGX X X X XHHHX",
-//     "X X H X r o b X G X",
-//     "X XXHXX XXXXX XXGXX",
-//     "X     X     X     X",
-//     "XXXXX X XXX X XXXXX",
-//     "X     X X X X     X",
-//     "X XXXXX X X XXXXX X",
-//     "O   H       G     O",
-//     "X XXXXXXX XXXXXXX X",
-//     "X X     X X     X X",
-//     "X X XXX X X XXX X X",
-//     "X X X       X X X X",
-//     "X X XXXXXpXXXXX X X",
-//     "X X           X X X",
-//     "X XXXXXXXXXXXXX X X",
-//     "X               Q X",
-//     "XXXXXXXXXXXXXXXXXXX"
-
-// };
-
-
-
-// // LEVEL 20: MEDIUM [ BUTTON GATES ADVANCED]
-// private String[] tileMap20 = {
-//     "XXXXXXXXXXXXXXXXXXX",
-//     "X B    X       b X",
-//     "X XXX XXXXXXXX XXX",
-//     "X X G     X    H X",
-//     "X X G XXXXXXXX H X",
-//     "X X G X r  b X H X",
-//     "X XXXXX XXXXXXX XX",
-//     "X   X     X     X ",
-//     "XXX X XXXXXXX X XX",
-//     "X   X X     X X  X",
-//     "X XXX X XXX X XXX ",
-//     "O     G  X H     O",
-//     "X XXXXXXX XXXXXXXX",
-//     "X X     X X      X",
-//     "X X XXX X X XXXX X",
-//     "X X X       H X  X",
-//     "X X XXXXXpXXXXXX X",
-//     "X XQ           X X",
-//     "X XXXXXXXXXXXXXX X",
-//     "X           G    X",
-//     "XXXXXXXXXXXXXXXXXXX"
-// };
-
-
-
-    // PROBLEM : SAME
-// fixed
-    private String[] tileMap19 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<}}}}}}}}}}}}}}}}}}}<" ,
-            "<}       }      j  }<" ,
-            "<} }}}}} }A}}}}}}} }<" ,
-            "<} }   }  f  }     }<" ,
-            "<} } } }}}}} } }}}}}<" ,
-            "<} }1}   >   }     }<" ,
-            "<} } }}}}}A}}}}} } }<" ,
-            "<} }     }     } }I}<" ,
-            "<} }}}}} } }}} } }I}<" ,
-            ".   }   }n    }1IIIIE" ,
-            "<} }}} }}}}} }}}}} }<" ,
-            "<}   }   I   }     }<" ,
-            "<} } }}}}I}}}} }}} }<" ,
-            "<} }     I     }   }<" ,
-            "<}I}}}}}}}}}}} } } }<" ,
-            "<}I  }     }1} }   }<" ,
-            "<}I} }}}A}}} } }}} }<" ,
-            "<}I}    I} P     } }<" ,
-            "<}}}}}}}I}}}A}}}}}}}<" ,
-            "<}     III         }<" ,
-            "<}}}}}}}}}}}}}}}}}}}<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-
-    };
-
-
-    // PROBLEM : SAME
-// fixed
-    private String[] tileMap20 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<}}}}}}}}}}}}}}}}}}}<" ,
-            "<}A n   }          }<" ,
-            "<} }}}}} } }}}}}}} }<" ,
-            "<} }    j  }       }<" ,
-            "<} } } }}}}}A} }}}}}<" ,
-            "<} } }       }     }<" ,
-            "<} } }}}}}f}}}}} } }<" ,
-            "<} }         } }   }<" ,
-            "<} }}}}}A} }}} } } }<" ,
-            "e   IIII   1    IIII-" ,
-            "<} }}} }}}A} }}}}} }<" ,
-            "<}   }       }     }<" ,
-            "<} } }}}}}}}}} }}} }<" ,
-            "<} }           }   }<" ,
-            "<} } }}}}}}}}} } } }<" ,
-            "<}   A  >  }   }   }<" ,
-            "<} } }}}}} } }}} } }<" ,
-            "<}       } P     } }<" ,
-            "<}}} }}} }}} }}} }}}<" ,
-            "<}                 }<" ,
-            "<}}}}}}}}}}}}}}}}}}}<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-    };
-
-
-// level 21:
-
-// theme 6: 21-24
-
-/*
-
-PACMAN = P
-
-     WALLS = `
-     SPACEENTRY1 = .
-     EXIT ENTRY1 = E
-     SPACEENTRY2 = -
-     EXIT ENTRY2 = e
-     red ghost = k
-     orange ghost = z
-     PINK GHOST = m
-     blue GHOST = O
-     LAVA =  V
-     TELEPORT 2 = %
-     BUTTON 2 = 2
-     GATE 2 = B
-
- */
-
-
-    // PROBLEM : GHOST SIZE INCREASE
-    private String[] tileMap21 = {
-
-
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<```````````````````<" ,
-            "<`    k            `<" ,
-            "<` ` `````V` ``` ` `<" ,
-            "<` `       `   O ` `<" ,
-            "<` ` ``` ` ` ``` ` `<" ,
-            "<` ` `   ` ` ` ` ` `<" ,
-            "<` ` ` ``` ` ` ` ` `<" ,
-            "<` ` `     `V` %   `<" ,
-            "<` ` ````` ` ` `````<" ,
-            ".      `  Vm    `   E" ,
-            "<` ```` `````` ``` `<" ,
-            "<` `        `      `<" ,
-            "<` ` ``````V` ``````<" ,
-            "<` ` `           ` `<" ,
-            "<` ` ` ````` ``` ` `<" ,
-            "<`   ` V   z   `   `<" ,
-            "<` ````` ``` ````` `<" ,
-            "<` `     ` P `     `<" ,
-            "<` ` ````` ``````` `<" ,
-            "<`   %     V       `<" ,
-            "<```````````````````<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-
-    };
-
-
-    // PROBLEM : BUTTON TOGGLE IS NOT WORKING [ fixed ]
-    private String[] tileMap22 = {
-
-
-
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<```````````````````<" ,
-            "<` k              %`<" ,
-            "<` ````` `2``` ``` `<" ,
-            "<` `VV ` ` ` ` `   `<" ,
-            "<` `V` ` ` ` ` ` ```<" ,
-            "<` ` `   `V`   `   `<" ,
-            "<` ` ```V V V``` ` `<" ,
-            "<` `    V   V  z ` `<" ,
-            "<` `````V V V````` `<" ,
-            ".       VVVVV       E" ,
-            "<` `````V V V````` `<" ,
-            "<` ` m  V   V    ` `<" ,
-            "<` ` ```V`V`V``` ` `<" ,
-            "<` ` `   `V`   ` ` `<" ,
-            "<` ` ` ``` ``` `V` `<" ,
-            "<`   `         `V` `<" ,
-            "<` ``` ``````` `V` `<" ,
-            "<` ` VVVV O     `V `<" ,
-            "<` ` ````` `````V` `<" ,
-            "<`  %     P    2   `<" ,
-            "<```````````````````<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-
-    };
-
-
-
-    // problem : same [ fixed ]
-    private String[] tileMap23 = {
-
-            "<<<<<<<<<<<<<<<<e<<<<" ,
-            "<``````````````` ```<" ,
-            "<`   z          2VV`<" ,
-            "<` ``` ````````` `V`<" ,
-            "<`   `V`       `  V`<" ,
-            "<` ` `V` ````` ``` `<" ,
-            "<` ` `V` `   `   ` `<" ,
-            "<` ` ``` ` ` ``` ` `<" ,
-            "<` `VVVVV` m `   ` `<" ,
-            "<` ```````` `` ` ` `<" ,
-            ".           O       E" ,
-            "<` ``````` ` ` ``` `<" ,
-            "<`       `V`     ` `<" ,
-            "<` ````` `V` ``` ` `<" ,
-            "<` `     `Vk `2` ` `<" ,
-            "<` ` ````` ``` ` ` `<" ,
-            "<`V` `  VVVVV    ` `<" ,
-            "<`V` ``````````` ` `<" ,
-            "<`V`      P       V`<" ,
-            "<` ``````` ```````V`<" ,
-            "<`                V`<" ,
-            "<``` ```````````````<" ,
-            "<<<<-<<<<<<<<<<<<<<<<" ,
-
-
-
-
-    };
-
-
-
-    private String[] tileMap24 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<```````````````````<" ,
-            "<`                 `<" ,
-            "<`%` ````` ``` ``` `<" ,
-            "<` ` `   `V` ` ` `%`<" ,
-            "<` ` ` ` `V` ` ` ` `<" ,
-            "<` ` ` ` `Vk` ` ` ``<" ,
-            "<` ` ` ` ``` ` ` ` `<" ,
-            "<`   ` `     `   ` `<" ,
-            "<` ``` ``` ``` ``` `<" ,
-            ". VVVV    m         E" ,
-            "< ````` ``` ```V````<" ,
-            "<`     `     `VV   `<" ,
-            "<` ``` ` ``` ` ``` `<" ,
-            "<`%`V` ` `z` ` `V  `<" ,
-            "<` ` ` ` ` ` ` ` ` `<" ,
-            "-   `   `   `     ` e" ,
-            "< ` ````` ``` ``````<" ,
-            "<`V      P    VVV  `<" ,
-            "<`V`````` ````````%`<" ,
-            "<`VV          O    `<" ,
-            "<```````````````````<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-    };
-
-
-// theme 7: 25
-
-/*
-
-bonus 2
-
-PACMAN = P
-
-     WALLS = /
-     SPACEENTRY1 = .
-     EXIT ENTRY1 = E
-     SPACEENTRY2 = -
-     EXIT ENTRY2 = e
-
-
- */
-
-    // problem :  pacman not eating food
-
-    private String[] tileMap25 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<//////////////////<<" ,
-            "</       /         /<" ,
-            "</ ///// / ///// / /<" ,
-            "</ /   / / /   / / /<" ,
-            "</ / / / / / / /// /<" ,
-            "</ / / /   / /   / /<" ,
-            "</ / /// /// /// / /<" ,
-            "</ /     /     / / /<" ,
-            "</ ///// / ///// / /<" ,
-            ".      /   /        E" ,
-            "</ /// /// /// /// /<" ,
-            "</ /         / / / /<" ,
-            "</ / /////// / / / /<" ,
-            "</ /         / / / /<" ,
-            "</ / / /// / / / / /<" ,
-            "</ /           / / /<" ,
-            "</ / /////// /// / /<" ,
-            "</   /   P       / /<" ,
-            "</ /// /////////// /<" ,
-            "</     /           /<" ,
-            "<///////////////////<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-    };
-
-
-
-
-// theme 8: 26-30
-
-/*
-
-PACMAN = P
-
-     WALLS = _
-     SPACEENTRY1 = .
-     EXIT ENTRY1 = E
-     SPACEENTRY2 = -
-     EXIT ENTRY2 = e
-     red ghost = y
-     orange ghost = x
-     PINK GHOST = q
-     blue GHOST = K
-     phantom = ~
-     reverse = R
-
- */
-
-
-    // problem :  the phantom zoens are not working for ghost , wall image change
-    private String[] tileMap26 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<___________________<" ,
-            "<_      ~_~      y _<" ,
-            "<_ _____ _ _______ _<" ,
-            "<_ _~  _ _ _~   ~_ _<" ,
-            "<_ _ _ _ _ _ ___ _ _<" ,
-            "<_ _ _ _ _ _ _ _ _ _<" ,
-            "<_ _ _ _   _ _ q _ _<" ,
-            "<_ _ _ _ _ _ _ _ _ _<" ,
-            "<_ _ _  x  _ _ _ _ _<" ,
-            "e    _____ _ _ _~   -" ,
-            "<_ _ _  K  _ _ _ _ _<" ,
-            "<_ _ _ ___ _   _ _ _<" ,
-            "<_ _~_ _ _ _ ___ _ _<" ,
-            "<_ _____   _ _~  _ _<" ,
-            "<_ _~_ _ _ _ _ ___ _<" ,
-            "<_ _ _    ~_ _     _<" ,
-            "<_ _ _______ _____ _<" ,
-            ".         P         E" ,
-            "<_ _______ _______ _<" ,
-            "<_                 _<" ,
-            "<___________________<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-
-    };
-
-
-    // LEVEL 27:
-
-
-    // problem same
-    private String[] tileMap27 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<___________________<" ,
-            "<_                 _<" ,
-            "<_ _____ _____ ___ _<" ,
-            "<_ _~ ~_ _ _ _ _~  _<" ,
-            "<_ _ _ _ _ _ _ _ _ _<" ,
-            "<_ _ K _ y   x _~  _<" ,
-            "<_ __ __ _____ __ __<" ,
-            "<_     _     _     _<" ,
-            "<_____ _ ___ _ _____<" ,
-            "<_    ~_ _~_ _~    _<" ,
-            "<_ _____ _ _ _____ _<" ,
-            "e        P          -" ,
-            "<_ _______ _______ _<" ,
-            "<_ _     _ _     _ _<" ,
-            "<_ _ ___ _ _ ___ _ _<" ,
-            "<_ _ _       _~_ _ _<" ,
-            "<_ _ _____q___ _ _ _<" ,
-            "<_ _~           ~_ _<" ,
-            "<_ _____________ _ _<" ,
-            "<_                 _<" ,
-            "<___________________<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-
-
-    };
-
-
-    // SAME PROBLEM
-    private String[] tileMap28 = {
-
-            "<<<<<<<<<<<<<<<<.<<<<" ,
-            "<_______________R___<" ,
-            "<_    y_    x_     _<" ,
-            "<___ ___ ___ ___ _ _<" ,
-            "e   R_       _~  _ _<" ,
-            "<_ ___ _____ ___ _ _<" ,
-            "<_ _       _  ~_ _ _<" ,
-            "<_ _ _ _ ___ _ _ _ _<" ,
-            "<_ _q_   _   _ _ _ _<" ,
-            "<_ _ _ _ _ ___ _ _ _<" ,
-            "<_   _ _ _ _~      _<" ,
-            "<___ _ _ _ _ _____ _<" ,
-            "<_   _ _~    _   _ _<" ,
-            "<_ ___ _____ ___ _ _<" ,
-            "<_ _~        _K  _ _<" ,
-            "<_ _ _______ ___ _ _<" ,
-            "<_ _ _~    _ _   _ _<" ,
-            "<_ _ _ ___ _ _ ___ _<" ,
-            "<_ _ _   _ _ _R     -" ,
-            "<_ _ ___ _ _ _____ _<" ,
-            "<_       P         _<" ,
-            "<_____ _____________<" ,
-            "<<<<<<E<<<<<<<<<<<<<<" ,
-
-
-
-    };
-
-    private String[] tileMap29 = {
-
-            "<<<<<<<<<<<<<<<<<-<<<" ,
-            "<________________ __<" ,
-            "<_        K        _<" ,
-            "<_ _____ ___ _____ _<" ,
-            "<_ _~  _         _ _<" ,
-            "<_ _ _R_______ _ _ _<" ,
-            "<_ _ _     q   _ _ _<" ,
-            "<_ _ _ ___ _____ _ _<" ,
-            "<_ _       _     _ _<" ,
-            "<_ ___ _ _ _ ___ _ _<" ,
-            ".     ~_ y _~       E" ,
-            "<_ ___ _ _ _ ___ _ _<" ,
-            "<_ _   _ _ _     _ _<" ,
-            "<_ _ ___ _ ___ ___ _<" ,
-            "<_ _     _     _   _<" ,
-            "<_ _____ _ _____ _ _<" ,
-            "<_ _~    x      ~_ _<" ,
-            "<_ _ _________ ___ _<" ,
-            "<_ _    P          _<" ,
-            "<_ _____ _____ ___ _<" ,
-            "<_                 _<" ,
-            "<__R________________<" ,
-            "<<<e<<<<<<<<<<<<<<<<<" ,
-
-
-    };
-
-
-
-    // PROBLEM WALL IS DIFFERENT IT SHOULD NOT BE
-    private String[] tileMap30 = {
-
-            "<<<<<<<<<<<<<<<<<-<<<" ,
-            "<________________ __<" ,
-            "<_ q       _    K  _<" ,
-            "<_ _______ _ _____ _<" ,
-            "<_ _~   ~_ _ _  ~_ _<" ,
-            "<_ _ _ _ _ _ _ _ _ _<" ,
-            "<_ _ _ _ _ _ _     _<" ,
-            "<_ _ _ _ _ _ _ _ _ _<" ,
-            "<_   _ _   R   _   _<" ,
-            "<_____ _____ ___ ___<" ,
-            "<_     _~ x  _     _<" ,
-            "<_ ___ _ ___ _ ___ _<" ,
-            ".    _   P     _    E" ,
-            "<_ ___ _____ ___ _ _<" ,
-            "<_ _~        _ _ _ _<" ,
-            "<_ _ _ ___ ___ _ _ _<" ,
-            "<_ _ _    y    _ _ _<" ,
-            "<_ _ _____ _ _ _ _ _<" ,
-            "<_ _~        _  ~_ _<" ,
-            "<_ _________ _ ___ _<" ,
-            "<_           _     _<" ,
-            "<_____R_____________<" ,
-            "<<<<<<e<<<<<<<<<<<<<<" ,
-
-
-
-    };
-
-
-
-
-
-// theme 9: 31-35
-
-/*
-
-PACMAN = P
-
-     WALLS -> =
-     SPACEENTRY1 = .
-     EXIT ENTRY1 = E
-     SPACEENTRY2 = -
-     EXIT ENTRY2 = e
-     red ghost = u
-     orange ghost = c
-     PINK GHOST = w
-     blue GHOST = H
-     LAVA =  V
-     SACRED = Z
-     SLIME = L
-     SPIDER = W
-
- */
-
-
-    // no problem only ghost size small
-    private String[] tileMap31 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<===================<" ,
-            "<=      Z      u   =<" ,
-            "<= ======= ======= =<" ,
-            "<= =  V  = =     = =<" ,
-            "<= = === = = = = = =<" ,
-            "<= = =   c   = = = =<" ,
-            "<= = = ===== = = = =<" ,
-            "<=   = Z     = =   =<" ,
-            "<= = ===============<" ,
-            ".   V    =w   Z     E" ,
-            "<= = ===== === =====<" ,
-            "<=   =   Z   =     =<" ,
-            "<= = = ===== = === =<" ,
-            "<= = =   H   = = = =<" ,
-            "<= = === = === = = =<" ,
-            "<= =   V   Z   = = =<" ,
-            "<= ======= ===== = =<" ,
-            "<=   Z   = P     = =<" ,
-            "<= ===== === === = =<" ,
-            "<=   V     Z     = =<" ,
-            "<===================<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-
-    };
-
-
-    private String[] tileMap32 = {
-
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<===================<" ,
-            "<=        Z        =<" ,
-            "<= === === === === =<" ,
-            "<= = =     u   = = =<" ,
-            "<= = === === === = =<" ,
-            "<=   =    V    =   =<" ,
-            "=== = ======= = ====<" ,
-            "<=   =    H    =   =<" ,
-            "<= === === === === =<" ,
-            ".        =c=        E" ,
-            "<= === === === === =<" ,
-            "<=   =   Z     =   =<" ,
-            "=== = ======= = ====<" ,
-            "<=   =    w    =   =<" ,
-            "<= = === === === = =<" ,
-            "<= = =    V    = = =<" ,
-            "<= = = ======= = = =<" ,
-            "<= =      P      = =<" ,
-            "<= = = = = = = = = =<" ,
-            "<=                 =<" ,
-            "<===================<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-
-    };
-
-
-    private String[] tileMap33 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<===================<" ,
-            "<=                 =<" ,
-            "<= ====L=====L==== =<" ,
-            "<= =      =      = =<" ,
-            "<= =====L=L == = = =<" ,
-            "<= = =   H= =  = = =<" ,
-            "<= = = ==== =  = = =<" ,
-            "<=L= =  u     =  = =<" ,
-            "<= = = == ==== =   =<" ,
-            ".  = L         L    E" ,
-            "<= = ======== ==   =<" ,
-            "<= = =   c     = = =<" ,
-            "<= = == ======== = =<" ,
-            "<=   =         = = =<" ,
-            "<= = =========== = =<" ,
-            "<= =   L     L   = =<" ,
-            "<= = ==L=== ==L= = =<" ,
-            "<=  =      w       =<" ,
-            "<= = ===== === === =<" ,
-            "<=      P          =<" ,
-            "<===================<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-
-    };
-
-    private String[] tileMap34 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<= = = = = = = = = =<" ,
-            "<=       =          -" ,
-            "<= ===== = ======= =<" ,
-            "<= =       L     = =<" ,
-            "<= = ======== ==== =<" ,
-            "<=                 =<" ,
-            "===== V===== V==== =<" ,
-            "<=     = c = =   = =<" ,
-            "<= === = = = = = = =<" ,
-            "<= = H = = W = = u =<" ,
-            "<= === === === === =<" ,
-            ".                   E" ,
-            "<= ===== === ===== =<" ,
-            "<= =     = =     = =<" ,
-            "<= = === = = === = =<" ,
-            "<= = = P     = = = =<" ,
-            "<= = ======= = = = =<" ,
-            "<=       =       = =<" ,
-            "===== == = = ===== =<" ,
-            "e          =       =<" ,
-            "<===================<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-
-
-
-
-    };
-
-    private String[] tileMap35 = {
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<===================<" ,
-            "<=       =    =     E" ,
-            "<= === = ===  = = ==<" ,
-            "<= = = = =      = ==<" ,
-            "<=== = = = ====== ==<" ,
-            "<=   = = =        ==<" ,
-            "<= === = ======== ==<" ,
-            "<= =    c     W =  =<" ,
-            "<= ===== ===== ==  =<" ,
-            "-      = =   V      e" ,
-            "<==== === == =======<" ,
-            "<=   H =   = P     L<" ,
-            "<= === == == ===== =<" ,
-            "<=   =       =     =<" ,
-            "=== ======= = === ==<" ,
-            "<=         = = =   =<" ,
-            "<= ======= = = = ===<" ,
-            "<=   u   =   =     =<" ,
-            "===== === ======== =<" ,
-            ".      =   L     = =<" ,
-            "<===================<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-
-
-    };
-
-
-
-// GAME ENDING IN NEXT TWO MAPS
-
-    private String[] tileMap36  = {
-
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<===================<" ,
-            "<=     r     =     =<" ,
-            "<= ========= = === =<" ,
-            "<= =Y      =   =   =<" ,
-            "<= = ===== ===== = =<" ,
-            "<=Y= =Y  =       = =<" ,
-            "<=Y= === = ======= =<" ,
-            "<=Y=     = =Y    = =<" ,
-            "<=Y===== = ===== = =<" ,
-            "<=Y=Y  = b       = =<" ,
-            "<=Y= = ========= = =<" ,
-            "<=Y= =       =YY=  =<" ,
-            "<= = ===== = ==== ==<" ,
-            "<=       = = P     =<" ,
-            "<======= = = =======<" ,
-            "<=Y    = = =     =Y=<" ,
-            "<= === = = ===== = =<" ,
-            "<= =   = p       = =<" ,
-            "<= = =========== = =<" ,
-            "<=      YY  o      =<" ,
-            "<===================<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-
-    };
-
-    private String[] tileMap37 = {
-
-
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-            "<= = = = = = = = = =<" ,
-            "<=       =  r      =<" ,
-            "<= ===== = ======= =<" ,
-            "<= =   = = =     = =<" ,
-            "<= = = = = = === = =<" ,
-            "<= = = =c=   = =   =<" ,
-            "<= = = === === =====<" ,
-            "<= = =   = =   =   =<" ,
-            "<= = === = = === = =<" ,
-            "<=     =   =   = = =<" ,
-            "<===== ===== = = = =<" ,
-            "<=   = =  c= = = = =<" ,
-            "<= = = = === = === =<" ,
-            "<= = = =     =     =<" ,
-            "<= = = ======= =====<" ,
-            "<= = =  c    = b   =<" ,
-            "<= = = ===== ===== =<" ,
-            "<= =   P  =  p     =<" ,
-            "<= ===== = ======= =<" ,
-            "<=     = c    o    =<" ,
-            "<= = = = = = = = = =<" ,
-            "<<<<<<<<<<<<<<<<<<<<<" ,
-
-
-
-    };
-
-
     // creating hashset for the constructor block used above
 
     HashSet<Block> foods;  // hashset of block and is named as foods
@@ -1864,6 +394,52 @@ PACMAN = P
     HashSet<Block> electricShocks;
 
 
+    /*
+Why are we creating a HashSet<Block> for all these game objects?
+
+we had build a tile-based game, where each tile is represented by a Block object. These Block objects might be:
+
+Walls
+Food dots
+Teleport pads
+Ice tiles
+Lava tiles
+Buttons, gates, electric shocks... etc.
+
+Instead of checking each tile one by one on the map for interactions (which is slow and messy), you're grouping certain types of tiles into HashSet<Block> collections
+
+
+
+A HashSet is ideal because:
+
+-->Fast Lookup: HashSet.contains(block) is O(1) — very fast.
+-->No Duplicates: Prevents duplicate entries for the same tile type.
+-->Easy to manage: You can easily add, remove, or check for membership
+
+
+
+Why not use an array or list?
+Using a List<Block> would require scanning through the whole list every time you want to check if a Block belongs to that group — slow
+
+
+
+Why is Block used as the object in HashSet<Block>?
+
+--> Because each game tile is a Block object, and you're using those objects to:
+
+Store position (x, y)
+Handle movement
+Check tile types
+Apply special behaviors (like stun, speed, etc.)
+
+*/
+
+
+
+
+
+
+
 
 
     // now we had done the representation of the objects in the game
@@ -1881,41 +457,41 @@ PACMAN = P
 
     // making the ghost move
     // creating an array of character
-    char [] directions = {'U' , 'D' , 'R' , 'L'}; // up down right left
-    // creating a rando object
+    char[] directions = {'U' , 'D' , 'R' , 'L'}; // up down right left
+
+    // Random is a built in class in java
+    // creating a random object
     Random random = new Random();
     // basically for each ghost we are going to randomly select the direction
     // moving to the constructor PacMan
 
 
 
-    // adding reamining things like score , lives and etc
+    // adding remaining things like score , lives and etc
     int score =0;
     int lives  = 3; // by default we start with 3 lives
     boolean gameOver = false;
     // pacman has 3 lives and if he collides with the ghost it will lose one life and when lives = 0 then game over becomes true . and if it is gameover then we stop the pacman from moving
 
     // lets starts with the score
-    // everytime the packman collides the the food it gonna eat it and gain 10 points . and everytime the packman eats the food we want to remove that food from hashSet
+    // everytime the pacman collides  food it gonna eat it and gain 10 points . and everytime the packman eats the food we want to remove that food from hashSet
 
     // go to move function
 
 
 
 
+    Runnable[] levelLoaders;
+//Runnable is an interface in Java that represents a block of code you want to run
 
-    // creating a constructor ( constrictor is a special method that rus automaticaly when an object of the class is created)
+    // creating a constructor ( constructor is a special method that rus automaticaly when an object of the class is created)
     PacMan(){   // here the PacMan constructor sets up the game board ( which extends JPanel)
-
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            soundManager.cleanup();
-        }));
 
         setPreferredSize(new Dimension(widthBoard , heightBoard));   // this sets the preffered size of the JPanel which means it tells the layout manager that widht = widthboard and height = heightboard
         setBackground(Color.BLACK);
 
         addKeyListener(this);  // when the class PacMan implements keylistener it takes on the properties of keylistener . so i dont need to create a seperate key listener object i can just reference pacman using this
-        // this keylistner is going to listner the three functions which are written keytyped, keypressed , keyreleased to process the key processes
+        // this keylistener is going to listener the three functions which are written keytyped, keypressed , keyreleased to process the key processes
 
         // now i need to ensure that our JPanel listens to key presses. in a window we can have multiple components which all can be listening key presses. but in this key we had one component ( declared just above this) but we need to make sure that this is the component that listens to the key presses
         // so i write
@@ -2091,7 +667,7 @@ PACMAN = P
 
          therefore we traverse the array such that if we occured across X then we place a wall , if we occur across p,r,o,b then we place their a ghost and if we came across whitespace then we lace their a food
 
-         therefore we had three main repaeting things - wall , ghost , and food so i will create a 3 different hash sets to ietrate through it and i need not have a hashset for pacman bcz it is used a single time and hence i will create a variable for it
+         therefore we had three main repeating things - wall , ghost , and food so i will create a 3 different hash sets to ietrate through it and i need not have a hashset for pacman bcz it is used a single time and hence i will create a variable for it
 
          why are we using a hashset?
 
@@ -2111,10 +687,88 @@ PACMAN = P
 
          */
 
+        // runnable and loading map logic
+        // it is an array of runnables where levelLoaders is an object or reference variable to access the members
+
+        // This is an array of such tasks. Each item in levelLoaders is a small, runnable code block
+        // It’s a clean way to organize level setup logic
+
+        // This creates an array of Runnables — one per map — based on however many maps MapLoader provides.... runnables is the object...i.e if maploader has returned 30 then we have [30] . thus we had 30 runnable objects which can be runned using the index..
+        // the for loop will run through each index as theri are 30 levels
+        levelLoaders = new Runnable[MapLoader.getMapCount()];
+
+        // here we are dynamically generating an array of level-loading tasks. this is good practice for large games ( like we had 35+maps). it is modular , flexible
+
+
+         /*
+          what is encapsulation?
+          Encapsulation means bundling data (variables) and methods (functions) that operate on that data into a single unit — usually a class — and restricting direct access to some of the object's components
+
+--> Why Is Encapsulation Important?
+
+Benefit                      	Description
+-------                   ----------------------
+Security	              Prevents outside code from putting your object into an invalid state.
+Control	                  You control how data is accessed or modified (via methods).
+Flexibility	              You can change internal implementation without affecting external code.
+Ease of Maintenance	      Keeps the code modular and clean.
+
+thus Encapsulation is the practice of keeping fields private and providing public methods to get and set their values, allowing you to control and protect the data
+
+
+--> Why Encapsulation Helps in Your Game:
+Benefit	                            How it applies to your game
+--------                           -------------------------------
+Game logic protection 	            Prevents other parts of the game from messing up Pac-Man or ghost data.
+Easier debugging	                You know exactly which methods affect game state.
+Clean code	                        You organize logic in the class it belongs to (e.g., ghost movement inside Ghost, stun logic inside PacMan).
+Future-proofing	                    You can change how blocks or ghosts work internally without changing the rest of the game.
+*/
+        // here encapsulation is used ( also in the block class we had used encapsulation)
+
+        for (int i = 0; i < levelLoaders.length; i++) {
+            final int index = i; // this is important because it captures the correct value of i for each Runnable. Without it, all Runnables might reference the same final value of i
+
+            // this is an inner class which is implementing runnable interface...actually we are saying At this index i, I want to store a small piece of code (a task) that I can run later.
+            levelLoaders[i] = new Runnable() {
+                @Override
+                public void run() {
+                    String[] mapData = MapLoader.getMap(index);
+                    loadMap(mapData); // Custom map-loading logic
+                }
+            };
+        }
+
+/*
+ why final?
+ Java’s anonymous classes (like Runnable) capture variables by reference, not by value. Without making a final copy, all Runnables would share the same i, which changes every loop iteration
+ thus writing final create a new, final copy of i for that specific Runnable. Now each Runnable captures its correct value of i at the time of creation
+
+
+ note: runnable interface is a built in interface which has only one method run.....This is used when you want to encapsulate a task (some code) that you want to run later, like loading a level
+
+ // actaully what we did above is that ....we are saying that for level at index this build the structure of the map and MapLoader.getMap(index) fetches the String[] data for that level’s map.
+ also loadMap(mapData) is your own method for converting that String[] (tile layout) into game objects (walls, food, ice, etc.)
+
+ after this we can then just use .run() to run any map
+
+ Instead of calling the loadMap() method immediately inside the loop, you're storing each map-loading task as a Runnable, and running it only when needed
+
+ */
+
+// we need to just call .run() on any index to trigger that level’s setup
 
 
         // checking number of walls , foods , ghosts
-        loadMap1();  // calling the function loadmap bcz we want to check the number of walls , foods , ghosts and its algo is written inside the function loadMap();
+
+
+
+
+
+        levelLoaders[debugMapLevel-1].run();  // Load the starting debug level
+// resetPositions();
+
+        // calling the function loadmap bcz we want to check the number of walls , foods , ghosts and its algo is written inside the function loadMap();
         //  System.out.println(walls.size());  // walls was the hashset where all the walls when encountered were stored
         //  System.out.println(foods.size());  // same here
         //  System.out.println(ghosts.size()); // same here
@@ -2154,21 +808,22 @@ PACMAN = P
         //  }
         // -> This repaints the game screen every 50ms, creating the illusion of motion.
 
-        soundManager.playThemeMusic(1);
-        System.out.println("Current volume: " + soundManager.getVolume());
-
         gameLoop.start();  // starting the timer
 
         // now the loop has started and when i run the loop is running but i dont see any changes so lets add some features of moving the pacman up down when pressed key
         // for that we need key listner like wise action listener . so we write it above where we written ActionListner
 
 
-    }  //  this is the end of PacMan function
+    }  //  this is the end of PacMan constructor
 
 
 
 
-    public void loadMap1(){
+
+
+    public void loadMap(String[] mapData) {
+        // Play theme music when loading new level
+        soundManager.playThemeMusic(debugMapLevel);
 
         // i need to initilise all the hashset first
 
@@ -2179,7 +834,7 @@ PACMAN = P
 
         teleportPads = new HashSet<Block>(); // T AND %  // these hashsets like teleport and iceblocks even if you are not using them in the current level but if you have somehwere in the program the usage of them then you had to implement this here also.
         iceBlocks = new HashSet<Block>();   // I   // bcz we have used somehwere in our program the for loop which iterates over this hashset so it doesn’t matter if there are actually any ice blocks in the map — if the HashSet was never initialized, then Java throws a NullPointerException.
-        // therefore Always initialize iceBlocks, even if it's empty .This way, your code won’t crash if it tries to iterate over or check iceBlocks, because it will just be an empty set instead of null.
+        // therefore Always initialize every hashset, even if it's empty .This way, your code won’t crash if it tries to iterate over or check for eg iceBlocks, because it will just be an empty set instead of null.
         speedZones = new HashSet<Block>();  // S
         reverseControls = new HashSet<Block>(); // R
         phantomZones = new HashSet<Block>();  // ~
@@ -2202,84 +857,73 @@ PACMAN = P
         blackSpace = new HashSet<Block>();  // <
 
 
-
-        for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
-        {
-            for (  int c = 0 ; c<colCount ; c++)   // c stands for column
-            {
-                String row = tileMap1[r];   // getting the current row bcz tileMap is our map and r index is the row index so we are getting the loop indexing
-                char tileMapChar = row.charAt(c);  // getting the current character
-                // what we had done in the above two lines is that we getting the row and then we are getting the character present at that row with the col index
-                // we had declared two variables 1) row 2) tileMapChar
-                // the string row represents the single row in the tile map from index r=0 to r<rowCount
-                // now we are using inbuilt string operations charAt() to acces the character present at that position
-                // row.charAt(c) acceses the character from the row at index c where c represents the columns
-
-
-                // we got a char at a specific tile now we need to figure out where this tile is. therefore to draw we need x , y positions and width and height of tile
-
+        for (int row = 0; row < mapData.length; row++) {
+            String line = mapData[row];
+            for (int col = 0; col < line.length(); col++) {
+                char tile = line.charAt(col);
                 // getting x position ( it will be the 'how many columns we are from the left')
-                int x = c*tileSize;
+                int x = col*tileSize;
                 // getting y position (  it will be the 'how many rows from the top')
-                int y = r*tileSize;
+                int y = row*tileSize;
 
 
 
-                if ( tileMapChar == 'X'){  // theme 1: wood wall
+                if ( tile == 'X'){  // theme 1: wood wall
 
+                    // since we made hashset for the block constructor so we will had to make object of the block....and since i had a paramterized constructor block which has arguments like image , x , y positions , widht and height....thus we are passing which image i want for this object of hashset, what is the positon related to x and y is of the image , what is its dimensions
                     Block wood = new Block(woodWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
+                    walls.add(wood);   // then since we had used hashset so i am now adding the object wood to it
                 }
 
-                else if ( tileMapChar == '<')
+                else if ( tile == '<')
                 {
                     Block bS = new Block(null , x , y , tileSize , tileSize);
                     blackSpace.add(bS);
                 }
 
-                else if ( tileMapChar == '['){  // theme 2: desert wall
+                else if ( tile == '['){  // theme 2: desert wall
 
                     Block wood = new Block(desertWallImage , x , y , tileSize , tileSize);
                     walls.add(wood);
                 }
 
-                else if ( tileMapChar == ']'){  // theme 3: sea wall
+                else if ( tile == ']'){  // theme 3: sea wall
 
                     Block wood = new Block(seaWallImage , x , y , tileSize , tileSize);
                     walls.add(wood);
                 }
 
-                else if ( tileMapChar == '{'){  // theme 4: bonus 1 wall
+                else if ( tile == '{'){  // theme 4: bonus 1 wall
 
                     Block wood = new Block(bonus1Wall , x , y , tileSize , tileSize);
                     walls.add(wood);
                 }
 
-                else if ( tileMapChar == '}'){  // theme 5: frost wall
+                else if ( tile == '}'){  // theme 5: frost wall
 
                     Block wood = new Block(frostWallImage , x , y , tileSize , tileSize);
                     walls.add(wood);
                 }
 
-                else if ( tileMapChar == '`'){  // theme 6: lava wall
+                else if ( tile == '`'){  // theme 6: lava wall
 
                     Block wood = new Block(lavaWallImage , x , y , tileSize , tileSize);
                     walls.add(wood);
                 }
 
-                else if ( tileMapChar == '/'){  // theme 7: bonus 2 wall
+                else if ( tile == '/'){  // theme 7: bonus 2 wall
 
                     Block wood = new Block(bonus2Wall , x , y , tileSize , tileSize);
                     walls.add(wood);
                 }
 
-                else if ( tileMapChar == '_'){  // theme 8:  machine wall
+                else if ( tile == '_'){  // theme 8:  machine wall
 
                     Block wood = new Block(machineWallImage , x , y , tileSize , tileSize);
                     walls.add(wood);
                 }
 
-                else if ( tileMapChar == '='){  // theme 9: moltenspire wall
+                else if ( tile == '='){  // theme 9: moltenspire wall
 
                     Block wood = new Block(moltenSphireWallImage , x , y , tileSize , tileSize);
                     walls.add(wood);
@@ -2288,7 +932,7 @@ PACMAN = P
 
 
 
-                else if ( tileMapChar == ' ')  // food
+                else if ( tile == ' ')  // food
                 {
                     Block food = new Block(null, x+14, y+14, 4,  4);  // here there wont be a image so i draw a rectangle programatically. for image i set it to null . since the rectangle will be made small so we decrease the size to 4 pixels and we offset the position to x+14 , y+14
                     foods.add(food);   // it is of the form  HashSet.add(objt);
@@ -2299,74 +943,74 @@ PACMAN = P
                 }
 
 
-                else if ( tileMapChar == '.')   // allowing pacman to move map from end to other
+                else if ( tile == '.')   // allowing pacman to move map from end to other
                 {
                     Block space1  = new Block(null , x, y, tileSize, tileSize);
                     spaces1.add(space1);
                 }
 
-                else if ( tileMapChar == 'E')
+                else if ( tile == 'E')
                 {
                     Block exit1 = new Block(null, x, y, tileSize, tileSize);
                     exitSpaces1.add(exit1);
                 }
 
 
-                else if ( tileMapChar == '-')   // allowing pacman to move map from end to other
+                else if ( tile == '-')   // allowing pacman to move map from end to other
                 {
                     Block space2  = new Block(null , x, y, tileSize, tileSize);
                     spaces2.add(space2);
                 }
 
-                else if ( tileMapChar == 'e')
+                else if ( tile == 'e')
                 {
                     Block exit2 = new Block(null, x, y, tileSize, tileSize);
                     exitSpaces2.add(exit2);
                 }
 
-                else if( tileMapChar == 'a')   // orange ghost 1 [theme 1]
+                else if( tile == 'a')   // orange ghost 1 [theme 1]
                 {
 
                     Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
                     ghosts.add(OrangeGhost1);
                 }
 
-                else if( tileMapChar == 's')   // orange ghost 2 [ theme 2]
+                else if( tile == 's')   // orange ghost 2 [ theme 2]
                 {
 
                     Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
                     ghosts.add(OrangeGhost2);
                 }
 
-                else if( tileMapChar == 'd')   // orange ghost 3 [ thme 3]
+                else if( tile == 'd')   // orange ghost 3 [ thme 3]
                 {
 
                     Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
                     ghosts.add(OrangeGhost3);
                 }
 
-                else if( tileMapChar == 'f')   // orange ghost 4 [ theme 5]
+                else if( tile == 'f')   // orange ghost 4 [ theme 5]
                 {
 
                     Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
                     ghosts.add(OrangeGhost4);
                 }
 
-                else if( tileMapChar == 'z')   // orange ghost 5 [theme 6]
+                else if( tile == 'z')   // orange ghost 5 [theme 6]
                 {
 
                     Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
                     ghosts.add(OrangeGhost5);
                 }
 
-                else if( tileMapChar == 'x')   // orange ghost 6 [ theme 8]
+                else if( tile == 'x')   // orange ghost 6 [ theme 8]
                 {
 
                     Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
                     ghosts.add(OrangeGhost6);
                 }
 
-                else if( tileMapChar == 'c')   // orange ghost 7 [ theme 9]
+                else if( tile == 'c')   // orange ghost 7 [ theme 9]
                 {
 
                     Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
@@ -2374,28 +1018,28 @@ PACMAN = P
                 }
 
 
-                else if( tileMapChar == 'r')   // red ghost 1
+                else if( tile == 'r')   // red ghost 1
                 {
 
                     Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
                     ghosts.add(RedGhost1);
                 }
 
-                else if( tileMapChar == 'g')   // red ghost 2
+                else if( tile == 'g')   // red ghost 2
                 {
 
                     Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
                     ghosts.add(RedGhost2);
                 }
 
-                else if( tileMapChar == 'h')   // red ghost 3
+                else if( tile == 'h')   // red ghost 3
                 {
 
                     Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
                     ghosts.add(RedGhost3);
                 }
 
-                else if( tileMapChar == 'j')   // red ghost4
+                else if( tile == 'j')   // red ghost4
                 {
 
                     Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
@@ -2403,7 +1047,7 @@ PACMAN = P
                 }
 
 
-                else if( tileMapChar == 'k')   // red ghost5
+                else if( tile == 'k')   // red ghost5
                 {
 
                     Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
@@ -2411,14 +1055,14 @@ PACMAN = P
                 }
 
 
-                else if( tileMapChar == 'y')   // red ghost6
+                else if( tile == 'y')   // red ghost6
                 {
 
                     Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
                     ghosts.add(RedGhost6);
                 }
 
-                else if( tileMapChar == 'u')   // red ghost7
+                else if( tile == 'u')   // red ghost7
                 {
 
                     Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
@@ -2426,42 +1070,42 @@ PACMAN = P
                 }
 
 
-                else if( tileMapChar == 't')   // pink ghost 1
+                else if( tile == 't')   // pink ghost 1
                 {
 
                     Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
                     ghosts.add(PinkGhost);
                 }
 
-                else if( tileMapChar == 'b')   // pink ghost 2
+                else if( tile == 'b')   // pink ghost 2
                 {
 
                     Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
                     ghosts.add(PinkGhost2);
                 }
 
-                else if( tileMapChar == 'n')   // pink ghost 3
+                else if( tile == 'n')   // pink ghost 3
                 {
 
                     Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
                     ghosts.add(PinkGhost3);
                 }
 
-                else if( tileMapChar == 'm')   // pink ghost 4
+                else if( tile == 'm')   // pink ghost 4
                 {
 
                     Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
                     ghosts.add(PinkGhost4);
                 }
 
-                else if( tileMapChar == 'q')   // pink ghost 5
+                else if( tile == 'q')   // pink ghost 5
                 {
 
                     Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
                     ghosts.add(PinkGhost5);
                 }
 
-                else if( tileMapChar == 'w')   // pink ghost 6
+                else if( tile == 'w')   // pink ghost 6
                 {
 
                     Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
@@ -2470,35 +1114,35 @@ PACMAN = P
 
 
 
-                else if( tileMapChar == 'Y')   // blue ghost 1
+                else if( tile == 'Y')   // blue ghost 1
                 {
 
                     Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
                     ghosts.add(BlueGhost);
                 }
 
-                else if( tileMapChar == 'U')   // blue ghost 2
+                else if( tile == 'U')   // blue ghost 2
                 {
 
                     Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
                     ghosts.add(BlueGhost2);
                 }
 
-                else if( tileMapChar == 'O')   // blue ghost 3
+                else if( tile == 'O')   // blue ghost 3
                 {
 
                     Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
                     ghosts.add(BlueGhost3);
                 }
 
-                else if( tileMapChar == 'K')   // blue ghost 4
+                else if( tile == 'K')   // blue ghost 4
                 {
 
                     Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
                     ghosts.add(BlueGhost4);
                 }
 
-                else if( tileMapChar == 'J')   // blue ghost 5
+                else if( tile == 'J')   // blue ghost 5
                 {
 
                     Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
@@ -2506,7 +1150,7 @@ PACMAN = P
                 }
 
 
-                else if ( tileMapChar == 'P')  // pacman
+                else if ( tile == 'P')  // pacman
                 {
                     pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);   // here we had created a pacman character and have stored it in pacman variable
                     // in the starting of the game we want our pacman to be facing towards right so we right pacmanRightImage
@@ -2515,44 +1159,44 @@ PACMAN = P
                 }
 
 
-                else if ( tileMapChar == 'T')
+                else if ( tile == 'T')
                 {
                     Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
                     teleportPads.add(teleport);
                 }
 
-                else if ( tileMapChar == '%')
+                else if ( tile == '%')
                 {
                     Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
                     teleportPads.add(teleport2);
                 }
 
-                else if ( tileMapChar == ':')
+                else if ( tile == ':')
                 {
                     Block bushe = new Block(bushes, x, y, tileSize, tileSize);
                     bush.add(bushe);
                 }
 
-                else if ( tileMapChar == 'I')
+                else if ( tile == 'I')
                 {
                     Block ice  = new Block(iceImage, x, y, tileSize, tileSize);
                     iceBlocks.add(ice);
                 }
 
-                else if ( tileMapChar == 'S')
+                else if ( tile == 'S')
                 {
                     Block speed = new Block(speedImage, x, y, tileSize, tileSize);
                     speedZones.add(speed);
                 }
 
-                else if ( tileMapChar == '~')
+                else if ( tile == '~')
                 {
                     Block phantom = new Block(null, x, y, tileSize, tileSize);  // null  bcz we are not taking the image
                     phantomZones.add(phantom);
                 }
 
 
-                else if ( tileMapChar == 'R')
+                else if ( tile == 'R')
                 {
                     Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
                     reverseControls.add(rev);
@@ -2560,13 +1204,13 @@ PACMAN = P
 
 
 
-                else if ( tileMapChar == 'N')
+                else if ( tile == 'N')
                 {
                     Block Wenter = new Block(warpEntranceImage, x, y, tileSize, tileSize);
                     warpEntrance.add(Wenter);
                 }
 
-                else if ( tileMapChar == '&')
+                else if ( tile == '&')
                 {
                     Block wexit = new Block(warpExitImage, x, y, tileSize, tileSize);
                     warpExit.add(wexit);
@@ -2574,13 +1218,13 @@ PACMAN = P
                 }
 
 
-                else if ( tileMapChar == '1')
+                else if ( tile == '1')
                 {
                     Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
                     Button1.add(button1);
                 }
 
-                else if ( tileMapChar == 'A')
+                else if ( tile == 'A')
                 {
                     Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
                     Gate1.add(gate1);
@@ -2588,32 +1232,32 @@ PACMAN = P
                 }
 
 
-                else if ( tileMapChar == '2')
+                else if ( tile == '2')
                 {
                     Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
                     Button2.add(button2);
                 }
 
-                else if ( tileMapChar == 'B')
+                else if ( tile == 'B')
                 {
                     Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
                     Gate2.add(gate2);
                     walls.add(gate2);
                 }
 
-                else if ( tileMapChar == 'W')
+                else if ( tile == 'W')
                 {
                     Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
                     spiderNets.add(web);
                 }
 
-                else if ( tileMapChar == 'V')
+                else if ( tile == 'V')
                 {
                     Block lava = new Block(lavaImage, x, y, tileSize, tileSize);
                     lavaTiles.add(lava);
                 }
 
-                else if ( tileMapChar == 'Z')
+                else if ( tile == 'Z')
                 {
                     Block sacred = new Block ( sacredZone , x, y , tileSize , tileSize);
                     sacredZones.add(sacred);
@@ -2621,13 +1265,13 @@ PACMAN = P
 
 
 
-                else if ( tileMapChar == 'L')
+                else if ( tile == 'L')
                 {
                     Block slimemist = new Block(slime, x, y, tileSize, tileSize);
                     slimePuddle.add(slimemist);
                 }
 
-                else if (tileMapChar == 'Q')
+                else if (tile == 'Q')
                 {
                     Block electricS = new Block(electric, x, y, tileSize, tileSize);
                     electricShocks.add(electricS);
@@ -2636,10651 +1280,10 @@ PACMAN = P
 
                 // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
-            }
-        }
-    };
-
-
-    public void loadMap2(){
-
-        // i need to initilise all the hashset first
-
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();  // " "
-
-
-
-        teleportPads = new HashSet<Block>(); // T AND %  // these hashsets like teleport and iceblocks even if you are not using them in the current level but if you have somehwere in the program the usage of them then you had to implement this here also.
-        iceBlocks = new HashSet<Block>();   // I   // bcz we have used somehwere in our program the for loop which iterates over this hashset so it doesn’t matter if there are actually any ice blocks in the map — if the HashSet was never initialized, then Java throws a NullPointerException.
-        // therefore Always initialize iceBlocks, even if it's empty .This way, your code won’t crash if it tries to iterate over or check iceBlocks, because it will just be an empty set instead of null.
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // ~
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1  = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-
-        for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
-        {
-            for (  int c = 0 ; c<colCount ; c++)   // c stands for column
-            {
-                String row = tileMap2[r];   // getting the current row bcz tileMap is our map and r index is the row index so we are getting the loop indexing
-                char tileMap2Char = row.charAt(c);  // getting the current character
-                // what we had done in the above two lines is that we getting the row and then we are getting the character present at that row with the col index
-                // we had declared two variables 1) row 2) tileMapChar
-                // the string row represents the single row in the tile map from index r=0 to r<rowCount
-                // now we are using inbuilt string operations charAt() to acces the character present at that position
-                // row.charAt(c) acceses the character from the row at index c where c represents the columns
-
-
-                // we got a char at a specific tile now we need to figure out where this tile is. therefore to draw we need x , y positions and width and height of tile
-
-                // getting x position ( it will be the 'how many columns we are from the left')
-                int x = c*tileSize;
-                // getting y position (  it will be the 'how many rows from the top')
-                int y = r*tileSize;
-
-
-
-                if ( tileMap2Char == 'X'){  // theme 1: wood wall
-
-                    Block wood = new Block(woodWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap2Char == '<')
-                {
-                    Block bS = new Block(null , x , y , tileSize , tileSize);
-                    blackSpace.add(bS);
-                }
-
-                else if ( tileMap2Char == '['){  // theme 2: desert wall
-
-                    Block wood = new Block(desertWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap2Char == ']'){  // theme 3: sea wall
-
-                    Block wood = new Block(seaWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap2Char == '{'){  // theme 4: bonus 1 wall
-
-                    Block wood = new Block(bonus1Wall , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap2Char == '}'){  // theme 5: frost wall
-
-                    Block wood = new Block(frostWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap2Char == '`'){  // theme 6: lava wall
-
-                    Block wood = new Block(lavaWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap2Char == '/'){  // theme 7: bonus 2 wall
-
-                    Block wood = new Block(bonus2Wall , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap2Char == '_'){  // theme 8:  machine wall
-
-                    Block wood = new Block(machineWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap2Char == '='){  // theme 9: moltenspire wall
-
-                    Block wood = new Block(moltenSphireWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-
-
-
-                else if ( tileMap2Char == ' ')  // food
-                {
-                    Block food = new Block(null, x+14, y+14, 4,  4);  // here there wont be a image so i draw a rectangle programatically. for image i set it to null . since the rectangle will be made small so we decrease the size to 4 pixels and we offset the position to x+14 , y+14
-                    foods.add(food);   // it is of the form  HashSet.add(objt);
-
-                    // x+14? y+14?
-                    // since our tile size is 32x32 but we had made here 4x4 so our image here will be a small particle therefore 32-4 is 28 therefore to go to this 4x4 rectangle we had to traverse 14 to the rigth from left and 14 from top to down
-
-                }
-
-
-                else if ( tileMap2Char == '.')   // allowing pacman to move map from end to other
-                {
-                    Block space1  = new Block(null , x, y, tileSize, tileSize);
-                    spaces1.add(space1);
-                }
-
-                else if ( tileMap2Char == 'E')
-                {
-                    Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                    exitSpaces1.add(exit1);
-                }
-
-
-                else if ( tileMap2Char == '-')   // allowing pacman to move map from end to other
-                {
-                    Block space2  = new Block(null , x, y, tileSize, tileSize);
-                    spaces2.add(space2);
-                }
-
-                else if ( tileMap2Char == 'e')
-                {
-                    Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                    exitSpaces2.add(exit2);
-                }
-
-                else if( tileMap2Char == 'a')   // orange ghost 1 [theme 1]
-                {
-
-                    Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost1);
-                }
-
-                else if( tileMap2Char == 's')   // orange ghost 2 [ theme 2]
-                {
-
-                    Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost2);
-                }
-
-                else if( tileMap2Char == 'd')   // orange ghost 3 [ thme 3]
-                {
-
-                    Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost3);
-                }
-
-                else if( tileMap2Char == 'f')   // orange ghost 4 [ theme 5]
-                {
-
-                    Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost4);
-                }
-
-                else if( tileMap2Char == 'z')   // orange ghost 5 [theme 6]
-                {
-
-                    Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost5);
-                }
-
-                else if( tileMap2Char == 'x')   // orange ghost 6 [ theme 8]
-                {
-
-                    Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost6);
-                }
-
-                else if( tileMap2Char == 'c')   // orange ghost 7 [ theme 9]
-                {
-
-                    Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost7);
-                }
-
-
-                else if( tileMap2Char == 'r')   // red ghost 1
-                {
-
-                    Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost1);
-                }
-
-                else if( tileMap2Char == 'g')   // red ghost 2
-                {
-
-                    Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost2);
-                }
-
-                else if( tileMap2Char == 'h')   // red ghost 3
-                {
-
-                    Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost3);
-                }
-
-                else if( tileMap2Char == 'j')   // red ghost4
-                {
-
-                    Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost4);
-                }
-
-
-                else if( tileMap2Char == 'k')   // red ghost5
-                {
-
-                    Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost5);
-                }
-
-
-                else if( tileMap2Char == 'y')   // red ghost6
-                {
-
-                    Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost6);
-                }
-
-                else if( tileMap2Char == 'u')   // red ghost7
-                {
-
-                    Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost7);
-                }
-
-
-                else if( tileMap2Char == 't')   // pink ghost 1
-                {
-
-                    Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost);
-                }
-
-                else if( tileMap2Char == 'b')   // pink ghost 2
-                {
-
-                    Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost2);
-                }
-
-                else if( tileMap2Char == 'n')   // pink ghost 3
-                {
-
-                    Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost3);
-                }
-
-                else if( tileMap2Char == 'm')   // pink ghost 4
-                {
-
-                    Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost4);
-                }
-
-                else if( tileMap2Char == 'q')   // pink ghost 5
-                {
-
-                    Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost5);
-                }
-
-                else if( tileMap2Char == 'w')   // pink ghost 6
-                {
-
-                    Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost6);
-                }
-
-
-
-                else if( tileMap2Char == 'Y')   // blue ghost 1
-                {
-
-                    Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost);
-                }
-
-                else if( tileMap2Char == 'U')   // blue ghost 2
-                {
-
-                    Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost2);
-                }
-
-                else if( tileMap2Char == 'O')   // blue ghost 3
-                {
-
-                    Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost3);
-                }
-
-                else if( tileMap2Char == 'K')   // blue ghost 4
-                {
-
-                    Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost4);
-                }
-
-                else if( tileMap2Char == 'J')   // blue ghost 5
-                {
-
-                    Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost5);
-                }
-
-
-                else if ( tileMap2Char == 'P')  // pacman
-                {
-                    pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);   // here we had created a pacman character and have stored it in pacman variable
-                    // in the starting of the game we want our pacman to be facing towards right so we right pacmanRightImage
-                    // also bcz pacman was single entity so we didnt created a hashset for it
-                    // we had done this to treat pac man as a game object making collision detection easier
-                }
-
-
-                else if ( tileMap2Char == 'T')
-                {
-                    Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                    teleportPads.add(teleport);
-                }
-
-                else if ( tileMap2Char == '%')
-                {
-                    Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                    teleportPads.add(teleport2);
-                }
-
-                else if ( tileMap2Char == ':')
-                {
-                    Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                    bush.add(bushe);
-                }
-
-                else if ( tileMap2Char == 'I')
-                {
-                    Block ice  = new Block(iceImage, x, y, tileSize, tileSize);
-                    iceBlocks.add(ice);
-                }
-
-                else if ( tileMap2Char == 'S')
-                {
-                    Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                    speedZones.add(speed);
-                }
-
-                else if ( tileMap2Char == '~')
-                {
-                    Block phantom = new Block(null, x, y, tileSize, tileSize);  // null  bcz we are not taking the image
-                    phantomZones.add(phantom);
-                }
-
-
-                else if ( tileMap2Char == 'R')
-                {
-                    Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                    reverseControls.add(rev);
-                }
-
-
-
-                else if ( tileMap2Char == 'N')
-                {
-                    Block Wenter = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                    warpEntrance.add(Wenter);
-                }
-
-                else if ( tileMap2Char == '&')
-                {
-                    Block wexit = new Block(warpExitImage, x, y, tileSize, tileSize);
-                    warpExit.add(wexit);
-                    walls.add(wexit);
-                }
-
-
-                else if ( tileMap2Char == '1')
-                {
-                    Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                    Button1.add(button1);
-                }
-
-                else if ( tileMap2Char == 'A')
-                {
-                    Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                    Gate1.add(gate1);
-                    walls.add(gate1);
-                }
-
-
-                else if ( tileMap2Char == '2')
-                {
-                    Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                    Button2.add(button2);
-                }
-
-                else if ( tileMap2Char == 'B')
-                {
-                    Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                    Gate2.add(gate2);
-                    walls.add(gate2);
-                }
-
-                else if ( tileMap2Char == 'W')
-                {
-                    Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                    spiderNets.add(web);
-                }
-
-                else if ( tileMap2Char == 'V')
-                {
-                    Block lava = new Block(lavaImage, x, y, tileSize, tileSize);
-                    lavaTiles.add(lava);
-                }
-
-                else if ( tileMap2Char == 'Z')
-                {
-                    Block sacred = new Block ( sacredZone , x, y , tileSize , tileSize);
-                    sacredZones.add(sacred);
-                }
-
-
-
-                else if ( tileMap2Char == 'L')
-                {
-                    Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                    slimePuddle.add(slimemist);
-                }
-
-                else if (tileMap2Char == 'Q')
-                {
-                    Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                    electricShocks.add(electricS);
-                }
-
-
-
-                // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
 
             }
         }
-    };
-
-
-
-    public void loadMap3(){
-
-        // i need to initilise all the hashset first
-
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();  // " "
-
-
-        teleportPads = new HashSet<Block>(); // T AND %  // these hashsets like teleport and iceblocks even if you are not using them in the current level but if you have somehwere in the program the usage of them then you had to implement this here also.
-        iceBlocks = new HashSet<Block>();   // I   // bcz we have used somehwere in our program the for loop which iterates over this hashset so it doesn’t matter if there are actually any ice blocks in the map — if the HashSet was never initialized, then Java throws a NullPointerException.
-        // therefore Always initialize iceBlocks, even if it's empty .This way, your code won’t crash if it tries to iterate over or check iceBlocks, because it will just be an empty set instead of null.
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // ~
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1  = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-
-        for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
-        {
-            for (  int c = 0 ; c<colCount ; c++)   // c stands for column
-            {
-                String row = tileMap3[r];   // getting the current row bcz tileMap is our map and r index is the row index so we are getting the loop indexing
-                char tileMap3Char = row.charAt(c);  // getting the current character
-                // what we had done in the above two lines is that we getting the row and then we are getting the character present at that row with the col index
-                // we had declared two variables 1) row 2) tileMapChar
-                // the string row represents the single row in the tile map from index r=0 to r<rowCount
-                // now we are using inbuilt string operations charAt() to acces the character present at that position
-                // row.charAt(c) acceses the character from the row at index c where c represents the columns
-
-
-                // we got a char at a specific tile now we need to figure out where this tile is. therefore to draw we need x , y positions and width and height of tile
-
-                // getting x position ( it will be the 'how many columns we are from the left')
-                int x = c*tileSize;
-                // getting y position (  it will be the 'how many rows from the top')
-                int y = r*tileSize;
-
-
-
-                if ( tileMap3Char == 'X'){  // theme 1: wood wall
-
-                    Block wood = new Block(woodWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap3Char == '<')
-                {
-                    Block bS = new Block(null , x , y , tileSize , tileSize);
-                    blackSpace.add(bS);
-                }
-
-                else if ( tileMap3Char == '['){  // theme 2: desert wall
-
-                    Block wood = new Block(desertWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap3Char == ']'){  // theme 3: sea wall
-
-                    Block wood = new Block(seaWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap3Char == '{'){  // theme 4: bonus 1 wall
-
-                    Block wood = new Block(bonus1Wall , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap3Char == '}'){  // theme 5: frost wall
-
-                    Block wood = new Block(frostWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap3Char == '`'){  // theme 6: lava wall
-
-                    Block wood = new Block(lavaWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap3Char == '/'){  // theme 7: bonus 2 wall
-
-                    Block wood = new Block(bonus2Wall , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap3Char == '_'){  // theme 8:  machine wall
-
-                    Block wood = new Block(machineWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap3Char == '='){  // theme 9: moltenspire wall
-
-                    Block wood = new Block(moltenSphireWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-
-
-
-                else if ( tileMap3Char == ' ')  // food
-                {
-                    Block food = new Block(null, x+14, y+14, 4,  4);  // here there wont be a image so i draw a rectangle programatically. for image i set it to null . since the rectangle will be made small so we decrease the size to 4 pixels and we offset the position to x+14 , y+14
-                    foods.add(food);   // it is of the form  HashSet.add(objt);
-
-                    // x+14? y+14?
-                    // since our tile size is 32x32 but we had made here 4x4 so our image here will be a small particle therefore 32-4 is 28 therefore to go to this 4x4 rectangle we had to traverse 14 to the rigth from left and 14 from top to down
-
-                }
-
-
-                else if ( tileMap3Char == '.')   // allowing pacman to move map from end to other
-                {
-                    Block space1  = new Block(null , x, y, tileSize, tileSize);
-                    spaces1.add(space1);
-                }
-
-                else if ( tileMap3Char == 'E')
-                {
-                    Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                    exitSpaces1.add(exit1);
-                }
-
-
-                else if ( tileMap3Char == '-')   // allowing pacman to move map from end to other
-                {
-                    Block space2  = new Block(null , x, y, tileSize, tileSize);
-                    spaces2.add(space2);
-                }
-
-                else if ( tileMap3Char == 'e')
-                {
-                    Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                    exitSpaces2.add(exit2);
-                }
-
-                else if( tileMap3Char == 'a')   // orange ghost 1 [theme 1]
-                {
-
-                    Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost1);
-                }
-
-                else if( tileMap3Char == 's')   // orange ghost 2 [ theme 2]
-                {
-
-                    Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost2);
-                }
-
-                else if( tileMap3Char == 'd')   // orange ghost 3 [ thme 3]
-                {
-
-                    Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost3);
-                }
-
-                else if( tileMap3Char == 'f')   // orange ghost 4 [ theme 5]
-                {
-
-                    Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost4);
-                }
-
-                else if( tileMap3Char == 'z')   // orange ghost 5 [theme 6]
-                {
-
-                    Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost5);
-                }
-
-                else if( tileMap3Char == 'x')   // orange ghost 6 [ theme 8]
-                {
-
-                    Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost6);
-                }
-
-                else if( tileMap3Char == 'c')   // orange ghost 7 [ theme 9]
-                {
-
-                    Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost7);
-                }
-
-
-                else if( tileMap3Char == 'r')   // red ghost 1
-                {
-
-                    Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost1);
-                }
-
-                else if( tileMap3Char == 'g')   // red ghost 2
-                {
-
-                    Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost2);
-                }
-
-                else if( tileMap3Char == 'h')   // red ghost 3
-                {
-
-                    Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost3);
-                }
-
-                else if( tileMap3Char == 'j')   // red ghost4
-                {
-
-                    Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost4);
-                }
-
-
-                else if( tileMap3Char == 'k')   // red ghost5
-                {
-
-                    Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost5);
-                }
-
-
-                else if( tileMap3Char == 'y')   // red ghost6
-                {
-
-                    Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost6);
-                }
-
-                else if( tileMap3Char == 'u')   // red ghost7
-                {
-
-                    Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost7);
-                }
-
-
-                else if( tileMap3Char == 't')   // pink ghost 1
-                {
-
-                    Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost);
-                }
-
-                else if( tileMap3Char == 'b')   // pink ghost 2
-                {
-
-                    Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost2);
-                }
-
-                else if( tileMap3Char == 'n')   // pink ghost 3
-                {
-
-                    Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost3);
-                }
-
-                else if( tileMap3Char == 'm')   // pink ghost 4
-                {
-
-                    Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost4);
-                }
-
-                else if( tileMap3Char == 'q')   // pink ghost 5
-                {
-
-                    Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost5);
-                }
-
-                else if( tileMap3Char == 'w')   // pink ghost 6
-                {
-
-                    Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost6);
-                }
-
-
-
-                else if( tileMap3Char == 'Y')   // blue ghost 1
-                {
-
-                    Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost);
-                }
-
-                else if( tileMap3Char == 'U')   // blue ghost 2
-                {
-
-                    Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost2);
-                }
-
-                else if( tileMap3Char == 'O')   // blue ghost 3
-                {
-
-                    Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost3);
-                }
-
-                else if( tileMap3Char == 'K')   // blue ghost 4
-                {
-
-                    Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost4);
-                }
-
-                else if( tileMap3Char == 'J')   // blue ghost 5
-                {
-
-                    Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost5);
-                }
-
-
-                else if ( tileMap3Char == 'P')  // pacman
-                {
-                    pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);   // here we had created a pacman character and have stored it in pacman variable
-                    // in the starting of the game we want our pacman to be facing towards right so we right pacmanRightImage
-                    // also bcz pacman was single entity so we didnt created a hashset for it
-                    // we had done this to treat pac man as a game object making collision detection easier
-                }
-
-
-                else if ( tileMap3Char == 'T')
-                {
-                    Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                    teleportPads.add(teleport);
-                }
-
-                else if ( tileMap3Char == '%')
-                {
-                    Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                    teleportPads.add(teleport2);
-                }
-
-                else if ( tileMap3Char == ':')
-                {
-                    Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                    bush.add(bushe);
-                }
-
-                else if ( tileMap3Char == 'I')
-                {
-                    Block ice  = new Block(iceImage, x, y, tileSize, tileSize);
-                    iceBlocks.add(ice);
-                }
-
-                else if ( tileMap3Char == 'S')
-                {
-                    Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                    speedZones.add(speed);
-                }
-
-                else if ( tileMap3Char == '~')
-                {
-                    Block phantom = new Block(null, x, y, tileSize, tileSize);  // null  bcz we are not taking the image
-                    phantomZones.add(phantom);
-                }
-
-
-                else if ( tileMap3Char == 'R')
-                {
-                    Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                    reverseControls.add(rev);
-                }
-
-
-
-                else if ( tileMap3Char == 'N')
-                {
-                    Block Wenter = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                    warpEntrance.add(Wenter);
-                }
-
-                else if ( tileMap3Char == '&')
-                {
-                    Block wexit = new Block(warpExitImage, x, y, tileSize, tileSize);
-                    warpExit.add(wexit);
-                    walls.add(wexit);
-                }
-
-
-                else if ( tileMap3Char == '1')
-                {
-                    Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                    Button1.add(button1);
-                }
-
-                else if ( tileMap3Char == 'A')
-                {
-                    Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                    Gate1.add(gate1);
-                    walls.add(gate1);
-                }
-
-
-                else if ( tileMap3Char == '2')
-                {
-                    Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                    Button2.add(button2);
-                }
-
-                else if ( tileMap3Char == 'B')
-                {
-                    Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                    Gate2.add(gate2);
-                    walls.add(gate2);
-                }
-
-                else if ( tileMap3Char == 'W')
-                {
-                    Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                    spiderNets.add(web);
-                }
-
-                else if ( tileMap3Char == 'V')
-                {
-                    Block lava = new Block(lavaImage, x, y, tileSize, tileSize);
-                    lavaTiles.add(lava);
-                }
-
-                else if ( tileMap3Char == 'Z')
-                {
-                    Block sacred = new Block ( sacredZone , x, y , tileSize , tileSize);
-                    sacredZones.add(sacred);
-                }
-
-
-
-                else if ( tileMap3Char == 'L')
-                {
-                    Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                    slimePuddle.add(slimemist);
-                }
-
-                else if (tileMap3Char == 'Q')
-                {
-                    Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                    electricShocks.add(electricS);
-                }
-
-
-                // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
-
-            }
-        }
-    };
-
-
-
-    public void loadMap4(){
-
-        // i need to initilise all the hashset first
-
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();  // " "
-
-
-        teleportPads = new HashSet<Block>(); // T AND %  // these hashsets like teleport and iceblocks even if you are not using them in the current level but if you have somehwere in the program the usage of them then you had to implement this here also.
-        iceBlocks = new HashSet<Block>();   // I   // bcz we have used somehwere in our program the for loop which iterates over this hashset so it doesn’t matter if there are actually any ice blocks in the map — if the HashSet was never initialized, then Java throws a NullPointerException.
-        // therefore Always initialize iceBlocks, even if it's empty .This way, your code won’t crash if it tries to iterate over or check iceBlocks, because it will just be an empty set instead of null.
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // ~
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1  = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-
-        for ( int r = 0 ; r<rowCount ; r++)   // r stands for row
-        {
-            for (  int c = 0 ; c<colCount ; c++)   // c stands for column
-            {
-                String row = tileMap4[r];   // getting the current row bcz tileMap is our map and r index is the row index so we are getting the loop indexing
-                char tileMap4Char = row.charAt(c);  // getting the current character
-                // what we had done in the above two lines is that we getting the row and then we are getting the character present at that row with the col index
-                // we had declared two variables 1) row 2) tileMapChar
-                // the string row represents the single row in the tile map from index r=0 to r<rowCount
-                // now we are using inbuilt string operations charAt() to acces the character present at that position
-                // row.charAt(c) acceses the character from the row at index c where c represents the columns
-
-
-                // we got a char at a specific tile now we need to figure out where this tile is. therefore to draw we need x , y positions and width and height of tile
-
-                // getting x position ( it will be the 'how many columns we are from the left')
-                int x = c*tileSize;
-                // getting y position (  it will be the 'how many rows from the top')
-                int y = r*tileSize;
-
-
-
-                if ( tileMap4Char == 'X'){  // theme 1: wood wall
-
-                    Block wood = new Block(woodWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap4Char == '<')
-                {
-                    Block bS = new Block(null , x , y , tileSize , tileSize);
-                    blackSpace.add(bS);
-                }
-
-                else if ( tileMap4Char == '['){  // theme 2: desert wall
-
-                    Block wood = new Block(desertWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap4Char == ']'){  // theme 3: sea wall
-
-                    Block wood = new Block(seaWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap4Char == '{'){  // theme 4: bonus 1 wall
-
-                    Block wood = new Block(bonus1Wall , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap4Char == '}'){  // theme 5: frost wall
-
-                    Block wood = new Block(frostWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap4Char == '`'){  // theme 6: lava wall
-
-                    Block wood = new Block(lavaWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap4Char == '/'){  // theme 7: bonus 2 wall
-
-                    Block wood = new Block(bonus2Wall , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap4Char == '_'){  // theme 8:  machine wall
-
-                    Block wood = new Block(machineWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-                else if ( tileMap4Char == '='){  // theme 9: moltenspire wall
-
-                    Block wood = new Block(moltenSphireWallImage , x , y , tileSize , tileSize);
-                    walls.add(wood);
-                }
-
-
-
-
-                else if ( tileMap4Char == ' ')  // food
-                {
-                    Block food = new Block(null, x+14, y+14, 4,  4);  // here there wont be a image so i draw a rectangle programatically. for image i set it to null . since the rectangle will be made small so we decrease the size to 4 pixels and we offset the position to x+14 , y+14
-                    foods.add(food);   // it is of the form  HashSet.add(objt);
-
-                    // x+14? y+14?
-                    // since our tile size is 32x32 but we had made here 4x4 so our image here will be a small particle therefore 32-4 is 28 therefore to go to this 4x4 rectangle we had to traverse 14 to the rigth from left and 14 from top to down
-
-                }
-
-
-                else if ( tileMap4Char == '.')   // allowing pacman to move map from end to other
-                {
-                    Block space1  = new Block(null , x, y, tileSize, tileSize);
-                    spaces1.add(space1);
-                }
-
-                else if ( tileMap4Char == 'E')
-                {
-                    Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                    exitSpaces1.add(exit1);
-                }
-
-
-                else if ( tileMap4Char == '-')   // allowing pacman to move map from end to other
-                {
-                    Block space2  = new Block(null , x, y, tileSize, tileSize);
-                    spaces2.add(space2);
-                }
-
-                else if ( tileMap4Char == 'e')
-                {
-                    Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                    exitSpaces2.add(exit2);
-                }
-
-                else if( tileMap4Char == 'a')   // orange ghost 1 [theme 1]
-                {
-
-                    Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost1);
-                }
-
-                else if( tileMap4Char == 's')   // orange ghost 2 [ theme 2]
-                {
-
-                    Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost2);
-                }
-
-                else if( tileMap4Char == 'd')   // orange ghost 3 [ thme 3]
-                {
-
-                    Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost3);
-                }
-
-                else if( tileMap4Char == 'f')   // orange ghost 4 [ theme 5]
-                {
-
-                    Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost4);
-                }
-
-                else if( tileMap4Char == 'z')   // orange ghost 5 [theme 6]
-                {
-
-                    Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost5);
-                }
-
-                else if( tileMap4Char == 'x')   // orange ghost 6 [ theme 8]
-                {
-
-                    Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost6);
-                }
-
-                else if( tileMap4Char == 'c')   // orange ghost 7 [ theme 9]
-                {
-
-                    Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                    ghosts.add(OrangeGhost7);
-                }
-
-
-                else if( tileMap4Char == 'r')   // red ghost 1
-                {
-
-                    Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost1);
-                }
-
-                else if( tileMap4Char == 'g')   // red ghost 2
-                {
-
-                    Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost2);
-                }
-
-                else if( tileMap4Char == 'h')   // red ghost 3
-                {
-
-                    Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost3);
-                }
-
-                else if( tileMap4Char == 'j')   // red ghost4
-                {
-
-                    Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost4);
-                }
-
-
-                else if( tileMap4Char == 'k')   // red ghost5
-                {
-
-                    Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost5);
-                }
-
-
-                else if( tileMap4Char == 'y')   // red ghost6
-                {
-
-                    Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost6);
-                }
-
-                else if( tileMap4Char == 'u')   // red ghost7
-                {
-
-                    Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                    ghosts.add(RedGhost7);
-                }
-
-
-                else if( tileMap4Char == 't')   // pink ghost 1
-                {
-
-                    Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost);
-                }
-
-                else if( tileMap4Char == 'b')   // pink ghost 2
-                {
-
-                    Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost2);
-                }
-
-                else if( tileMap4Char == 'n')   // pink ghost 3
-                {
-
-                    Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost3);
-                }
-
-                else if( tileMap4Char == 'm')   // pink ghost 4
-                {
-
-                    Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost4);
-                }
-
-                else if( tileMap4Char == 'q')   // pink ghost 5
-                {
-
-                    Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost5);
-                }
-
-                else if( tileMap4Char == 'w')   // pink ghost 6
-                {
-
-                    Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                    ghosts.add(PinkGhost6);
-                }
-
-
-
-                else if( tileMap4Char == 'Y')   // blue ghost 1
-                {
-
-                    Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost);
-                }
-
-                else if( tileMap4Char == 'U')   // blue ghost 2
-                {
-
-                    Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost2);
-                }
-
-                else if( tileMap4Char == 'O')   // blue ghost 3
-                {
-
-                    Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost3);
-                }
-
-                else if( tileMap4Char == 'K')   // blue ghost 4
-                {
-
-                    Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost4);
-                }
-
-                else if( tileMap4Char == 'J')   // blue ghost 5
-                {
-
-                    Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                    ghosts.add(BlueGhost5);
-                }
-
-
-                else if ( tileMap4Char == 'P')  // pacman
-                {
-                    pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);   // here we had created a pacman character and have stored it in pacman variable
-                    // in the starting of the game we want our pacman to be facing towards right so we right pacmanRightImage
-                    // also bcz pacman was single entity so we didnt created a hashset for it
-                    // we had done this to treat pac man as a game object making collision detection easier
-                }
-
-
-                else if ( tileMap4Char == 'T')
-                {
-                    Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                    teleportPads.add(teleport);
-                }
-
-                else if ( tileMap4Char == '%')
-                {
-                    Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                    teleportPads.add(teleport2);
-                }
-
-                else if ( tileMap4Char == ':')
-                {
-                    Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                    bush.add(bushe);
-                }
-
-                else if ( tileMap4Char == 'I')
-                {
-                    Block ice  = new Block(iceImage, x, y, tileSize, tileSize);
-                    iceBlocks.add(ice);
-                }
-
-                else if ( tileMap4Char == 'S')
-                {
-                    Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                    speedZones.add(speed);
-                }
-
-                else if ( tileMap4Char == '~')
-                {
-                    Block phantom = new Block(null, x, y, tileSize, tileSize);  // null  bcz we are not taking the image
-                    phantomZones.add(phantom);
-                }
-
-
-                else if ( tileMap4Char == 'R')
-                {
-                    Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                    reverseControls.add(rev);
-                }
-
-
-
-                else if ( tileMap4Char == 'N')
-                {
-                    Block Wenter = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                    warpEntrance.add(Wenter);
-                }
-
-                else if ( tileMap4Char == '&')
-                {
-                    Block wexit = new Block(warpExitImage, x, y, tileSize, tileSize);
-                    warpExit.add(wexit);
-                    walls.add(wexit);
-                }
-
-
-                else if ( tileMap4Char == '1')
-                {
-                    Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                    Button1.add(button1);
-                }
-
-                else if ( tileMap4Char == 'A')
-                {
-                    Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                    Gate1.add(gate1);
-                    walls.add(gate1);
-                }
-
-
-                else if ( tileMap4Char == '2')
-                {
-                    Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                    Button2.add(button2);
-                }
-
-                else if ( tileMap4Char == 'B')
-                {
-                    Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                    Gate2.add(gate2);
-                    walls.add(gate2);
-                }
-
-                else if ( tileMap4Char == 'W')
-                {
-                    Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                    spiderNets.add(web);
-                }
-
-                else if ( tileMap4Char == 'V')
-                {
-                    Block lava = new Block(lavaImage, x, y, tileSize, tileSize);
-                    lavaTiles.add(lava);
-                }
-
-                else if ( tileMap4Char == 'Z')
-                {
-                    Block sacred = new Block ( sacredZone , x, y , tileSize , tileSize);
-                    sacredZones.add(sacred);
-                }
-
-
-
-                else if ( tileMap4Char == 'L')
-                {
-                    Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                    slimePuddle.add(slimemist);
-                }
-
-                else if (tileMap4Char == 'Q')
-                {
-                    Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                    electricShocks.add(electricS);
-                }
-
-
-                // now moving back to PacMan constructor and checking the number of walls, foods , ghosts
-
-            }
-        }
-    };
-
-
-
-    public void loadMap5(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap5[r];
-                char tileMap5Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap5Char) {
-                    case '<':  // black space
-                        Block bS  = new Block(null, x, y, tileSize, tileSize);
-                        blackSpace.add(bS);
-                        break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        bush.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap6(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap6[r];
-                char tileMap6Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap6Char) {
-                    case '<':  // black space
-                        Block bS  = new Block(null, x, y, tileSize, tileSize);
-                        blackSpace.add(bS);
-                        break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-
-    public void loadMap7(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap7[r];
-                char tileMap7Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap7Char) {
-                    case '<':  // black space
-                        Block bS  = new Block(null, x, y, tileSize, tileSize);
-                        blackSpace.add(bS);
-                        break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-
-
-    public void loadMap8(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap8[r];
-                char tileMap8Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap8Char) {
-                    case '<':  // black space
-                        Block bS  = new Block(null, x, y, tileSize, tileSize);
-                        blackSpace.add(bS);
-                        break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-
-    public void loadMap9(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap9[r];
-                char tileMap9Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap9Char) { case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-
-    public void loadMap10(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap10[r];
-                char tileMap10Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap10Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-
-    public void loadMap11(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap11[r];
-                char tileMap11Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap11Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-
-    public void loadMap12(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap12[r];
-                char tileMap12Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap12Char) { case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap13(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-
-        blackSpace = new HashSet<Block>(); // <
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap13[r];
-                char tileMap13Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap13Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap14(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap14[r];
-                char tileMap14Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap14Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap15(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap15[r];
-                char tileMap15Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap15Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap16(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap16[r];
-                char tileMap16Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap16Char) { case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap17(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap17[r];
-                char tileMap17Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap17Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap18(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap18[r];
-                char tileMap18Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap18Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap19(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap19[r];
-                char tileMap19Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap19Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-    public void loadMap20(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap20[r];
-                char tileMap20Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap20Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap21(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap21[r];
-                char tileMap21Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap21Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap22(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap22[r];
-                char tileMap22Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap22Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap23(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap23[r];
-                char tileMap23Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap23Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap24(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap24[r];
-                char tileMap24Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap24Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap25(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap25[r];
-                char tileMap25Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap25Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap26(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // ~
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap26[r];
-                char tileMap26Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap26Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap27(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap27[r];
-                char tileMap27Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap27Char) { case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap28(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap28[r];
-                char tileMap28Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap28Char) { case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap29(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap29[r];
-                char tileMap29Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap29Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap30(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap30[r];
-                char tileMap30Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap30Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap31(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap31[r];
-                char tileMap31Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap31Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap32(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap32[r];
-                char tileMap32Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap32Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap33(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap33[r];
-                char tileMap33Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap33Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-    public void loadMap34(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap34[r];
-                char tileMap34Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap34Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-    public void loadMap35(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap35[r];
-                char tileMap35Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap35Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap36(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap36[r];
-                char tileMap36Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap36Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-    public void loadMap37(){
-        // Initializing all HashSets first
-        walls = new HashSet<Block>();
-        ghosts = new HashSet<Block>();
-        foods = new HashSet<Block>();
-        teleportPads = new HashSet<Block>(); // T AND %
-        iceBlocks = new HashSet<Block>();   // I
-        speedZones = new HashSet<Block>();  // S
-        reverseControls = new HashSet<Block>(); // R
-        phantomZones = new HashSet<Block>();  // J
-        warpEntrance = new HashSet<Block>(); // N
-        warpExit = new HashSet<Block>(); // &
-        spaces1 = new HashSet<Block>(); // .
-        spaces2 = new HashSet<Block>();  // -
-        exitSpaces1 = new HashSet<Block>();  // E
-        exitSpaces2 = new HashSet<Block>(); // e
-        Button1 = new HashSet<Block>();  // 1
-        Gate1 = new HashSet<Block>();  // A
-        Button2 = new HashSet<Block>(); // 2
-        Gate2 = new HashSet<Block>();  // B
-        spiderNets = new HashSet<Block>();  // W
-        lavaTiles = new HashSet<Block>();  // V
-        sacredZones = new HashSet<Block>(); // Z
-        slimePuddle = new HashSet<Block>();  // L
-        electricShocks = new HashSet<Block>();  // Q
-        bush = new HashSet<Block>();  // :
-        blackSpace = new HashSet<Block>(); // <
-
-
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < colCount; c++) {
-                String row = tileMap37[r];
-                char tileMap37Char = row.charAt(c);
-
-                int x = c * tileSize;
-                int y = r * tileSize;
-
-                switch (tileMap37Char) {case '<':  // black space
-                    Block bS  = new Block(null, x, y, tileSize, tileSize);
-                    blackSpace.add(bS);
-                    break;
-                    case 'X': // theme 1: wood wall
-                        Block wood = new Block(woodWallImage, x, y, tileSize, tileSize);
-                        walls.add(wood);
-                        break;
-                    case '[': // theme 2: desert wall
-                        Block desert = new Block(desertWallImage, x, y, tileSize, tileSize);
-                        walls.add(desert);
-                        break;
-                    case ']': // theme 3: sea wall
-                        Block sea = new Block(seaWallImage, x, y, tileSize, tileSize);
-                        walls.add(sea);
-                        break;
-                    case '{': // theme 4: bonus 1 wall
-                        Block bonus1 = new Block(bonus1Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus1);
-                        break;
-                    case '}': // theme 5: frost wall
-                        Block frost = new Block(frostWallImage, x, y, tileSize, tileSize);
-                        walls.add(frost);
-                        break;
-                    case '`': // theme 6: lava wall
-                        Block lava = new Block(lavaWallImage, x, y, tileSize, tileSize);
-                        walls.add(lava);
-                        break;
-                    case '/': // theme 7: bonus 2 wall
-                        Block bonus2 = new Block(bonus2Wall, x, y, tileSize, tileSize);
-                        walls.add(bonus2);
-                        break;
-                    case '_': // theme 8: machine wall
-                        Block machine = new Block(machineWallImage, x, y, tileSize, tileSize);
-                        walls.add(machine);
-                        break;
-                    case '=': // theme 9: moltenspire wall
-                        Block molten = new Block(moltenSphireWallImage, x, y, tileSize, tileSize);
-                        walls.add(molten);
-                        break;
-                    case ' ': // food
-                        Block food = new Block(null, x + 14, y + 14, 4, 4);
-                        foods.add(food);
-                        break;
-                    case '.': // allowing pacman to move map from end to other
-                        Block space1 = new Block(null, x, y, tileSize, tileSize);
-                        spaces1.add(space1);
-                        break;
-                    case 'E':
-                        Block exit1 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces1.add(exit1);
-                        break;
-                    case '-': // allowing pacman to move map from end to other
-                        Block space2 = new Block(null, x, y, tileSize, tileSize);
-                        spaces2.add(space2);
-                        break;
-                    case 'e':
-                        Block exit2 = new Block(null, x, y, tileSize, tileSize);
-                        exitSpaces2.add(exit2);
-                        break;
-                    case 'a': // orange ghost 1 [theme 1]
-                        Block OrangeGhost1 = new Block(orangeGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost1);
-                        break;
-                    case 's': // orange ghost 2 [ theme 2]
-                        Block OrangeGhost2 = new Block(orangeGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost2);
-                        break;
-                    case 'd': // orange ghost 3 [ thme 3]
-                        Block OrangeGhost3 = new Block(orangeGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost3);
-                        break;
-                    case 'f': // orange ghost 4 [ theme 5]
-                        Block OrangeGhost4 = new Block(orangeGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost4);
-                        break;
-                    case 'z': // orange ghost 5 [theme 6]
-                        Block OrangeGhost5 = new Block(orangeGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost5);
-                        break;
-                    case 'x': // orange ghost 6 [ theme 8]
-                        Block OrangeGhost6 = new Block(orangeGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost6);
-                        break;
-                    case 'c': // orange ghost 7 [ theme 9]
-                        Block OrangeGhost7 = new Block(orangeGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(OrangeGhost7);
-                        break;
-                    case 'r': // red ghost 1
-                        Block RedGhost1 = new Block(redGhost1Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost1);
-                        break;
-                    case 'g': // red ghost 2
-                        Block RedGhost2 = new Block(redGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost2);
-                        break;
-                    case 'h': // red ghost 3
-                        Block RedGhost3 = new Block(redGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost3);
-                        break;
-                    case 'j': // red ghost4
-                        Block RedGhost4 = new Block(redGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost4);
-                        break;
-                    case 'k': // red ghost5
-                        Block RedGhost5 = new Block(redGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost5);
-                        break;
-                    case 'y': // red ghost6
-                        Block RedGhost6 = new Block(redGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost6);
-                        break;
-                    case 'u': // red ghost7
-                        Block RedGhost7 = new Block(redGhost7Image, x, y, tileSize, tileSize);
-                        ghosts.add(RedGhost7);
-                        break;
-                    case 't': // pink ghost 1
-                        Block PinkGhost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost);
-                        break;
-                    case 'b': // pink ghost 2
-                        Block PinkGhost2 = new Block(pinkGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost2);
-                        break;
-                    case 'n': // pink ghost 3
-                        Block PinkGhost3 = new Block(pinkGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost3);
-                        break;
-                    case 'm': // pink ghost 4
-                        Block PinkGhost4 = new Block(pinkGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost4);
-                        break;
-                    case 'q': // pink ghost 5
-                        Block PinkGhost5 = new Block(pinkGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost5);
-                        break;
-                    case 'w': // pink ghost 6
-                        Block PinkGhost6 = new Block(pinkGhost6Image, x, y, tileSize, tileSize);
-                        ghosts.add(PinkGhost6);
-                        break;
-                    case 'Y': // blue ghost 1
-                        Block BlueGhost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost);
-                        break;
-                    case 'U': // blue ghost 2
-                        Block BlueGhost2 = new Block(blueGhost2Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost2);
-                        break;
-                    case 'O': // blue ghost 3
-                        Block BlueGhost3 = new Block(blueGhost3Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost3);
-                        break;
-                    case 'K': // blue ghost 4
-                        Block BlueGhost4 = new Block(blueGhost4Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost4);
-                        break;
-                    case 'J': // blue ghost 5
-                        Block BlueGhost5 = new Block(blueGhost5Image, x, y, tileSize, tileSize);
-                        ghosts.add(BlueGhost5);
-                        break;
-                    case 'P': // PACMAN
-                        pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
-                        break;
-                    case 'W': // spider net
-                        Block web = new Block(spiderWeb, x, y, tileSize, tileSize);
-                        spiderNets.add(web);
-                        break;
-                    case 'T': // teleportal pad
-                        Block teleport = new Block(teleportImage, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport);
-                        break;
-                    case '%': // teleportal pad 2
-                        Block teleport2 = new Block(teleport2Image, x, y, tileSize, tileSize);
-                        teleportPads.add(teleport2);
-                        break;
-                    case ':': // bushes
-                        Block bushe = new Block(bushes, x, y, tileSize, tileSize);
-                        teleportPads.add(bushe);
-                        break;
-                    case 'I': // ice tiles
-                        Block ice = new Block(iceImage, x, y, tileSize, tileSize);
-                        iceBlocks.add(ice);
-                        break;
-                    case 'Z': // sacred zones
-                        Block sacred = new Block(sacredZone, x, y, tileSize, tileSize);
-                        sacredZones.add(sacred);
-                        break;
-                    case 'S': // speed zone
-                        Block speed = new Block(speedImage, x, y, tileSize, tileSize);
-                        speedZones.add(speed);
-                        break;
-                    case 'R': // reverse controls
-                        Block rev = new Block(reverseImage, x, y, tileSize, tileSize);
-                        reverseControls.add(rev);
-                        break;
-                    case '~': // phantom zone
-                        Block phantom = new Block(null, x, y, tileSize, tileSize);
-                        phantomZones.add(phantom);
-                        break;
-
-                    case 'N': // warp entrance
-                        Block warpIn = new Block(warpEntranceImage, x, y, tileSize, tileSize);
-                        warpEntrance.add(warpIn);
-                        break;
-                    case '&': // warp exit
-                        Block warpOut = new Block(warpExitImage, x, y, tileSize, tileSize);
-                        warpExit.add(warpOut);
-                        break;
-                    case '1': // button 1
-                        Block button1 = new Block(button1Image, x, y, tileSize, tileSize);
-                        Button1.add(button1);
-                        break;
-                    case 'A': // gate 1
-                        Block gate1 = new Block(gate1Image, x, y, tileSize, tileSize);
-                        Gate1.add(gate1);
-                        break;
-                    case '2': // button 2
-                        Block button2 = new Block(button2Image, x, y, tileSize, tileSize);
-                        Button2.add(button2);
-                        break;
-                    case 'B': // gate 2
-                        Block gate2 = new Block(gate2Image, x, y, tileSize, tileSize);
-                        Gate2.add(gate2);
-                        break;
-                    case 'V': // LAVA tiles
-                        Block lavat = new Block(lavaImage, x, y, tileSize, tileSize);
-                        lavaTiles.add(lavat);
-                        break;
-                    case 'L': // SLIME
-                        Block slimemist = new Block(slime, x, y, tileSize, tileSize);
-                        slimePuddle.add(slimemist);
-                        break;
-                    case 'Q': // ELECTRICSHOCK
-                        Block electricS = new Block(electric, x, y, tileSize, tileSize);
-                        electricShocks.add(electricS);
-                        break;
-                }
-            }
-        }
-    };
-
-
-
+    }
 
 
 
@@ -13290,13 +1293,22 @@ PACMAN = P
     // creating a function paintComponent in this we will draw all of our objects onto the game
 
 
+    @Override   // bcz it overrides the method of jPanl
     public void paintComponent(Graphics g)   // it will take in graphics g
     {
         super.paintComponent(g);  // basically super is going to import the function "paintComponent" from JPanel
+        // This calls the original method from JPanel (the superclass).
+        // It clears the screen and prepares it for fresh drawing.
+        // Without this, old drawings might not get erased and you'd see weird overlapping graphics or flickering
 
-        // calling draw function
+
+        // calling draw function ( custom method )
         draw(g);  // this will draw graphics g
     }
+
+    // Java automatically calls this whenever your game panel needs to be redrawn (e.g. when the game updates, window resizes, etc.).
+    // Graphics g is the paintbrush — you use it to draw shapes, images, text, etc. on the screen
+
 
     public void draw(Graphics g)  // taking graphics g
     {
@@ -13313,11 +1325,7 @@ PACMAN = P
         }
 
 
-        // bushes
-        for ( Block bu : bush)
-        {
-            g.drawImage(bu.image, bu.x, bu.y, bu.width , bu.height , null);
-        }
+
 
 
         // black spaces
@@ -13336,7 +1344,7 @@ PACMAN = P
 
 
 
-        // since i want the pacman to move above the ice tiles and not below and since i is a 2d game so the layering depends on the order of draw so i draw the ice tiles first and then pacman
+        // since i want the pacman to move above the ice tiles and not below and since it is a 2d game so the layering depends on the order of draw so i draw the ice tiles first and then pacman
         // DISPLAYING ICE
         for( Block ice : iceBlocks)
         {
@@ -13490,6 +1498,12 @@ PACMAN = P
 
         }
 
+        // bushes
+        for ( Block bu : bush)
+        {
+            g.drawImage(bu.image, bu.x, bu.y, bu.width , bu.height , null);
+        }
+
 
         // displaying walls
         for ( Block wall : walls){
@@ -13499,7 +1513,7 @@ PACMAN = P
 
 
         // displaying phantom zones. it is done after walls are drawn bcz they will display above the wall . if drawn before walls then it will make then hide behind walls
-        g.setColor(new Color(100, 0, 100, 120)); // semi-transparent purple
+        g.setColor(new Color(100, 130, 160, 120)); // semi-transparent purple
         for (Block phantom : phantomZones) {
             g.fillRect(phantom.x, phantom.y, phantom.width, phantom.height);
         }
@@ -13561,46 +1575,74 @@ PACMAN = P
 
         // electric shocks
 
+        // here we are storing the current time in milli secodns which we will then use to compare with the stun end time...this wll let us know that pacman should move or not
         long currentTime = System.currentTimeMillis();
 
+        // boolean to check if we should skip pacman movement
         boolean pacmanStunnedThisFrame = false;
 
         // Check if Pac-Man is stunned
-        if (pacmanStunEndTimes.containsKey(pacman)) {
-            long end1 = pacmanStunEndTimes.get(pacman);
-            if (System.currentTimeMillis() < end1) {
 
+        // since we had declared a hashset for pacmanstunendtiems so we check if pacman is in that set...if yes then it means pacman is stunned
+        if (pacmanStunEndTimes.containsKey(pacman))
+        {
+            // since we had also defined the long in the hashset which tell the milli seconds used
+            // so we get that value and compare with our current time
+            long end1 = pacmanStunEndTimes.get(pacman);
+            if (System.currentTimeMillis() < end1)   // if stun time is still left then
+            {
+
+                // we set the velocity to 0 which will freeze him
                 pacman.velocityX =0;
                 pacman.velocityY = 0;
-                pacman.x += pacman.velocityX;
+                pacman.x += pacman.velocityX;  // these two are not required here but are not harmless also...so keep them to maintain consistency
                 pacman.y += pacman.velocityY;
-                pacmanStunnedThisFrame = true;
-            } else {
+                pacmanStunnedThisFrame = true;  // set to true i.e pacman is stunned
+            }
+
+            else // if the stunned time has excedded the current time then we remove the pacman from hashset
+            {
                 pacmanStunEndTimes.remove(pacman);  // Stun ended
             }
         }
 
         // Check for collision with shock tile
-        for (Block shock : electricShocks) {
-            if (collision(pacman, shock)) {
-                pacmanStunEndTimes.put(pacman, System.currentTimeMillis() + 2000);
-                pacman.x -= pacman.velocityX;
-                pacman.y -= pacman.velocityY;
-                pacman.velocityX =0;
-                pacman.velocityY = 0;
-                pacmanStunnedThisFrame = false;
-                System.out.println("⚡ Pac-Man stunned!");
-                if (currentLevel == 3) {
+        for (Block shock : electricShocks)
+        {
+            if (collision(pacman, shock))  // if there is a collision
+            {
+                // Play shock sound if in theme 3
+                if (debugMapLevel == 3) {
                     soundManager.playElectricShockSound();
                 }
+
+                // then we put the pacman to the hashset and set a 2 sec stun duration
+                pacmanStunEndTimes.put(pacman, System.currentTimeMillis() + 2000);
+
+                // this stops the pacman where it was...it basically undoes the movement
+                pacman.x -= pacman.velocityX;
+                pacman.y -= pacman.velocityY;
+
+                // now set velocity zero
+                pacman.velocityX =0;
+                pacman.velocityY = 0;
+
+                // since we do checking for one frame so this frame is checked now we make the boolean again false
+                pacmanStunnedThisFrame = false;
+                System.out.println("Pac-Man stunned!");
+                // since we encountered a collison and reset the pacman velocity so we dont need to check for any other tiles now at this pt so we exit the loop
                 break;  // exit shock tile loop
             }
         }
 
-        // 🔒 Skip movement ONLY if stunned this frame
-        if (pacmanStunnedThisFrame) {
-            return;  // ← safe now, no velocity updates or motion
+        //  Skip movement ONLY if stunned this frame
+        if (pacmanStunnedThisFrame)
+        {
+            return;  // safe now, no velocity updates or motion
         }
+
+
+
 
 
 
@@ -13609,17 +1651,24 @@ PACMAN = P
 
         boolean currentlyOnReverse = false;
 
-        for (Block reverse : reverseControls) {
-            if (collision(pacman, reverse)) {
+        for (Block reverse : reverseControls)
+        {
+            if (collision(pacman, reverse))
+            {
+                // make bool true
                 currentlyOnReverse = true;
 
-                if (!pacmanIsOnReverse) {
-                    // Just stepped onto the R tile
-                    controlsReversed = !controlsReversed; // Toggle it!
-                    System.out.println("Controls reversed: " + controlsReversed);
+                // at the st of program we had declared their variables false initally
+                if (!pacmanIsOnReverse) // if pacman is not rversed
+                {
+
+                    // then it means he just stepped onto the R tile
+                    // therefore we now toggle the bool that controls are reversed....earlier it was false which i declared initally
+                    controlsReversed = !controlsReversed;
+                    // System.out.println("Controls reversed: " + controlsReversed);
                 }
 
-                break; // Found one, no need to check more
+                break; // therefore found one, no need to check more
             }
         }
 
@@ -13628,10 +1677,16 @@ PACMAN = P
 
 
 
+
+
+
         // phantom zones
         // Check if Pac-Man is entering a Phantom Zone
-        for (Block phantom : phantomZones) {
-            if (collision(pacman, phantom)) {
+        for (Block phantom : phantomZones)
+        {
+            if(collision(pacman, phantom))
+            {
+                // if yes then stops him...that is we block him like it is a wall
                 pacman.x -= pacman.velocityX;
                 pacman.y -= pacman.velocityY;
                 break;
@@ -13641,56 +1696,86 @@ PACMAN = P
 
 
 
-// STEP 1: Check where Pac-Man is (before moving)
         boolean alreadyInWeb = isInsideSpiderNet(pacman); // checks if pacman is currently on a spider web
         boolean alreadyInBush = isInsideBushes(pacman); // checks if pacman is currently on a BUSHES
 
-        if (alreadyInWeb) {
-            // Slow down Pac-Man's movement inside the web
-            if (pacman.direction == 'L') {
-                pacman.velocityX = -tileSize / 8;  // Slow down horizontally
+        if(alreadyInWeb)
+        {
+            // slow down pacmans movement inside the web
+            if(pacman.direction == 'L')
+            {
+                pacman.velocityX = -tileSize / 8;  // Slow down horizontally....earlier the speed was tile size /4 now it is half of that
                 pacman.velocityY = 0;  // No vertical movement
-            } else if (pacman.direction == 'R') {
+            }
+
+            else if(pacman.direction == 'R')
+            {
                 pacman.velocityX = +tileSize / 8;
                 pacman.velocityY = 0;
-            } else if (pacman.direction == 'U') {
+            }
+
+            else if(pacman.direction == 'U')
+            {
                 pacman.velocityY = -tileSize / 8;  // Slow down vertically
                 pacman.velocityX = 0;
-            } else if (pacman.direction == 'D') {
+            }
+
+            else if(pacman.direction == 'D')
+            {
                 pacman.velocityX = 0;
                 pacman.velocityY = +tileSize / 8;
             }
+
         }
-        else if ( alreadyInBush)
+
+        else if( alreadyInBush)
         {
             // Slow down Pac-Man's movement inside the web
-            if (pacman.direction == 'L') {
+            if (pacman.direction == 'L')
+            {
                 pacman.velocityX = -tileSize / 8;  // Slow down horizontally
                 pacman.velocityY = 0;  // No vertical movement
-            } else if (pacman.direction == 'R') {
+            }
+
+
+            else if(pacman.direction == 'R')
+            {
                 pacman.velocityX = +tileSize / 8;
                 pacman.velocityY = 0;
-            } else if (pacman.direction == 'U') {
+            }
+
+            else if(pacman.direction == 'U')
+            {
                 pacman.velocityY = -tileSize / 8;  // Slow down vertically
                 pacman.velocityX = 0;
-            } else if (pacman.direction == 'D') {
+            }
+
+            else if(pacman.direction == 'D')
+            {
                 pacman.velocityX = 0;
                 pacman.velocityY = +tileSize / 8;
             }
+
         }
-        else if (isOnIce(pacman)) {
+
+
+
+        else if(isOnIce(pacman))
+        {
             // ICE SLIDING LOGIC
             boolean onIceNow = isOnIce(pacman); // check current tile. isOnIce is a function which returns boolean value. this functions checks if the tile is ice or not. if yes then returns true therefore here boolean onIceNow = true
 
-            // 1. Update velocity based on current direction
+            // Update velocity based on current direction
             pacman.updateVelocity();
 
-            // 2. Try moving
+            // Try moving
             pacman.x += pacman.velocityX;
             pacman.y += pacman.velocityY;
             // these two are increasing the speed of pacman when on ice tiles
 
-            // 3. Check for wall hit
+
+
+            // Check for wall hit
             for (Block wall : walls) {
                 if (collision(pacman, wall)) {
                     pacman.x -= pacman.velocityX;
@@ -13702,6 +1787,7 @@ PACMAN = P
                     break; // if we used here return then move function is ended therefore now when pacman hits a wall then everyone does not move ghosts also until a key is pressed by user to make it move in open area. therefore this is wrong to put here return
                 }
             }
+
 
             // checking for black space collision
 
@@ -13736,9 +1822,9 @@ PACMAN = P
                     lavaEnabled = !lavaEnabled;
 
                     if (lavaEnabled) {
-                        System.out.println("🔥 Lava turned ON");
+                        System.out.println("Lava turned ON");
                     } else {
-                        System.out.println("🧯 Lava turned OFF");
+                        System.out.println("Lava turned OFF");
                     }
                 }
 
@@ -13758,7 +1844,7 @@ PACMAN = P
         {
             if (collision(pacman, warpIn))
             {
-                if (!warpExit.isEmpty())
+                if (!warpExit.isEmpty())  // if wrap exit hashset is not empty
                 {
                     // Convert HashSet to array and pick a random exit
                     Block[] exitsArray = warpExit.toArray(new Block[0]);
@@ -13782,14 +1868,14 @@ PACMAN = P
                             pacman.x = chosenExit.x - tileSize;
                             pacman.y = chosenExit.y;
                             break;
-                        case 'R':
-                            pacman.x = chosenExit.x + tileSize;
+                        case 'R':   // if pacman enters from left then we want him toh appear from the right... and that too one next tile...
+                            pacman.x = chosenExit.x + tileSize;  // this spawan the pacman one tile next to the warp exit...since warp exit is also a wall so it prevent the paxcman from wall collison and lands him on a walkable tile
                             pacman.y = chosenExit.y;
                             break;
                     }
 
 
-                    System.out.println("Pac-Man teleported to random warp exit at (" + chosenExit.x + ", " + chosenExit.y + ")");
+                    // System.out.println("PacMan teleported to random warp exit at (" + chosenExit.x + ", " + chosenExit.y + ")");
                 }
                 break; // Exit after teleporting
             }
@@ -13800,11 +1886,12 @@ PACMAN = P
         {
             if ( collision(pacman, warpOut))
             {
+                // this will be a wall for pacman
 
                 pacman.x -= pacman.velocityX;
                 pacman.y -= pacman.velocityY;
 
-                // 🛑 Completely stop movement
+                // Completely stop movement
                 pacman.velocityX = 0;
                 pacman.velocityY = 0;
 
@@ -13818,19 +1905,25 @@ PACMAN = P
 
         // TELEPORTING THE PACMAN FROM ONE MAP END TO OTHER
         // Handle E ↔ e warp for pacman
-        for (Block space1 : spaces1) {
-            if (collision(pacman, space1)) {
-                for (Block exit1 : exitSpaces1) {
-                    teleport(space1, exit1, pacman);
+        for(Block space1 : spaces1)
+        {
+            if(collision(pacman, space1))
+            {
+                for(Block exit1 : exitSpaces1)
+                {
+                    teleport(space1, exit1, pacman);  // function
                     break;
                 }
                 break;
             }
         }
 
-        for (Block exit1 : exitSpaces1) {
-            if (collision(pacman, exit1)) {
-                for (Block space1 : spaces1) {
+        for(Block exit1 : exitSpaces1)
+        {
+            if(collision(pacman, exit1))
+            {
+                for(Block space1 : spaces1)
+                {
                     teleport(exit1, space1, pacman);
                     break;
                 }
@@ -13838,23 +1931,32 @@ PACMAN = P
             }
         }
 
+
 // Handle M ↔ m warp for pacman
-        for (Block space2 : spaces2) {
-            if (collision(pacman, space2)) {
-                for (Block exit2 : exitSpaces2) {
+        for(Block space2 : spaces2)
+        {
+            if(collision(pacman, space2))
+            {
+                for(Block exit2 : exitSpaces2)
+                {
                     teleport(space2, exit2, pacman);
                     break;
                 }
+
                 break;
             }
         }
 
-        for (Block exit2 : exitSpaces2) {
-            if (collision(pacman, exit2)) {
-                for (Block space2 : spaces2) {
+        for(Block exit2 : exitSpaces2)
+        {
+            if(collision(pacman, exit2))
+            {
+                for(Block space2 : spaces2)
+                {
                     teleport(exit2, space2, pacman);
                     break;
                 }
+
                 break;
             }
         }
@@ -13955,21 +2057,25 @@ PACMAN = P
 
 
         // speed zones
-        for ( Block ghost : ghosts) {
+        for( Block ghost : ghosts)
+        {
             boolean onSpeedZone = isOnSpeedZone(ghost); // Check if the ghost is on a speed zone (Speed tile "S")
 
-            // 1. Update velocity based on the current direction
+            //  Update velocity based on the current direction
             ghost.updateVelocity();
 
-            // 2. If ghost is on speed zone, increase speed (like ice sliding)
-            if (onSpeedZone) {
+            //  If ghost is on speed zone, increase speed (like ice sliding)
+            if(onSpeedZone)
+            {
                 ghost.velocityX *= 2;  // Double the velocity when on speed zone
                 ghost.velocityY *= 2;
 
             }
 
-            // 5. If ghost is no longer on the speed zone, reset velocity to normal
-            if (!onSpeedZone) {  // WHEN THIS WAS PLACED AT LAST THEN THE GHOST WERE MOVING AT 2X SPEED ALWAYS BUT WHEN I PLACED IT HERE THEN THEY STARTED MOVING NORMAL
+            // If ghost is no longer on the speed zone, reset velocity to normal
+            if(!onSpeedZone)
+            {
+                // WHEN THIS WAS PLACED AT LAST THEN THE GHOST WERE MOVING AT 2X SPEED ALWAYS BUT WHEN I PLACED IT HERE THEN THEY STARTED MOVING NORMAL
                 ghost.velocityX /= 2; // Reset speed to normal
                 ghost.velocityY /= 2;
             }
@@ -13978,17 +2084,22 @@ PACMAN = P
             int newX = ghost.x + ghost.velocityX;
             int newY = ghost.y + ghost.velocityY;
 
-            // 4. Check for collision with walls at the new position
+
+            //  Check for collision with walls at the new position
             boolean collisionDetected = false;
-            for (Block wall : walls) {
-                if (collision(newX, newY, wall)) { // Check if the ghost's new position collides with any wall
+            for(Block wall : walls)
+            {
+                if (collision(newX, newY, wall))
+                {
+                    // Check if the ghost's new position collides with any wall
                     collisionDetected = true;
                     break;
                 }
             }
 
-            // 5. If no collision, update ghost's position
-            if (!collisionDetected) {
+            //  If no collision, update ghost's position
+            if (!collisionDetected)
+            {
                 ghost.x = newX;
                 ghost.y = newY;
             }
@@ -14001,24 +2112,37 @@ PACMAN = P
         // --- Toggle for Button 1 & Gate 1 ---
         boolean currentlyOnButton1 = false;
 
-        for (Block button : Button1) {
-            if (collision(pacman, button)) {
+        for (Block button : Button1)
+        {
+            if(collision(pacman, button))
+            {
                 currentlyOnButton1 = true;
 
-                if (!pacmanOnButton1) { // Just stepped onto it
+                if(!pacmanOnButton1)
+                {
+                    // Just stepped onto it
                     gate1Open = !gate1Open;
 
-                    if (gate1Open) {
-                        for (Block gate : Gate1) {
+                    if(gate1Open)
+                    {
+                        for(Block gate : Gate1)
+                        {
                             walls.remove(gate); // gate becomes walkable
                         }
-                        System.out.println("Gate 1 opened!");
-                    } else {
-                        for (Block gate : Gate1) {
+                        // System.out.println("Gate 1 opened!");
+                    }
+
+                    else
+                    {
+                        for(Block gate : Gate1)
+                        {
                             walls.add(gate); // gate becomes solid again
                         }
-                        System.out.println("Gate 1 closed!");
+                        // System.out.println("Gate 1 closed!");
                     }
+
+
+
                 }
 
                 break;
@@ -14050,12 +2174,14 @@ PACMAN = P
         // }
 
 
-        for (Block wall : walls) {
-            if (collision(pacman, wall)) {
+        for(Block wall : walls)
+        {
+            if(collision(pacman, wall))
+            {
                 pacman.x -= pacman.velocityX;
                 pacman.y -= pacman.velocityY;
 
-                // 🛑 Completely stop movement
+                // Completely stop movement
                 pacman.velocityX = 0;
                 pacman.velocityY = 0;
 
@@ -14069,28 +2195,42 @@ PACMAN = P
         // so to make that fix the pacman should only change the direction if it is able to which basically means that it should not change the direction if there is a wall
         // therefore go towards the update direction function
 
+
+
         // Always check ghost button toggle, even if lava is off
         boolean currentlyGhostOnLavaButton = false;
 
-        for (Block ghost : ghosts) {
-            for (Block button : Button2) {
-                if (collision(ghost, button)) {
+        for (Block ghost : ghosts)
+        {
+            for(Block button : Button2)
+            {
+                if(collision(ghost, button))
+                {
                     currentlyGhostOnLavaButton = true;
 
-                    if (!ghostOnLavaButton) {  // Just stepped ON it
+                    if(!ghostOnLavaButton)
+                    {  // Just stepped ON it
                         lavaEnabled = !lavaEnabled;
 
-                        if (lavaEnabled) {
-                            System.out.println("🔥 Lava turned ON by ghost!");
-                        } else {
-                            System.out.println("🧯 Lava turned OFF by ghost!");
+                        if(lavaEnabled)
+                        {
+                            System.out.println("Lava turned ON by ghost!");
+                        }
+
+                        else
+                        {
+                            System.out.println("Lava turned OFF by ghost!");
                         }
                     }
 
-                    break;  // Don't check more buttons
+                    break;  // dont check more buttons
                 }
             }
-            if (currentlyGhostOnLavaButton) break;  // Don't check more ghosts
+            if (currentlyGhostOnLavaButton)
+            {
+                break;  // dont check more ghosts
+
+            }
         }
 
         // 💡 Update toggle tracker each frame
@@ -14099,17 +2239,19 @@ PACMAN = P
 
 
         // lava collsiion
-        if (lavaEnabled) {
+        if (lavaEnabled)
+        {
             // Pac-Man lava logic
-            for (Block lava : lavaTiles) {
-                if (collision(pacman, lava)) {
+            for(Block lava : lavaTiles)
+            {
+                if(collision(pacman, lava))
+                {
                     lives--;
-                    soundManager.playDeathSound();
                     System.out.println("Pac-Man stepped on lava! Lives: " + lives);
 
-                    if (lives <= 0) {
+                    if (lives <= 0)
+                    {
                         gameOver = true;
-                        soundManager.playGameOverSound();
                         return;
                     }
 
@@ -14119,16 +2261,19 @@ PACMAN = P
             }
         }
 
-        if ( lavaEnabled && (ghostLavaKillTemporary ) )
+        if( lavaEnabled && (ghostLavaKillTemporary ) )
         {
             Iterator<Block> ghostIterator = ghosts.iterator();
-            while (ghostIterator.hasNext()) {
+            while (ghostIterator.hasNext())
+            {
                 Block ghost = ghostIterator.next();
 
-                for (Block lava : lavaTiles) {
-                    if (lavaEnabled && collision(ghost, lava)) {
+                for (Block lava : lavaTiles)
+                {
+                    if (lavaEnabled && collision(ghost, lava))
+                    {
                         ghostIterator.remove();  // remove from current ghosts
-                        System.out.println("👻 Ghost removed on lava!");
+                        System.out.println("Ghost removed on lava!");
                         break;
                     }
                 }
@@ -14140,34 +2285,45 @@ PACMAN = P
 
         boolean currentlyGhostOnIceButton1 = false;
 
-        for (Block ghost : ghosts) {
-            for (Block button : Button1) {
-                if (collision(ghost, button)) {
+        for (Block ghost : ghosts)
+        {
+            for (Block button : Button1)
+            {
+                if (collision(ghost, button))
+                {
                     currentlyGhostOnIceButton1 = true;
 
-                    if (!ghostOnButton1) {  // Just stepped ON it
+                    if (!ghostOnButton1)
+                    {
+                        // Just stepped ON it
                         gate1Open = !gate1Open;
 
-                        if (gate1Open) {
-                            for (Block gate : Gate1) {
+                        if (gate1Open)
+                        {
+                            for (Block gate : Gate1)
+                            {
                                 walls.remove(gate); // gate becomes walkable
-                                System.out.println("🔥 gate 1 ON by ghost!");
+                                System.out.println("gate 1 ON by ghost!");
                             }
-                            System.out.println("Gate 1 opened!");
-                        } else {
-                            for (Block gate : Gate1) {
+                            // System.out.println("Gate 1 opened!");
+                        }
+
+                        else
+                        {
+                            for (Block gate : Gate1)
+                            {
                                 walls.add(gate); // gate becomes solid again
                                 System.out.println("🧯 gate 2 OFF by ghost!");
                             }
-                            System.out.println("Gate 1 closed!");
+                            // System.out.println("Gate 1 closed!");
                         }
 
                     }
 
-                    break;  // Don't check more buttons
+                    break;  // dont check more buttons
                 }
             }
-            if (currentlyGhostOnIceButton1) break;  // Don't check more ghosts
+            if (currentlyGhostOnIceButton1) break;  // dont check more ghosts
         }
 
         // 💡 Update toggle tracker each frame
@@ -14185,10 +2341,14 @@ PACMAN = P
 
         // ghost collison
 
-        for ( Block ghost : ghosts){  // for each ghost
+        for ( Block ghost : ghosts)
+        {
+            // for each ghost
 
-            for (Block phantom : phantomZones) {
-                if (collision(ghost, phantom)) {
+            for (Block phantom : phantomZones)
+            {
+                if (collision(ghost, phantom))
+                {
                     // ghost.phaseTilesRemaining = 8;  // IF WE WANT OUR GHOSTS TO CROSS ONE BLOCK OF WALL (NOT INCLUDING SPACE I.E ONLY ONE BLOCK IS TO BE CROSSED OVERALL)
                     // THEREFORE IF WE WANT TO CROSS TWO BLOCKS WHETHER IT IS TWO WALLS OR ONE WALL ONE EMPTY THEN IT WILL TAKE DOUBLE THEREFORE 16
                     // BUT IT IS NOT EFFICENT WAY TO DO WHAT WE HAVE GOT IS THE CONCEPT BEHIND IT IS
@@ -14213,7 +2373,7 @@ To allow 4 frames → you need phaseTilesRemaining = 4
 
 BUT you're decrementing it per frame, not per pixel!
 
-🚨 If you decrement once per move(), and each frame moves 8 pixels, then:
+If you decrement once per move(), and each frame moves 8 pixels, then:
 
 8 means 8 frames, so it crosses 2 tiles (8px * 8 = 64px = 2 tiles)
 
@@ -14227,58 +2387,80 @@ BUT! It may also depend on how often you're checking collisions (and where in th
                     // THEREFORE CORRECT WAY IS
                     //  ghost.phaseTilesRemaining = (tileSize / ghostSpeed) * numTilesToPass;
 
+                    ghost.x += ghost.velocityX;
+                    ghost.y += ghost.velocityY;
+
                     ghost.phaseTilesRemaining = (tileSize / 8) * 2;  // GHOST SPEED IN OUR PROGRAM IS TILESIZE/4 I.E 32/4
                     // NOTE: HERE NUMBER OF TILES TWO BCZ I THINK IT COUNTS THE PHANTOM ZONE TILE ALSO SO ONE WALL AND ONE PHANTOM ZONE THEREFORE 2
+
+
+                    ghost.x += ghost.velocityX;
+                    ghost.y += ghost.velocityY;
+
 
                     break;
 
                 }
                 // }
 
-                // // Move ghost
                 // ghost.x += ghost.velocityX;
-                // ghost.y += ghost.velocityY;
+                //         ghost.y += ghost.velocityY;
+
 
                 // Handle walls ONLY if not in phase mode
                 // Only check for wall collision if ghost is NOT phasing
-                if (ghost.phaseTilesRemaining <= 0) {
-                    for (Block wall : walls) {
-                        if (collision(ghost, wall)) {
-                            ghost.x -= ghost.velocityX;
-                            ghost.y -= ghost.velocityY;
 
-                            char newDirection = directions[random.nextInt(4)];
-                            ghost.updateDirection(newDirection);
-                            break;
-                        }
-                    }
-                } else {
-                    // Ghost is in phantom mode, so allow movement through walls
+                if (ghost.phaseTilesRemaining > 0)
+                {
+                    // Ghost is phasing, so skip wall collision
+
                     ghost.phaseTilesRemaining--;
                 }
 
+                else
+                {
+                    // Ghost is not phasing, so check walls
+                    for (Block wall : walls)
+                    {
+                        if (collision(ghost, wall))
+                        {
+                            ghost.x += ghost.velocityX;
+                            ghost.y += ghost.velocityY;
+                            ghost.updateDirection(directions[random.nextInt(4)]);
+                            break;
+                        }
+                    }
+                }
 
             }
 
             // Check if this ghost is stunned
-            if (ghostStunEndTimes.containsKey(ghost)) {
+            if (ghostStunEndTimes.containsKey(ghost))
+            {
                 long end = ghostStunEndTimes.get(ghost);
-                if (System.currentTimeMillis() < end) {
+                if (System.currentTimeMillis() < end)
+                {
                     ghost.velocityX = 0;
                     ghost.velocityY = 0;
                     continue;  // Skip movement
-                } else {
+                }
+
+                else
+                {
                     ghostStunEndTimes.remove(ghost);  // Stun ended
                 }
             }
 
+
 // Check for collision with shock tile
-            for (Block shock : electricShocks) {
-                if (collision(ghost, shock)) {
+            for (Block shock : electricShocks)
+            {
+                if (collision(ghost, shock))
+                {
                     ghostStunEndTimes.put(ghost, System.currentTimeMillis() + 2000);  // 2 sec stun
                     ghost.velocityX = 0;
                     ghost.velocityY = 0;
-                    System.out.println("👻 Ghost stunned!");
+                    System.out.println("Ghost stunned!");
                     continue;  // Skip movement this frame
                 }
             }
@@ -14288,22 +2470,37 @@ BUT! It may also depend on how often you're checking collisions (and where in th
 
             boolean inSacred = isInsideSacredZone(ghost);  // your sacred zone check
 
-            if (inSacred) {
+            if (inSacred)
+            {
                 // Slow down ghost like spider webs
-                if (ghost.direction == 'L') {
+                if (ghost.direction == 'L')
+                {
                     ghost.velocityX = -tileSize /32;
                     ghost.velocityY = 0;
-                } else if (ghost.direction == 'R') {
+                }
+
+                else if (ghost.direction == 'R')
+                {
                     ghost.velocityX = +tileSize /32;
                     ghost.velocityY = 0;
-                } else if (ghost.direction == 'U') {
+                }
+
+                else if (ghost.direction == 'U')
+                {
                     ghost.velocityY = -tileSize /32;
                     ghost.velocityX = 0;
-                } else if (ghost.direction == 'D') {
+                }
+
+                else if (ghost.direction == 'D')
+                {
                     ghost.velocityX = 0;
                     ghost.velocityY = +tileSize /32;
                 }
-            } else {
+            }
+
+
+            else
+            {
                 // Normal movement outside sacred zones
                 // ghost.updateVelocity();   // commented out this and now the ghost are moving corectly . previously it was like they were moving very fastly on normal tiles as well
             }
@@ -14313,33 +2510,51 @@ BUT! It may also depend on how often you're checking collisions (and where in th
 
             // ghost gets slow doown in slime
             boolean inSlime = isInsideSlimePuddle(ghost);
-            if (inSlime) {
+
+
+            if (inSlime)
+            {
                 // Slow down ghost like spider webs
-                if (ghost.direction == 'L') {
+                if (ghost.direction == 'L')
+                {
                     ghost.velocityX = -tileSize /32;
                     ghost.velocityY = 0;
-                } else if (ghost.direction == 'R') {
+                }
+
+                else if (ghost.direction == 'R')
+                {
                     ghost.velocityX = +tileSize /32;
                     ghost.velocityY = 0;
-                } else if (ghost.direction == 'U') {
+                }
+
+                else if (ghost.direction == 'U')
+                {
                     ghost.velocityY = -tileSize /32;
                     ghost.velocityX = 0;
-                } else if (ghost.direction == 'D') {
+                }
+
+                else if (ghost.direction == 'D')
+                {
                     ghost.velocityX = 0;
                     ghost.velocityY = +tileSize /32;
                 }
-            } else {
+            }
+
+            else
+            {
                 // Normal movement outside sacred zones
                 // ghost.updateVelocity();   // commented out this and now the ghost are moving corectly . previously it was like they were moving very fastly on normal tiles as well
             }
 
-            // 👻 Move the ghost
+            // Move the ghost
             ghost.x += ghost.velocityX;
             ghost.y += ghost.velocityY;
 
             // Wall collision
-            for (Block wall : walls) {
-                if (collision(ghost, wall)) {
+            for (Block wall : walls)
+            {
+                if (collision(ghost, wall))
+                {
                     ghost.x -= ghost.velocityX;
                     ghost.y -= ghost.velocityY;
 
@@ -14383,11 +2598,11 @@ BUT! It may also depend on how often you're checking collisions (and where in th
             // ghost and pacman collision
             if ( collision(ghost, pacman))
             {
-
-                lives += 1;
-                if ( lives == 0)
-                {
+                soundManager.playDeathSound();
+                lives -= 1;
+                if (lives == 0) {
                     gameOver = true;
+                    soundManager.playGameOverSound();
                     return;   // now since the game ends therefore i want to stop the gameloop so go to actionperformed
                 }
                 resetPositions();  // i have to declare this new function and i will acces the reset function through it
@@ -14399,6 +2614,7 @@ BUT! It may also depend on how often you're checking collisions (and where in th
 
 
             // adding a condition first to solve the problem 2 we faced
+            // a loop ( trap) ....i.e there is a plain row with no obtsacles and if by chance the ghost gets into this..he does not changes direction so we did this
             if ( ghost.y == tileSize*9 && ghost.direction != 'U' && ghost.direction != 'D')
             {
                 // ghost.updateDirection('U');  // instead of making the ghost only move up we can make another char array which will choose from up and down only since it is of bound 2 therefore 0 or 1 therefore first two indexes
@@ -14414,7 +2630,8 @@ BUT! It may also depend on how often you're checking collisions (and where in th
 
             // Set Pac-Man image based on actual direction he's moving in
             // since in the key released function i was using this but bcz in that i had to control the if revrse control or not conditiosn so it was causing error. as when pacman was moving between two walls and when we press the up or down key the pacman up image or pacman down image gets but it shoudl not come bcz pacman is moving forward or backward thats why we did this thing here
-            switch (pacman.direction) {
+            switch (pacman.direction)
+            {
                 case 'U':
                     pacman.image = pacmanUpImage;
                     break;
@@ -14444,23 +2661,25 @@ BUT! It may also depend on how often you're checking collisions (and where in th
 
 
 
-            // checking food collision
-            Block foodEaten = null; // currently pacman has not eaten anything
+            // Check food collision
+            Block foodEaten = null; // No food eaten yet
 
-            // iterating over the loop
-            for ( Block food : foods)
-            {
-                if ( collision(pacman , food))
-                {
-                    // pacman will eat the food 
+            for (Block food : foods) {
+                if (collision(pacman, food)) {
+                    // Pacman eats food
                     foodEaten = food;
                     score += 10;
                     soundManager.playEatSound();
-                    // now we want to remove the food from hashSet
-
+                    // Do NOT remove inside the loop!
+                    break; // Exit after first food is eaten (optional: remove if Pacman can eat multiple at once)
                 }
             }
-            foods.remove(foodEaten);  // it removes that food  . note: it should not be placed inside the for loop as we are using for each loop. so any modifications we wanna made are to done outside it
+
+// Safe to remove outside the loop
+            if (foodEaten != null) {
+                foods.remove(foodEaten);
+            }
+            // it removes that food  . note: it should not be placed inside the for loop as we are using for each loop. so any modifications we wanna made are to done outside it
             // now we want to update the score on the screen so move towards draw function
 
 
@@ -14512,26 +2731,44 @@ BUT! It may also depend on how often you're checking collisions (and where in th
         }
     }
 
-    private boolean isInsideSpiderNet(Block pacman) {
-        for (Block net : spiderNets) {
-            if (collision(pacman, net)) return true;
+
+
+    private boolean isInsideSpiderNet(Block pacman)
+    {
+        for (Block net : spiderNets)
+        {
+            if (collision(pacman, net))
+            {
+                return true;
+
+            }
         }
         return false;
     }
 
 
-    private boolean isInsideBushes(Block pacman) {
-        for (Block bushBlock : bush) {
-            if (collision(pacman, bushBlock)) return true;
+    private boolean isInsideBushes(Block pacman)
+    {
+        for (Block bushBlock : bush)
+        {
+            if (collision(pacman, bushBlock))
+            {
+                return true;
+
+            }
+
         }
         return false;
     }
 
 
 
-    private boolean isInsideSacredZone(Block ghost) {
-        for (Block sacredZ : sacredZones) {
-            if (collision(ghost, sacredZ)) {
+    private boolean isInsideSacredZone(Block ghost)
+    {
+        for (Block sacredZ : sacredZones)
+        {
+            if (collision(ghost, sacredZ))
+            {
                 return true;
             }
         }
@@ -14548,9 +2785,12 @@ BUT! It may also depend on how often you're checking collisions (and where in th
     // }
 
 
-    private boolean isInsideSlimePuddle(Block ghost) {
-        for (Block slime : slimePuddle) {
-            if (collision(ghost, slime)) {
+    private boolean isInsideSlimePuddle(Block ghost)
+    {
+        for (Block slime : slimePuddle)
+        {
+            if (collision(ghost, slime))
+            {
                 return true;
             }
         }
@@ -14558,13 +2798,15 @@ BUT! It may also depend on how often you're checking collisions (and where in th
     }
 
 
-    public void teleport(Block entry, Block exit, Block pacman) {
+    public void teleport(Block entry, Block exit, Block pacman)
+    {
         // Move Pac-Man to exit tile
         pacman.x = exit.x;
         pacman.y = exit.y;
 
         // Offset Pac-Man based on current direction so he doesn't land inside the exit tile
-        switch (pacman.direction) {
+        switch (pacman.direction)
+        {
             case 'U':
                 pacman.y -= tileSize;
                 break;
@@ -14585,9 +2827,12 @@ BUT! It may also depend on how often you're checking collisions (and where in th
 
 
     // ice level checking collisoion
-    public boolean isOnIce(Block pacman) {
-        for (Block ice : iceBlocks) {
-            if (collision(pacman, ice)) {
+    public boolean isOnIce(Block pacman)
+    {
+        for (Block ice : iceBlocks)
+        {
+            if (collision(pacman, ice))
+            {
                 return true;
             }
         }
@@ -14597,16 +2842,22 @@ BUT! It may also depend on how often you're checking collisions (and where in th
 
 
     // speed
-    public boolean isOnSpeedZone(Block ghost) {
-        for (Block speedZone : speedZones) {
-            if (collision(ghost, speedZone)) {
+    public boolean isOnSpeedZone(Block ghost)
+    {
+        for (Block speedZone : speedZones)
+        {
+            if (collision(ghost, speedZone))
+            {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean collision(int newX, int newY, Block block) {
+
+
+    public boolean collision(int newX, int newY, Block block)
+    {
         // Assuming each block has x, y, width, height attributes
         return newX < block.x + block.width &&
                 newX + block.width > block.x &&
@@ -14615,10 +2866,35 @@ BUT! It may also depend on how often you're checking collisions (and where in th
     }
 
 
+    /*
+     is a collision detection function based on Axis-Aligned Bounding Box (AABB) logic, which is commonly used in 2D games.
+
+
+What it does:
+It checks whether a rectangle at position (newX, newY) (like Pac-Man’s future position) overlaps with the rectangle defined by the Block (like a wall, food, trap, etc.).
+
+It assumes:
+Your Block class has x, y, width, and height fields.
+The object being moved (e.g. Pac-Man) has the same size as the block (block.width, block.height).
+
+
+Logic breakdown:
+This is how AABB collision works:
+
+Two rectangles collide/overlap if all these are true:
+The left edge of one is to the left of the right edge of the other
+The right edge of one is to the right of the left edge of the other
+The top edge of one is above the bottom edge of the other
+The bottom edge of one is below the top edge of the other
+This code checks exactly those four conditions.
+     */
+
+
     // teleport pacman
 
     // A HashSet does not allow direct access by index. To convert it to a list, you need to create an ArrayList that contains all the elements from the HashSet
-    public void teleportPacMan() {
+    public void teleportPacMan()
+    {
         List<Block> teleportPadList = new ArrayList<>(teleportPads);
         Block randomPad;
         // this loop randomly selects the teleport pad from the hashset and it also prevents from teleporting on same pad
@@ -14638,15 +2914,15 @@ BUT! It may also depend on how often you're checking collisions (and where in th
 
 
 
-    // proceding to new level
-    // -> method 1: using switch case
-
+//     proceding to new level
+//     -> method 1: using switch case
+//
 //     int currentLevel = 1;
-
+//
 //     public void updateGameLogic() {
 //     if (foods.isEmpty()) {
 //         currentLevel++;
-
+//
 //         switch (currentLevel) {
 //             case 2:
 //                 loadMap2();
@@ -14685,7 +2961,7 @@ BUT! It may also depend on how often you're checking collisions (and where in th
 //                 gameOver = true;
 //                 return;
 //         }
-
+//
 //         resetPositions();  // Reset positions after each level load
 //     }
 // }
@@ -14726,63 +3002,27 @@ It’s perfect for things like levels, animations, background tasks, or threadin
 
 
 
-    Runnable[] levelLoaders = new Runnable[]{   // it is an array of runnables where levelLoaders is an object or reference variable to access the members
-
-            this :: loadMap1,
-            this :: loadMap2,
-            this :: loadMap3,
-            this :: loadMap4,
-            this :: loadMap5,
-            this :: loadMap6,
-            this :: loadMap7,
-            this :: loadMap8,
-            this :: loadMap9,
-            this :: loadMap10,
-            this :: loadMap11,
-            this :: loadMap12,
-            this :: loadMap13,
-            this :: loadMap14,
-            this :: loadMap15,
-            this :: loadMap16,
-            this :: loadMap17,
-            this :: loadMap18,
-            this :: loadMap19,
-            this :: loadMap20,
-            this :: loadMap21,
-            this :: loadMap22,
-            this :: loadMap23,
-            this :: loadMap24,
-            this :: loadMap25,
-            this :: loadMap26,
-            this :: loadMap27,
-            this :: loadMap28,
-            this :: loadMap29,
-            this :: loadMap30,
-            this :: loadMap31,
-            this :: loadMap32,
-            this :: loadMap33
-
-            // if we want to add more maps then just write this::loadMapX and done but the last line should not have a comma
-
-    };
 
 
-    int currentLevel = 13;
 
-    public void updateGameLogic()
-    {
-        if (foods.isEmpty())
-        {
+    int currentLevel = 0;
+    public void startGame() {
+        levelLoaders[currentLevel].run();  // load level 1 (index 0)
+        resetPositions();
+    }
+    public void updateGameLogic() {
+        if (foods.isEmpty()) {
             currentLevel++;
 
-            if ( currentLevel < levelLoaders.length)
+            // Check for coin collection levels
+            if (currentLevel == 15 || currentLevel == 35) {
+                soundManager.playCollectCoinsSound();
+            }
+
+            if (debugMapLevel + currentLevel < levelLoaders.length)
             {
-                levelLoaders[currentLevel].run();
+                levelLoaders[debugMapLevel + currentLevel].run();
                 resetPositions();
-                soundManager.playThemeMusic(currentLevel);
-                if (currentLevel == 15 || currentLevel == 35) {
-                    soundManager.playCollectCoinsSound();
-                }
             }
 
             else
@@ -14859,7 +3099,8 @@ It’s perfect for things like levels, animations, background tasks, or threadin
 
 
     @Override   // this gets created automatically when i press quick fix at the error i was getting when written implements ActionListener
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e)
+    {
         move();
         repaint();   // it is going to call paintComponent
 
@@ -14905,8 +3146,9 @@ It’s perfect for things like levels, animations, background tasks, or threadin
 
         // now i comment out that printing statement
 
-        if (gameOver) {
-            loadMap1(); // reloading the map . this is done bcz i want to add all the foods back into the hashset
+        if (gameOver)
+        {
+            levelLoaders[debugMapLevel].run();// reloading the map . this is done bcz i want to add all the foods back into the hashset
             resetPositions(); // resetting the positions
             // now we want each object a new direction to move in  so
             lives = 3;  // making lives again 3
@@ -14924,31 +3166,57 @@ It’s perfect for things like levels, animations, background tasks, or threadin
         int futureX = pacman.x;
         int futureY = pacman.y;
 
-        if (controlsReversed) {
-            if (e.getKeyCode() == KeyEvent.VK_UP) {
+        if (controlsReversed)
+        {
+            if (e.getKeyCode() == KeyEvent.VK_UP)
+            {
                 futureY += tileSize / 4;
                 if (!willHitWall(futureX, futureY)) pacman.updateDirection('D');
-            } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            }
+
+
+            else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+            {
                 futureY -= tileSize / 4;
                 if (!willHitWall(futureX, futureY)) pacman.updateDirection('U');
-            } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            }
+
+            else if (e.getKeyCode() == KeyEvent.VK_LEFT)
+            {
                 futureX += tileSize / 4;
                 if (!willHitWall(futureX, futureY)) pacman.updateDirection('R');
-            } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            }
+
+            else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+            {
                 futureX -= tileSize / 4;
                 if (!willHitWall(futureX, futureY)) pacman.updateDirection('L');
             }
-        } else {
-            if (e.getKeyCode() == KeyEvent.VK_UP) {
+        }
+
+        else
+        {
+            if (e.getKeyCode() == KeyEvent.VK_UP)
+            {
                 futureY -= tileSize / 4;
                 if (!willHitWall(futureX, futureY)) pacman.updateDirection('U');
-            } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            }
+
+            else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+            {
                 futureY += tileSize / 4;
                 if (!willHitWall(futureX, futureY)) pacman.updateDirection('D');
-            } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            }
+
+
+            else if (e.getKeyCode() == KeyEvent.VK_LEFT)
+            {
                 futureX -= tileSize / 4;
                 if (!willHitWall(futureX, futureY)) pacman.updateDirection('L');
-            } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            }
+
+            else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+            {
                 futureX += tileSize / 4;
                 if (!willHitWall(futureX, futureY)) pacman.updateDirection('R');
             }
@@ -14962,7 +3230,8 @@ It’s perfect for things like levels, animations, background tasks, or threadin
 
 
 
-    private boolean willHitWall(int futureX, int futureY) {
+    private boolean willHitWall(int futureX, int futureY)
+    {
         for (Block wall : walls) {
             if (collision(futureX, futureY, wall)) {
                 return true;
@@ -14971,5 +3240,6 @@ It’s perfect for things like levels, animations, background tasks, or threadin
         return false;
     }
 
-
 }
+
+// yes

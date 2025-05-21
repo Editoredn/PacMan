@@ -49,13 +49,13 @@ public class App {
 
         // setVisible() , setSize..... all these are in built methods in JFrame class
 
-        
+
 
 
 
         // till the above code we have created our frame window when we run this code we get a screen where apllication name is PAC MAN as i written 
         // but the window is blank white window since i did nothing in the designing work. designing is done in JPanel. Jpanel will show our game 
-        
+
         // i could have create JPanel here but i will create another java class file in source folder i.e in src
 
 
