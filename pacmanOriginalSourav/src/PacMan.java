@@ -26,7 +26,7 @@ public class PacMan extends JPanel implements ActionListener , KeyListener {   /
     
 
 // variable to debug the map
-int debugMapLevel = 19;   // if i found a problem in map and i want to go to that specific map then i only need to change here. nothing to be done in the else code
+int debugMapLevel = 1;   // if i found a problem in map and i want to go to that specific map then i only need to change here. nothing to be done in the else code
 
 
 
