@@ -1,0 +1,2 @@
+
+            // ghost.y += ghost.velocityY;
