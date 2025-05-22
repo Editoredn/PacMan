@@ -26,8 +26,8 @@ public class PacMan extends JPanel implements ActionListener , KeyListener {   /
 
 
     // variable to debug the map
-    int debugMapLevel = 1;   // if i found a problem in map and i want to go to that specific map then i only need to change here. nothing to be done in the else code
-
+    int debugMapLevel =1;   // if i found a problem in map and i want to go to that specific map then i only need to change here. nothing to be done in the else code
+    int currentLevel = 0;
 
 
     // variables for the reverse control
@@ -485,6 +485,11 @@ Apply special behaviors (like stun, speed, etc.)
 //Runnable is an interface in Java that represents a block of code you want to run
 
     // creating a constructor ( constructor is a special method that rus automaticaly when an object of the class is created)
+
+
+
+
+
     PacMan(){   // here the PacMan constructor sets up the game board ( which extends JPanel)
 
         setPreferredSize(new Dimension(widthBoard , heightBoard));   // this sets the preffered size of the JPanel which means it tells the layout manager that widht = widthboard and height = heightboard
@@ -764,7 +769,6 @@ Future-proofing	                    You can change how blocks or ghosts work int
 
 
 
-
         levelLoaders[debugMapLevel-1].run();  // Load the starting debug level
 // resetPositions();
 
@@ -820,10 +824,17 @@ Future-proofing	                    You can change how blocks or ghosts work int
 
 
 
-
     public void loadMap(String[] mapData) {
+        int themeNumber=1;
+        if(currentLevel+debugMapLevel-1==36||currentLevel+debugMapLevel-1==37){
+            themeNumber=9;
+        }
+        else{
+            themeNumber=((debugMapLevel+currentLevel)/4)+1;
+        }
+
         // Play theme music when loading new level
-        soundManager.playThemeMusic(debugMapLevel);
+        soundManager.playThemeMusic(themeNumber);
 
         // i need to initilise all the hashset first
 
@@ -1550,7 +1561,7 @@ Future-proofing	                    You can change how blocks or ghosts work int
         }
         else
         {
-            g.drawString("x" + String.valueOf(lives)+ " Score: " + String.valueOf(score), tileSize/2 , tileSize/2);
+            g.drawString("x" + String.valueOf(lives)+ "  Score: " + String.valueOf(score) + "  Level : "+(debugMapLevel+currentLevel), tileSize/2 , tileSize/2);
         }
 
     }
@@ -3005,7 +3016,6 @@ It’s perfect for things like levels, animations, background tasks, or threadin
 
 
 
-    int currentLevel = 0;
     public void startGame() {
         levelLoaders[currentLevel].run();  // load level 1 (index 0)
         resetPositions();
@@ -3019,9 +3029,9 @@ It’s perfect for things like levels, animations, background tasks, or threadin
                 soundManager.playCollectCoinsSound();
             }
 
-            if (debugMapLevel + currentLevel < levelLoaders.length)
+            if (currentLevel < levelLoaders.length)
             {
-                levelLoaders[debugMapLevel + currentLevel].run();
+                levelLoaders[currentLevel].run();
                 resetPositions();
             }
 
@@ -3148,7 +3158,7 @@ It’s perfect for things like levels, animations, background tasks, or threadin
 
         if (gameOver)
         {
-            levelLoaders[debugMapLevel].run();// reloading the map . this is done bcz i want to add all the foods back into the hashset
+            levelLoaders[currentLevel].run();// reloading the map . this is done bcz i want to add all the foods back into the hashset
             resetPositions(); // resetting the positions
             // now we want each object a new direction to move in  so
             lives = 3;  // making lives again 3
