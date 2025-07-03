@@ -113,6 +113,7 @@ PacPulse(short form) is a modern, Java-based reimagination of the classic Pacman
 >Sound effects: eat, die, shock, gates, lava
 >All managed using Java `Clip` API
 
+_Sound credit to Khinsider.com_
 --- 
 >### Installation
 
@@ -200,7 +201,7 @@ PacPulse(short form) is a modern, Java-based reimagination of the classic Pacman
 - The game ends after level 37 or on game over, with a "gameover" sound.
 
 >Youtube video 
-++ 
+++ https://youtu.be/C82V90F0TNg?si=tQnJ0CXGbUP4tvkl
 
 > Controls:
 
