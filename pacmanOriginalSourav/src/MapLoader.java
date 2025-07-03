@@ -1,3 +1,4 @@
+package src;
 public class MapLoader {
     
 
@@ -1526,6 +1527,8 @@ private static final String[][] MAPS = {
         if (index < 0 || index >= MAPS.length) {
             throw new IllegalArgumentException("INVALID MAP INDEX : " +index);
         }
+
+        
         return MAPS[index];
     }
 

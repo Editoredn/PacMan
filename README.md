@@ -1,2 +1,0 @@
-# PacMan
- DSC-6 PROJECT
